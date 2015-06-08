@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dev.innso.myappbum.UI.Fragments.AppbumsFragment">
+
+    <item android:id="@+id/main_action_search"
+        android:title="@string/action_search"
+        android:icon="@mipmap/ic_magnify"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+    <item android:id="@+id/main_action_profile"
+        android:title="@string/action_settings"
+        android:icon="@mipmap/ic_account"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>
