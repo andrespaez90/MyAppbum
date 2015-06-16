@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">My Appbum</string>
+
     <string name="facebook_app_id">1578844742376453</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">My Appbum</string>
+    <string name="by">by Innovating Software</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_list_buddies">ListBuddiesActivity</string>
     <string name="position">Posición</string>
@@ -46,4 +48,5 @@
     <string name="rPassword">Repita Contraseña:</string>
     <string name="newAccount">Crear Cuenta</string>
     <string name="title_activity_start">StartActivity</string>
+    <string name="access">Acceder</string>
 </resources>
