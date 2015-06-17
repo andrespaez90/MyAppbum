@@ -48,11 +48,12 @@ public class ProfileActivity extends ActionBarActivity {
             String imageURL = "https://graph.facebook.com/"+userId+"/picture?type=large";
             Picasso.with(this).load(imageURL).placeholder(R.drawable.ic_profile).into(profilePicture);
             Picasso.with(this).load(userCover).placeholder(R.mipmap.default_bg).into(profileCover);
-            profileName.setText(userName);
+
         }
         else{
 
         }
+        profileName.setText(userName);
     }
 
     @Override

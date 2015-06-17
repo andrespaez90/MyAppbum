@@ -51,13 +51,12 @@ public class StartActivity extends Activity {
 
     @OnClick(R.id.start_access)
     protected void accessApp(){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivityForResult(intent, ActivityTags.ACTIVITY_LOGIN.ordinal());
     }
 
     private void initFacebookButton() {
         FacebookLogin.setReadPermissions("public_profile ", "email", "user_photos");
-        FacebookLogin.setText("Hola mundo");
         FacebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -120,30 +119,17 @@ public class StartActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if( requestCode == ActivityTags.ACTIVITY_LOGIN.ordinal() ){
+            if( resultCode == RESULT_OK )
+                finishSuccess();
+            return;
+        }
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void finishSuccess(){
+        setResult(RESULT_OK);
+        finish();
     }
 }

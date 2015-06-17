@@ -68,7 +68,7 @@ public class RegisterActivity extends ActionBarActivity {
         if( responseAction == StringTags.ACTION_SUCCESS ){
             savePreference();
             //Save on server
-            finishSuccess();
+            showDialog(responseAction);
         }else{
             showDialog(responseAction);
         }
@@ -79,7 +79,6 @@ public class RegisterActivity extends ActionBarActivity {
         userEmail = tv_email.getText().toString();
         userPassword = tv_passwords.getText().toString();
         rePassword = tv_rpassword.getText().toString();
-
         userEmail = userEmail.toLowerCase();
         userName = userName.toLowerCase();
     }
@@ -87,13 +86,28 @@ public class RegisterActivity extends ActionBarActivity {
     private StringTags confirmData() {
         if(userName == "" || userName.length() < 3)
             return StringTags.REGISTER_NAME;
-        if(userEmail == "" || !userPassword.contains("@") || !userEmail.contains("."))
+        if( !validateEmail() )
             return StringTags.REGISTER_EMAIL;
         if(userPassword.length() < 3)
             return StringTags.REGISTER_LENGHT_PASSWORD;
-        if(userPassword.equals(rePassword))
+        if(!userPassword.equals(rePassword))
             return StringTags.REGISTER_PASSWORD;
         return StringTags.ACTION_SUCCESS;
+    }
+
+
+    private boolean validateEmail(){
+        if(userEmail == "" || !userEmail.contains("@") )
+            return false;
+        else{
+            if( userEmail.contains(" ") ){
+                return false;
+            }
+            String dominio = userEmail.substring( userEmail.indexOf("@") );
+            if( !dominio.contains(".") )
+                return false;
+        }
+        return true;
     }
 
     private void savePreference(){
@@ -107,30 +121,47 @@ public class RegisterActivity extends ActionBarActivity {
     }
 
 
+    private String title = "";
+    String message = "";
 
     private void showDialog(final StringTags tag){
-        String title = "";
-        String message = "";
-        getMesagge(tag, title, message);
+        getMesagge(tag);
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if ( tag == StringTags.ACTION_SUCCESS) {
-                            RegisterActivity.this.finish();
+                        if (tag == StringTags.ACTION_SUCCESS) {
+                            finishSuccess();
                         }
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 
-    private void getMesagge(StringTags Tag, String title, String message){
+    private void getMesagge(StringTags Tag){
         if(Tag == StringTags.ACTION_SUCCESS ){
             title = getResources().getString(R.string.title_create_user);
             message =  getResources().getString(R.string.success_create_user);
             return;
+        }else{
+            title = getResources().getString(R.string.title_error);
+            if( Tag == StringTags.REGISTER_NAME){
+                message = getResources().getString(R.string.error_name);
+                return;
+            }
+            if( Tag == StringTags.REGISTER_EMAIL){
+                message =  getResources().getString(R.string.errirn_email);
+                return;
+            }
+            if( Tag == StringTags.REGISTER_LENGHT_PASSWORD){
+                message = getResources().getString(R.string.error_lenght_pass);
+                return;
+            }
+            if( Tag == StringTags.REGISTER_PASSWORD){
+                message = getResources().getString(R.string.error_passwords);
+                return;
+            }
         }
     }
 }

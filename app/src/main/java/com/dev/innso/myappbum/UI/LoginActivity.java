@@ -18,9 +18,6 @@ import butterknife.OnClick;
 
 public class LoginActivity extends ActionBarActivity {
 
-    @InjectView(R.id.login_singin)
-    Button Register;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +49,15 @@ public class LoginActivity extends ActionBarActivity {
 
     @OnClick(R.id.login_singin)
     public void signin(){
-        Intent i = new Intent(this,RegisterActivity.class);
-        this.startActivityForResult( i, 0 );
+        Intent intent = new Intent(this,RegisterActivity.class);
+        this.startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 0 && resultCode == 0) {
+        if(requestCode ==   ActivityTags.ACTIVITY_REGISTER.ordinal() && resultCode == RESULT_OK) {
+            setResult(RESULT_OK);
             finish();
         }
     }
