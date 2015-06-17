@@ -6,8 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.dev.innso.myappbum.Models.SharedPrefKeys;
+import com.dev.innso.myappbum.Providers.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.facebook.AccessToken;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class StartActivity extends Activity {
 
@@ -42,6 +45,12 @@ public class StartActivity extends Activity {
         ButterKnife.inject(this);
     }
 
+
+    @OnClick(R.id.start_access)
+    public void accessApp(){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
+    }
 
     private void initFacebookButton() {
         FacebookLogin.setReadPermissions("public_profile ", "email", "user_photos");

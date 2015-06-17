@@ -5,7 +5,8 @@ package com.dev.innso.myappbum.Providers;
  */
 public enum ActivityTags {
 
-    ACTIVITY_REGISTER("Register");
+    ACTIVITY_START("START"),
+    ACTIVITY_REGISTER("REGISTER");
 
     private String text;
 

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Models.ItemImageList;
+import com.dev.innso.myappbum.Providers.ActivityTags;
 import com.dev.innso.myappbum.R;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void init(){
         Intent i = new Intent(this, StartActivity.class);
-        startActivity(i);
+        startActivityForResult(i,ActivityTags.ACTIVITY_START.ordinal());
     }
 
     public void getAppbums() {
@@ -53,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     private void createList(ArrayList<ItemImageList> list){
-
-
         //Inicializacion RecyclerView
         AlbumsList.setHasFixedSize(true);
         final RecycleAppbumAdapter adaptador = new RecycleAppbumAdapter(list,this);
@@ -88,6 +87,14 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == ActivityTags.ACTIVITY_START.ordinal()){
+            if(requestCode == RESULT_CANCELED){
+                finish();
+            }
+        }
+    }
 
     public class MainController implements SearchView.OnQueryTextListener{
 

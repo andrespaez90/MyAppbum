@@ -13,8 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-
-
         <LinearLayout
             android:id="@+id/startlayout_img"
             android:layout_width="match_parent"
@@ -77,21 +75,23 @@
             android:layout_height="wrap_content"
             android:text="@string/access"
             android:textSize="25dp"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
             android:background="@drawable/primary_button"
+            android:textColor="@color/white"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"/>
 
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/star_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
             android:textSize="25dp"
-            android:text="Facebook"
+            android:text="Facebook dsdcsd"
             android:gravity="center|bottom"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"

@@ -56,14 +56,14 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     }
 
     public void flushFilter(){
-        visibleItems = new ArrayList<>();
+        visibleItems = new ArrayList<ItemImageList>();
         visibleItems.addAll(allItems);
         notifyDataSetChanged();
     }
 
     public void setFilter(String queryText) {
 
-        visibleItems = new ArrayList<>();
+        visibleItems = new ArrayList<ItemImageList>();
         for (ItemImageList item: allItems) {
             if (item.getNameAlbum().toLowerCase().contains(queryText))
                 visibleItems.add(item);
