@@ -50,7 +50,9 @@ public class ProfileActivity extends ActionBarActivity {
             Picasso.with(this).load(userCover).placeholder(R.mipmap.default_bg).into(profileCover);
             profileName.setText(userName);
         }
-        Toast.makeText(this,userId+":"+userName,Toast.LENGTH_LONG).show();
+        else{
+
+        }
     }
 
     @Override

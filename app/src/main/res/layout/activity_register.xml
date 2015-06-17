@@ -28,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/newAccount"
-                android:id="@+id/button"
-                android:background="@drawable/create_account_button"
+                android:id="@+id/register_button"
+                android:background="@drawable/red_button"
                 android:textColor="@color/background_material_light"/>
 
 

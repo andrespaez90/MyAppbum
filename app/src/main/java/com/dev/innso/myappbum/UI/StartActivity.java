@@ -43,17 +43,21 @@ public class StartActivity extends Activity {
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_start);
         ButterKnife.inject(this);
+        initFacebookButton();
+
+
     }
 
 
     @OnClick(R.id.start_access)
-    public void accessApp(){
+    protected void accessApp(){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
     }
 
     private void initFacebookButton() {
         FacebookLogin.setReadPermissions("public_profile ", "email", "user_photos");
+        FacebookLogin.setText("Hola mundo");
         FacebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {

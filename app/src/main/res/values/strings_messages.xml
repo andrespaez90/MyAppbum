@@ -1,0 +1,12 @@
+<resources>
+    <string name="title_create_user">Gracias!</string>
+    <string name="title_error">Error</string>
+
+    <string name="success_create_user">Bienvenido! Ahora puedes crear tus Appbums</string>
+
+    <string name="error_passwords">Las contraseñas no coinciden</string>
+    <string name="error_lenght_pass">La contraseña es muy corta</string>
+    <string name="error_name">Nombre demasiado corto</string>
+    <string name="errirn_email">Revisa tu E-mail</string>
+
+</resources>

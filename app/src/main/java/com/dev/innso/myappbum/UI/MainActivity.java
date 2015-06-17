@@ -11,8 +11,10 @@ import android.view.MenuItem;
 
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Models.ItemImageList;
+import com.dev.innso.myappbum.Models.SharedPrefKeys;
 import com.dev.innso.myappbum.Providers.ActivityTags;
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.Utils.SharePreferences;
 
 import java.util.ArrayList;
 
@@ -34,14 +36,19 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        getAppbums();
-        createList(itemsImagelist);
         init();
     }
 
     private void init(){
-        Intent i = new Intent(this, StartActivity.class);
-        startActivityForResult(i,ActivityTags.ACTIVITY_START.ordinal());
+        String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
+        if(userName == ""){
+            Intent i = new Intent(this, StartActivity.class);
+            startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
+        }
+        else{
+            getAppbums();
+            createList(itemsImagelist);
+        }
     }
 
     public void getAppbums() {
@@ -49,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
         itemsImagelist.add(new ItemImageList("Basilea - Dia de las Madres 2014" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
         itemsImagelist.add(new ItemImageList("Basilea - Halloween" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
         itemsImagelist.add(new ItemImageList("Basilea - Dia de las Madres 2014" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
-        itemsImagelist.add(new ItemImageList("Basilea - Halloween" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
+        itemsImagelist.add(new ItemImageList("Basilea - Halloween", "http://andrespaez90.com/images/Basilea/P14.JPG"));
     }
 
 

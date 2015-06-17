@@ -5,8 +5,8 @@
     <item android:state_pressed="true" >
         <shape>
             <gradient
-                android:startColor="#FFCA0065"
-                android:endColor="#FFCA0065"
+                android:startColor="@color/primary_dark"
+                android:endColor="@color/primary_dark"
                 android:angle="270" />
 
         </shape>
@@ -15,9 +15,12 @@
     <item>
         <shape>
             <gradient
-                android:startColor="@color/primary_dark"
-                android:endColor="@color/primary_dark"
+                android:startColor="#ffff4646"
+                android:endColor="#ffff4646"
                 android:angle="270" />
+            <stroke
+                android:color="@color/strokePrimaryDark"
+                android:width="5dp"/>
         </shape>
     </item>
 </selector>

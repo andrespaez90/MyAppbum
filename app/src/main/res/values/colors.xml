@@ -9,13 +9,21 @@
     <color name="inset">#9000</color>
 
     <color name="primary">#F44336</color>
+
     <color name="primary_dark">#D32F2F</color>
+    <color name="strokePrimaryDark">#56d32f2f</color>
+
     <color name="accent">#FFC107</color>
+    <color name="strokeaccent">#73FFc107</color>
+
     <color name="accent_pressed">#FFCDD2</color>
     <color name="secondary_text_color">#727272</color>
 
     <color name="white_transparecy85">#D9FFFFFF</color>
     <color name="white_transparecy65">#A6FFFFFF</color>
 
+
+    <color name="orangeButton">#ffff8e00</color>
+    <color name="strokeOrangeButton">#64FF9800</color>
 
 </resources>
