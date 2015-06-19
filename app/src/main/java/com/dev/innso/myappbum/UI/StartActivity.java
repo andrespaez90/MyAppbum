@@ -44,8 +44,6 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
         ButterKnife.inject(this);
         initFacebookButton();
-
-
     }
 
 
