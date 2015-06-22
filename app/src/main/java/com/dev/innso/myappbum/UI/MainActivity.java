@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Models.ItemImageList;
 import com.dev.innso.myappbum.Models.SharedPrefKeys;
-import com.dev.innso.myappbum.Providers.ActivityTags;
+import com.dev.innso.myappbum.Utils.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 

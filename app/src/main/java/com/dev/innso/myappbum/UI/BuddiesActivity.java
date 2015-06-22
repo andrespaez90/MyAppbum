@@ -5,19 +5,17 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
 
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.Fragments.AddpictureFragment;
 import com.dev.innso.myappbum.UI.Fragments.CustomizeFragment;
-import com.dev.innso.myappbum.Providers.FragmentTags;
+import com.dev.innso.myappbum.Utils.FragmentTags;
 import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
 
 

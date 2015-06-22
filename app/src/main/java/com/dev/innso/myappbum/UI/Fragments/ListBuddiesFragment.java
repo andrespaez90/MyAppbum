@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.dev.innso.myappbum.Adapters.CircularAdapter;
-import com.dev.innso.myappbum.Providers.ExtraArgumentKeys;
+import com.dev.innso.myappbum.Utils.ExtraArgumentKeys;
 import com.dev.innso.myappbum.Providers.ImagesUrls;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.DetailActivity;

@@ -5,14 +5,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.dev.innso.myappbum.Providers.ActivityTags;
+import com.dev.innso.myappbum.Utils.ActivityTags;
 import com.dev.innso.myappbum.R;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 

@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Providers;
+package com.dev.innso.myappbum.Utils;
 
 public enum ExtraArgumentKeys {
     OPEN_ACTIVITES("OPEN_ACTIVITES");

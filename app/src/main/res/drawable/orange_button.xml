@@ -20,7 +20,7 @@
                 android:angle="270" />
             <stroke
                 android:color="@color/strokeOrangeButton"
-                android:width="7dp"/>
+                android:width="5dp"/>
         </shape>
     </item>
 </selector>

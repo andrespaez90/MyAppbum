@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Providers;
+package com.dev.innso.myappbum.Utils;
 
 /**
  * Created by INNSO SAS on 25/05/2015.
