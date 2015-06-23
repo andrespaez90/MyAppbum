@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.Fragments.AddpictureFragment;
 import com.dev.innso.myappbum.UI.Fragments.CustomizeFragment;
-import com.dev.innso.myappbum.Utils.FragmentTags;
+import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
 import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
 
 

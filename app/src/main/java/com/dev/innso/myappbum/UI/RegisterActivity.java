@@ -6,8 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Models.SharedPrefKeys;
-import com.dev.innso.myappbum.Utils.StringTags;
+import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.Utils.TAGs.StringTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 

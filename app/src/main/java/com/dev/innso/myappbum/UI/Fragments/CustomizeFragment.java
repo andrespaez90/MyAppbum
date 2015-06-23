@@ -14,8 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.Adapters.CustomizeSpinnersAdapter;
-import com.dev.innso.myappbum.Models.KeyValuePair;
-import com.dev.innso.myappbum.Models.SharedPrefKeys;
+import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
+import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;

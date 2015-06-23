@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Models.KeyValuePair;
+import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
 import com.dev.innso.myappbum.R;
 
 import java.util.List;

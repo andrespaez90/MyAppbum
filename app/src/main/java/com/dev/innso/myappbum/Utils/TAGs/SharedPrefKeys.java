@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Models;
+package com.dev.innso.myappbum.Utils.TAGs;
 
 /**
  * Created by jpardogo on 23/02/2014.

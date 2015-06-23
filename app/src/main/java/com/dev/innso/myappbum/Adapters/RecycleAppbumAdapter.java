@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Models.ItemImageList;
+import com.dev.innso.myappbum.Models.Appbum;
+import com.dev.innso.myappbum.Utils.TAGs.ItemImageList;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.BuddiesActivity;
 import com.squareup.picasso.Picasso;
@@ -23,11 +24,11 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
                             implements  View.OnClickListener{
 
 
-    private ArrayList<ItemImageList> visibleItems;
-    private ArrayList<ItemImageList> allItems;
+    private ArrayList<Appbum> visibleItems;
+    private ArrayList<Appbum> allItems;
     private Context mContext;
 
-    public RecycleAppbumAdapter(ArrayList<ItemImageList> data, Context context){
+    public RecycleAppbumAdapter(ArrayList<Appbum> data, Context context){
         mContext = context;
         allItems = data;
         flushFilter();
@@ -46,7 +47,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
     @Override
     public void onBindViewHolder(DataViewHolder data, int i) {
-        ItemImageList item = visibleItems.get(i);
+        Appbum item = visibleItems.get(i);
         data.bindItem(item);
     }
 
@@ -56,16 +57,16 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     }
 
     public void flushFilter(){
-        visibleItems = new ArrayList<ItemImageList>();
+        visibleItems = new ArrayList<Appbum>();
         visibleItems.addAll(allItems);
         notifyDataSetChanged();
     }
 
     public void setFilter(String queryText) {
 
-        visibleItems = new ArrayList<ItemImageList>();
-        for (ItemImageList item: allItems) {
-            if (item.getNameAlbum().toLowerCase().contains(queryText))
+        visibleItems = new ArrayList<Appbum>();
+        for (Appbum item: allItems) {
+            if (item.getName().toLowerCase().contains(queryText))
                 visibleItems.add(item);
         }
         notifyDataSetChanged();
@@ -97,9 +98,9 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
             txtTitle = (TextView)itemView.findViewById(R.id.imagelist_title);
         }
 
-        public void bindItem(ItemImageList item) {
-            txtTitle.setText(item.getNameAlbum());
-            Picasso.with(mContext).load(item.getUrlImg()).placeholder(R.drawable.bg_appbum_load).into(imageView);
+        public void bindItem(Appbum item) {
+            txtTitle.setText(item.getName());
+            Picasso.with(mContext).load(item.getUrlCover()).placeholder(R.drawable.bg_appbum_load).into(imageView);
         }
     }
 

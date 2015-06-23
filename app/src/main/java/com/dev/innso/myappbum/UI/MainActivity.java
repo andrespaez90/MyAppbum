@@ -1,20 +1,29 @@
 package com.dev.innso.myappbum.UI;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
-import com.dev.innso.myappbum.Models.ItemImageList;
-import com.dev.innso.myappbum.Models.SharedPrefKeys;
-import com.dev.innso.myappbum.Utils.ActivityTags;
+import com.dev.innso.myappbum.Models.Appbum;
+import com.dev.innso.myappbum.Models.FacadeModel;
+import com.dev.innso.myappbum.Models.FactoryModel;
+import com.dev.innso.myappbum.Providers.JSONHandler;
+import com.dev.innso.myappbum.Utils.TAGs.ItemImageList;
+import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,8 +35,6 @@ import butterknife.InjectView;
  */
 public class MainActivity extends ActionBarActivity {
 
-    private ArrayList<ItemImageList> itemsImagelist;
-
     @InjectView(R.id.main_recView)
     RecyclerView AlbumsList;
 
@@ -37,30 +44,25 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         init();
+
     }
 
     private void init(){
+        createList(FacadeModel.Appbums);
         String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
         if(userName == ""){
             Intent i = new Intent(this, StartActivity.class);
             startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
         }
         else{
-            getAppbums();
-            createList(itemsImagelist);
+            new DownloadData().execute("http://andrespaez90.com/Appbum/getAppbum.php?id=1224525");
         }
     }
 
-    public void getAppbums() {
-        itemsImagelist = new ArrayList<ItemImageList>();
-        itemsImagelist.add(new ItemImageList("Basilea - Dia de las Madres 2014" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
-        itemsImagelist.add(new ItemImageList("Basilea - Halloween" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
-        itemsImagelist.add(new ItemImageList("Basilea - Dia de las Madres 2014" , "http://andrespaez90.com/images/Basilea/P14.JPG" ) );
-        itemsImagelist.add(new ItemImageList("Basilea - Halloween", "http://andrespaez90.com/images/Basilea/P14.JPG"));
-    }
 
 
-    private void createList(ArrayList<ItemImageList> list){
+
+    private void createList(ArrayList<Appbum> list){
         //Inicializacion RecyclerView
         AlbumsList.setHasFixedSize(true);
         final RecycleAppbumAdapter adaptador = new RecycleAppbumAdapter(list,this);
@@ -97,9 +99,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == ActivityTags.ACTIVITY_START.ordinal()){
-            if(requestCode == RESULT_CANCELED){
+            if(resultCode == RESULT_CANCELED){
                 finish();
+            }else{
+                new DownloadData().execute("http://andrespaez90.com/Appbum/getAppbum.php?id=1224525");
             }
+
         }
     }
 
@@ -116,6 +121,38 @@ public class MainActivity extends ActionBarActivity {
             ((RecycleAppbumAdapter) AlbumsList.getAdapter()).setFilter(newText);
             return false;
         }
+    }
+
+
+    private class DownloadData extends AsyncTask<String,String,String>{
+
+
+
+        protected String doInBackground(String ...urls){
+            try{
+                String result = JSONHandler.readJSON(urls[0]);
+                JSONObject jsonObject = new JSONObject(result);
+                publishProgress("Descargando Actualizaciones");
+
+                JSONArray jsonArray = jsonObject.getJSONArray("Appbums");
+                FactoryModel.createAppbums(jsonArray);
+
+                return "Success";
+
+            }
+            catch (Exception e) {
+                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(String result) {
+            if(result != null) {
+                createList(FacadeModel.Appbums);
+            }
+        }
+
     }
 
 }

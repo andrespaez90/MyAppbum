@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Utils;
+package com.dev.innso.myappbum.Utils.TAGs;
 
 
 public enum StringTags {
