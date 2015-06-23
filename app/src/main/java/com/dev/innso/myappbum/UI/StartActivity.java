@@ -103,8 +103,7 @@ public class StartActivity extends Activity {
             SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER,userName);
             SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER,usercover);
 
-            setResult(RESULT_OK);
-            finish();
+            finishSuccess();
 
         } catch (JSONException e) {
             e.printStackTrace();

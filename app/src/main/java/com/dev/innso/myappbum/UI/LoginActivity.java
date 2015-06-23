@@ -5,15 +5,31 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dev.innso.myappbum.Providers.JSONHandler;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnClick;
 
 
 public class LoginActivity extends ActionBarActivity {
+
+    @InjectView(R.id.login_username)
+    TextView userEmail;
+
+    @InjectView(R.id.login_password)
+    TextView userPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,34 +38,26 @@ public class LoginActivity extends ActionBarActivity {
         ButterKnife.inject(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @OnClick(R.id.login_singin)
-    public void signin(){
+    protected void signin(){
         Intent intent = new Intent(this,RegisterActivity.class);
         this.startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
     }
 
+    @OnClick(R.id.login_Login)
+    protected void login(){
+        String email = userEmail.getText().toString();
+        String pass = userPass.getText().toString();
+
+        List<NameValuePair> data = new ArrayList<NameValuePair>();
+
+        data.add(new BasicNameValuePair("user",email));
+        data.add(new BasicNameValuePair("user", email));
+
+        String ads = JSONHandler.requestPOST("http://andrespaez90.com/Appbum/loginService.php",data);
+        Toast.makeText(this,ads,Toast.LENGTH_LONG).show();
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
