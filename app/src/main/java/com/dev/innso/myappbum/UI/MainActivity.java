@@ -10,14 +10,12 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Models.Appbum;
 import com.dev.innso.myappbum.Models.FacadeModel;
 import com.dev.innso.myappbum.Models.FactoryModel;
-import com.dev.innso.myappbum.Providers.JSONHandler;
-import com.dev.innso.myappbum.Utils.TAGs.ItemImageList;
+import com.dev.innso.myappbum.Providers.ServerConnection;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
@@ -50,14 +48,14 @@ public class MainActivity extends ActionBarActivity {
 
     private void init(){
         createList(FacadeModel.Appbums);
-        /*String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
+        String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
         if(userName == ""){
             Intent i = new Intent(this, StartActivity.class);
             startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
         }
-        else{*/
+        else{
             new DownloadData().execute("http://andrespaez90.com/Appbum/getAppbum.php?id=1224525");
-        //}
+        }
     }
 
 
@@ -131,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
 
         protected String doInBackground(String ...urls){
             try{
-                String result = JSONHandler.requestGet(urls[0]);
+                String result = ServerConnection.requestGet(urls[0]);
 
                 JSONObject jsonObject = new JSONObject(result);
                 //publishProgress(result);
