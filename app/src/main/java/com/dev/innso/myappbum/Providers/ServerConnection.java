@@ -33,25 +33,6 @@ import java.util.List;
  */
 public class ServerConnection {
 
-    public static String requestGet(String url){
-        StringBuilder stringBuilder = new StringBuilder();
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(url);
-        try {
-            HttpResponse response = httpClient.execute(httpGet);
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) {
-                stringBuilder = readJSON(response);
-            } else {
-                Log.d("JSON", "Failed to download file");
-            }
-        } catch (Exception e) {
-            return e.getLocalizedMessage();
-        }
-        return stringBuilder.toString();
-    }
-
     public static String requestPOST(String url, Pair<String,String>... data){
         StringBuilder stringBuilder;
 
@@ -96,20 +77,4 @@ public class ServerConnection {
         return stringBuilder;
     }
 
-
-
-
-    private static StringBuilder readJSON(HttpResponse response) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        HttpEntity entity = response.getEntity();
-        InputStream inputStream = entity.getContent();
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        inputStream.close();
-        return stringBuilder;
-    }
 }

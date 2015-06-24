@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,12 @@ public class LoginActivity extends ActionBarActivity {
     @InjectView(R.id.login_error)
     TextView loginError;
 
+    @InjectView(R.id.login_singin)
+    Button btnRegister;
+
+    @InjectView(R.id.login_Login)
+    Button btnLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +54,10 @@ public class LoginActivity extends ActionBarActivity {
 
     @OnClick(R.id.login_Login)
     protected void login(){
+
+        btnLogin.setEnabled(false);
+        btnRegister.setEnabled(false);
+
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
 
@@ -72,7 +83,7 @@ public class LoginActivity extends ActionBarActivity {
         protected String doInBackground(Pair<String,String>... data){
             try{
 
-                String response = ServerConnection.requestPOST("http://andrespaez90.com/Appbum/loginService.php", data);
+                String response = ServerConnection.requestPOST(getResources().getString(R.string.loginService), data);
                 JSONObject jsonObject = new JSONObject(response);
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;

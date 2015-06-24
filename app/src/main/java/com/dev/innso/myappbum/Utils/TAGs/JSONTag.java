@@ -8,6 +8,8 @@ public enum JSONTag {
     JSON_RESPONSE("result"),
     JSON_SUCCESS("Success"),
 
+    JSON_USER_ID("1224525"),
+
     USER_EMAIL("user"),
     USER_PASSWORD("pass");
 

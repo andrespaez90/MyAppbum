@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +17,7 @@ import com.dev.innso.myappbum.Models.Appbum;
 import com.dev.innso.myappbum.Models.FacadeModel;
 import com.dev.innso.myappbum.Models.FactoryModel;
 import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
@@ -54,7 +56,8 @@ public class MainActivity extends ActionBarActivity {
             startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
         }
         else{
-            new DownloadData().execute("http://andrespaez90.com/Appbum/getAppbum.php?id=1224525");
+            Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),"1224525");
+            new DownloadData().execute(userId);
         }
     }
 
@@ -101,7 +104,8 @@ public class MainActivity extends ActionBarActivity {
             if(resultCode == RESULT_CANCELED){
                 finish();
             }else{
-                new DownloadData().execute("http://andrespaez90.com/Appbum/getAppbum.php?id=1224525");
+                Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),"1224525");
+                new DownloadData().execute(userId);
             }
 
         }
@@ -123,13 +127,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private class DownloadData extends AsyncTask<String,String,String>{
+    private class DownloadData extends AsyncTask< Pair<String,String>,String,String>{
 
 
 
-        protected String doInBackground(String ...urls){
+        protected String doInBackground(Pair<String,String>...data){
             try{
-                String result = ServerConnection.requestGet(urls[0]);
+
+                String result = ServerConnection.requestPOST(getResources().getString(R.string.getAppbumsService), data);
 
                 JSONObject jsonObject = new JSONObject(result);
                 //publishProgress(result);
