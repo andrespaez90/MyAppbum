@@ -78,7 +78,7 @@ public class LoginActivity extends ActionBarActivity {
                     return null;
                 }
                 publishProgress(response);
-                return "Success";
+                return JSONTag.JSON_SUCCESS.toString();
 
             }
             catch (Exception e) {
