@@ -4,24 +4,14 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-public class ImagesUrls {
+public class BuddiesImages {
 
-        public static ArrayList<String[]> getImageUrls_Left(String name, Context mContext){
-
-                ArrayList<String[]> imageUrls = new ArrayList<String[]>();
-
-                String[]imageUrls_left = new String[10];
-                String[]imageUrls_right = new String[10];
-                //Find de URls
-
-                imageUrls.add(imageUrls_left);
-                imageUrls.add(imageUrls_right);
-
-                return imageUrls;
-        }
+        public static ArrayList<String> imageUrls_left = new ArrayList<String>();
+        public static ArrayList<String> imageUrls_right = new ArrayList<String>();
 
 
-    public final static String[] imageUrls_left = new String[]{
+
+    /*public final static String[] imageUrls_left = new String[]{
             "http://andrespaez90.com/images/Basilea/P1.JPG",
             "http://andrespaez90.com/images/Basilea/P3.JPG",
             "http://andrespaez90.com/images/Basilea/P4.JPG",
@@ -71,5 +61,5 @@ public class ImagesUrls {
             "http://andrespaez90.com/images/Basilea/P26.JPG",
             "http://andrespaez90.com/images/Basilea/P25.JPG"
 
-    };
+    };*/
 }

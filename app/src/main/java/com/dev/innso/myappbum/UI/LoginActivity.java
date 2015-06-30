@@ -11,9 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
+import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 
 import org.json.JSONObject;
 
@@ -22,7 +24,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends ActionBarActivity{
 
     @InjectView(R.id.login_username)
     TextView userEmail;
@@ -40,7 +42,7 @@ public class LoginActivity extends ActionBarActivity {
     Button btnLogin;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
@@ -55,8 +57,7 @@ public class LoginActivity extends ActionBarActivity {
     @OnClick(R.id.login_Login)
     protected void login(){
 
-        btnLogin.setEnabled(false);
-        btnRegister.setEnabled(false);
+        enbleActivity(false);
 
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
@@ -65,6 +66,14 @@ public class LoginActivity extends ActionBarActivity {
         Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.USER_PASSWORD.toString() , pass);
 
         new loginService().execute(pairEmail, pairPass);
+    }
+
+    private void enbleActivity(Boolean activate){
+        userEmail.setEnabled(activate);
+        userPass.setEnabled(activate);
+        btnLogin.setEnabled(activate);
+        btnRegister.setEnabled(activate);
+
     }
 
     @Override
@@ -78,8 +87,6 @@ public class LoginActivity extends ActionBarActivity {
 
     private class loginService extends AsyncTask<Pair<String,String>,String,String> {
 
-
-
         protected String doInBackground(Pair<String,String>... data){
             try{
 
@@ -87,13 +94,19 @@ public class LoginActivity extends ActionBarActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;
+                }else{
+                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, jsonObject.getString(JSONTag.JSON_USER_IDFACE.toString()) );
+                    SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER, jsonObject.getString(JSONTag.JSON_USER_NAME.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.PROFILE_USER, jsonObject.getString(JSONTag.JSON_URLPROFILE.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER, jsonObject.getString(JSONTag.JSON_URLCOVER.toString()));
                 }
                 publishProgress(response);
                 return JSONTag.JSON_SUCCESS.toString();
-
             }
             catch (Exception e) {
                 Log.d("ReadWeatherJSONFeedTask", e.getMessage());
+                publishProgress(e.getMessage());
             }
             return null;
         }
@@ -106,8 +119,14 @@ public class LoginActivity extends ActionBarActivity {
 
 
         protected void onPostExecute(String result) {
-            if( result ==null )
-                loginError.setText( "Usuario o contraseña incorrecta" );
+            if( result ==null ) {
+                loginError.setText("Usuario o contraseña incorrecta");
+            }
+            else if( result.equals(JSONTag.JSON_SUCCESS.toString())){
+                setResult(RESULT_OK);
+                finish();
+            }
+            enbleActivity(true);
         }
 
     }

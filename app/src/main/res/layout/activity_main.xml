@@ -5,7 +5,7 @@
     android:orientation="vertical"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="com.dev.innso.myappbum.UI.Fragments.AppbumsFragment"
-    android:background="@color/primary_material_light"
+    android:background="@color/dim_foreground_disabled_material_dark"
     android:weightSum="1">
 
 
@@ -24,13 +24,13 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/main_plus"
+            android:id="@+id/main_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/ic_account_plus"
             android:text="Crear Appbum"
             android:paddingLeft="6dp"
-            android:background="@color/primary_dark"
+            android:background="@drawable/darkred_button"
             android:textColor="@color/background_material_light"/>
     </LinearLayout>
 

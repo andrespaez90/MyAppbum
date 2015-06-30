@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.Models.Appbum;
+import com.dev.innso.myappbum.Models.Render;
 import com.dev.innso.myappbum.Utils.TAGs.ItemImageList;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.BuddiesActivity;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by INNSO SAS on 13/05/2015.
  */
-public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdapter.DataViewHolder>
-                            implements  View.OnClickListener{
+public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdapter.DataViewHolder> {
 
 
     private ArrayList<Appbum> visibleItems;
@@ -39,8 +39,9 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.image_list, viewGroup, false);
 
-        itemView.setOnClickListener(this);
         DataViewHolder tvh = new DataViewHolder(itemView,mContext);
+        itemView.setOnClickListener(tvh);
+
 
         return tvh;
     }
@@ -73,22 +74,14 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     }
 
 
-
-    @Override
-    public void onClick(View v) {
-        TextView tv = (TextView)v.findViewById(R.id.imagelist_title);
-        Intent intent = new Intent(mContext, BuddiesActivity.class);
-        intent.putExtra("APPBUM_NAME", tv.getText().toString());
-        mContext.startActivity(intent);
-    }
-
-
-    public static class DataViewHolder extends RecyclerView.ViewHolder{
+    public static class DataViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
         private ImageView imageView;
         private TextView txtTitle;
         private int mRowHeight;
+
         private Context mContext;
+        private Appbum appbum;
 
         public DataViewHolder(View itemView, Context context) {
             super(itemView);
@@ -99,10 +92,16 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
         }
 
         public void bindItem(Appbum item) {
-            txtTitle.setText(item.getName());
-            Picasso.with(mContext).load(item.getUrlCover()).placeholder(R.drawable.bg_appbum_load).into(imageView);
+            appbum = item;
+            txtTitle.setText(appbum.getName());
+            Picasso.with(mContext).load(appbum.getUrlCover()).placeholder(R.drawable.bg_appbum_load).into(imageView);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = Render.createIntent(appbum,mContext);
+            mContext.startActivity(intent);
         }
     }
-
 
 }

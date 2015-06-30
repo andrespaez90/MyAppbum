@@ -11,6 +11,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Models.Appbum;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by INNSO SAS on 22/05/2015.
@@ -50,22 +53,19 @@ public class MainActivity extends ActionBarActivity {
 
     private void init(){
         createList(FacadeModel.Appbums);
-        String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
-        if(userName == ""){
+        String userID = SharePreferences.getApplicationValue(SharedPrefKeys.ID_USER);
+        if(userID == ""){
             Intent i = new Intent(this, StartActivity.class);
             startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
         }
         else{
-            Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),"1224525");
+            Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),userID);
             new DownloadData().execute(userId);
         }
     }
 
 
-
-
     private void createList(ArrayList<Appbum> list){
-        //Inicializacion RecyclerView
         AlbumsList.setHasFixedSize(true);
         final RecycleAppbumAdapter adaptador = new RecycleAppbumAdapter(list,this);
 
@@ -75,8 +75,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         SearchView searchview = (SearchView)(menu.findItem(R.id.main_action_search).getActionView());
@@ -104,12 +102,18 @@ public class MainActivity extends ActionBarActivity {
             if(resultCode == RESULT_CANCELED){
                 finish();
             }else{
-                Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),"1224525");
-                new DownloadData().execute(userId);
+                String userId = SharePreferences.getApplicationValue(SharedPrefKeys.ID_USER);
+                Pair<String,String> pairId = new Pair<>(JSONTag.JSON_USER_ID.toString(),userId);
+                new DownloadData().execute(pairId);
             }
-
         }
     }
+
+
+    @OnClick(R.id.main_add) void closeSession(){
+        SharePreferences.resetUser();
+    }
+
 
     public class MainController implements SearchView.OnQueryTextListener{
 
@@ -129,15 +133,12 @@ public class MainActivity extends ActionBarActivity {
 
     private class DownloadData extends AsyncTask< Pair<String,String>,String,String>{
 
-
-
         protected String doInBackground(Pair<String,String>...data){
             try{
 
                 String result = ServerConnection.requestPOST(getResources().getString(R.string.getAppbumsService), data);
-
-                JSONObject jsonObject = new JSONObject(result);
                 //publishProgress(result);
+                JSONObject jsonObject = new JSONObject(result);
 
                 JSONArray jsonArray = jsonObject.getJSONArray("Appbums");
                 FactoryModel.createAppbums(jsonArray);
@@ -153,9 +154,8 @@ public class MainActivity extends ActionBarActivity {
 
 
         protected void onProgressUpdate(String... progress) {
-           // Toast.makeText(MainActivity.this,progress[0],Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, progress[0], Toast.LENGTH_LONG).show();
         }
-
 
 
         protected void onPostExecute(String result) {

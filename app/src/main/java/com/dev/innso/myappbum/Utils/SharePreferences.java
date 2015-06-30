@@ -75,7 +75,15 @@ public class SharePreferences {
         return defaultValue;
     }
 
-    public static void reset() {
+    public static void resetUser() {
+        saveDataApplication(SharedPrefKeys.ID_USER,"");
+        saveDataApplication(SharedPrefKeys.FACEBOOK_USERID,"");
+        saveDataApplication(SharedPrefKeys.NAME_USER,"");
+        saveDataApplication(SharedPrefKeys.PROFILE_USER,"");
+        saveDataApplication(SharedPrefKeys.COVER_USER,"");
+    }
+
+    public static void resetBuddies() {
         for (SharedPrefKeys key : SharedPrefKeys.values()) {
             saveCustomization(key, getDefaultValue(key));
         }

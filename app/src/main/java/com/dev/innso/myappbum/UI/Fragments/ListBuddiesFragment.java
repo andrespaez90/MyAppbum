@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.dev.innso.myappbum.Adapters.CircularAdapter;
 import com.dev.innso.myappbum.Utils.ExtraArgumentKeys;
-import com.dev.innso.myappbum.Providers.ImagesUrls;
+import com.dev.innso.myappbum.Providers.BuddiesImages;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.DetailActivity;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
@@ -64,8 +64,8 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
 
         //If we do this we need to uncomment the container on the xml layout
         //createListBuddiesLayoutDinamically(rootView);
-        mImagesLeft.addAll(Arrays.asList(ImagesUrls.imageUrls_left));
-        mImagesRight.addAll(Arrays.asList(ImagesUrls.imageUrls_right));
+        mImagesLeft.addAll(BuddiesImages.imageUrls_left);
+        mImagesRight.addAll(BuddiesImages.imageUrls_right);
         mAdapterLeft = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small), mImagesLeft);
         mAdapterRight = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), mImagesRight);
         mListBuddies.setAdapters(mAdapterLeft, mAdapterRight);
@@ -93,7 +93,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
     }
 
     private String getImage(int buddy, int position) {
-        return buddy == 0 ? ImagesUrls.imageUrls_left[position] : ImagesUrls.imageUrls_right[position];
+        return buddy == 0 ? BuddiesImages.imageUrls_left.get(position) : BuddiesImages.imageUrls_right.get(position);
     }
 
     public void setGap(int value) {

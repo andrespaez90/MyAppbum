@@ -1,7 +1,5 @@
 package com.dev.innso.myappbum.Models;
 
-import com.dev.innso.myappbum.Models.Appbums.Photo;
-
 import java.util.ArrayList;
 
 /**
@@ -14,14 +12,17 @@ public class Appbum {
     private String Rol;
     private String urlCover;
 
-    private ArrayList<Photo> Photos;
+    private int type;
 
-    public Appbum(int id, String name, String rol, String urlCover) {
+    private ArrayList<Picture> Pictures;
+
+    public Appbum(int id, String name, String rol, String urlCover, int type) {
         this.id = id;
         Name = name;
         Rol = rol;
         this.urlCover = urlCover;
-        Photos = new ArrayList<Photo>();
+        this.type = type;
+        Pictures = new ArrayList<Picture>();
     }
 
     public String getName() {
@@ -30,5 +31,21 @@ public class Appbum {
 
     public String getUrlCover() {
         return urlCover;
+    }
+
+    public void add(Picture photo) {
+        this.Pictures.add(photo);
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int gettype() {
+        return type;
+    }
+
+    public ArrayList<Picture> getPictures() {
+        return Pictures;
     }
 }

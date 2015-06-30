@@ -8,7 +8,17 @@ public enum JSONTag {
     JSON_RESPONSE("result"),
     JSON_SUCCESS("Success"),
 
-    JSON_USER_ID("1224525"),
+    JSON_USER_ID("id"),
+    JSON_USER_IDFACE("idFacebook"),
+    JSON_USER_NAME("name"),
+    JSON_URLPROFILE("urlProfile"),
+    JSON_URLCOVER("urlCover"),
+    JSON_ARRAYPHOTOS("photos"),
+
+    PHOTO_ID("id"),
+    PHOTO_URL("urlImagen"),
+    PHOTO_NAME("name"),
+    PHOTO_TYPE("type"),
 
     USER_EMAIL("user"),
     USER_PASSWORD("pass");
