@@ -20,8 +20,8 @@ public enum JSONTag {
     PHOTO_NAME("name"),
     PHOTO_TYPE("type"),
 
-    USER_EMAIL("user"),
-    USER_PASSWORD("pass");
+    JSON_USER_EMAIL("email"),
+    JSON_USER_PASSWORD("pass");
 
 
     String text;

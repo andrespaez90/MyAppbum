@@ -2,14 +2,23 @@ package com.dev.innso.myappbum.UI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.StringTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
+
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +38,9 @@ public class RegisterActivity extends ActionBarActivity {
     @InjectView(R.id.register_rpasswords)
     TextView tv_rpassword;
 
+    @InjectView(R.id.register_button)
+    Button btn_register;
+
     private String userName;
     private String userEmail;
     private String userPassword;
@@ -44,15 +56,29 @@ public class RegisterActivity extends ActionBarActivity {
 
     @OnClick(R.id.register_button)
     protected void Register(){
+        enableActivity( false );
         getData();
         StringTags responseAction = confirmData();
         if( responseAction == StringTags.ACTION_SUCCESS ){
-            savePreference();
-            //Save on server
-            showDialog(responseAction);
+
+            Pair<String,String> pairName = new Pair<>(JSONTag.JSON_USER_NAME.toString(),userName);
+            Pair<String,String> pairEmail = new Pair<>(JSONTag.JSON_USER_EMAIL.toString(),userEmail);
+            Pair<String,String> pairPass = new Pair<>(JSONTag.JSON_USER_PASSWORD.toString(),userPassword);
+
+            new registerService().execute(pairName,pairEmail,pairPass);
+
         }else{
             showDialog(responseAction);
+            enableActivity( true );
         }
+    }
+
+    private void enableActivity( Boolean enable ){
+        tv_name.setEnabled( enable );
+        tv_email.setEnabled( enable );
+        tv_passwords.setEnabled( enable );
+        tv_rpassword.setEnabled( enable );
+        btn_register.setEnabled( enable );
     }
 
     private void getData(){
@@ -145,4 +171,47 @@ public class RegisterActivity extends ActionBarActivity {
             }
         }
     }
+
+    private class registerService extends AsyncTask<Pair<String,String>,String,String> {
+
+        protected String doInBackground(Pair<String,String>... data){
+            try{
+                String response = ServerConnection.requestPOST(getResources().getString(R.string.registerService), data);
+                publishProgress(response);
+                JSONObject jsonObject = new JSONObject(response);
+                if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
+                    return null;
+                }else{
+                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    savePreference();
+                }
+                publishProgress(response);
+                return JSONTag.JSON_SUCCESS.toString();
+            }
+            catch (Exception e) {
+                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
+                publishProgress(e.getMessage());
+            }
+            return null;
+        }
+
+
+        protected void onProgressUpdate(String... progress) {
+            Toast.makeText(RegisterActivity.this, progress[0], Toast.LENGTH_LONG).show();
+        }
+
+
+
+        protected void onPostExecute(String result) {
+            if( result ==null ) {
+                //loginError.setText("Usuario o contraseña incorrecta");
+            }
+            else if( result.equals(JSONTag.JSON_SUCCESS.toString())){
+                RegisterActivity.this.showDialog(StringTags.ACTION_SUCCESS);
+            }
+            enableActivity(true);
+        }
+
+    }
+
 }

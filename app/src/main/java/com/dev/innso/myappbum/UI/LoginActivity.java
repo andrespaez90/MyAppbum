@@ -62,8 +62,8 @@ public class LoginActivity extends ActionBarActivity{
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
 
-        Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.USER_EMAIL.toString() , email);
-        Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.USER_PASSWORD.toString() , pass);
+        Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.JSON_USER_EMAIL.toString() , email);
+        Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.JSON_USER_PASSWORD.toString() , pass);
 
         new loginService().execute(pairEmail, pairPass);
     }

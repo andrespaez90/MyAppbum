@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loginService">http://andrespaez90.com/Appbum/loginService.php</string>
+    <string name="registerService">http://andrespaez90.com/Appbum/registerService.php</string>
     <string name="getAppbumsService">http://andrespaez90.com/Appbum/getAppbum.php</string>
 
 </resources>
