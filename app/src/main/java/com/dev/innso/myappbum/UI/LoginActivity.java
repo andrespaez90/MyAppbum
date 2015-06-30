@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.innso.myappbum.Providers.Functions;
 import com.dev.innso.myappbum.Providers.ServerConnection;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
@@ -61,6 +62,7 @@ public class LoginActivity extends ActionBarActivity{
 
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
+        pass = Functions.md5(pass);
 
         Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.JSON_USER_EMAIL.toString() , email);
         Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.JSON_USER_PASSWORD.toString() , pass);
