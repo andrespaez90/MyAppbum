@@ -2,12 +2,19 @@ package com.dev.innso.myappbum.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
+import android.widget.Toast;
 
+import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
+import com.dev.innso.myappbum.Utils.TAGs.StringTags;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -31,6 +38,11 @@ public class StartActivity extends Activity {
     LoginButton FacebookLogin;
 
     CallbackManager callbackManager;
+
+    private String userID;
+    private String userEmail;
+    private String userName;
+    private String usercover;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,16 +106,17 @@ public class StartActivity extends Activity {
 
     private void saveFacebookInformation(JSONObject information){
         try {
-            String userID = information.getString("id");
-            String userEmail = information.getString("email");
-            String userName = information.getString("name");
-            String usercover = information.getJSONObject("cover").getString("source");
+            userID = information.getString(JSONTag.JSON_USER_ID.toString());
+            userEmail = information.getString(JSONTag.JSON_USER_EMAIL.toString());
+            userName = information.getString(JSONTag.JSON_USER_NAME.toString());
+            usercover = information.getJSONObject(JSONTag.JSON_FACEBOOK_COVER.toString()).getString("source");
 
-            SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, userID);
-            SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER,userName);
-            SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER,usercover);
+            Pair<String, String> pairName = new Pair<>(JSONTag.JSON_USER_NAME.toString(),userName);
+            Pair<String, String> pairEmail = new Pair<>(JSONTag.JSON_USER_EMAIL.toString(),userEmail);
+            Pair<String, String> pairFacebook = new Pair<>(JSONTag.JSON_USER_IDFACE.toString(),userID);
+            Pair<String, String> pairCover = new Pair<>(JSONTag.JSON_URLCOVER.toString(),usercover);
 
-            finishSuccess();
+            new registerFacebookUser().execute(pairName,pairEmail,pairFacebook,pairCover);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -121,8 +134,59 @@ public class StartActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+
+    private void savePreference(){
+        SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, userID);
+        SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER,userName);
+        SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER, usercover);
+    }
+
     private void finishSuccess(){
         setResult(RESULT_OK);
         finish();
     }
+
+
+
+
+
+    private class registerFacebookUser extends AsyncTask<Pair<String,String>,String,String> {
+
+        protected String doInBackground(Pair<String,String>... data){
+            try{
+                String response = ServerConnection.requestPOST(getResources().getString(R.string.registerService), data);
+                publishProgress(response);
+                JSONObject jsonObject = new JSONObject(response);
+                if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
+                    return null;
+                }else{
+                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    savePreference();
+                }
+                publishProgress(response);
+                return JSONTag.JSON_SUCCESS.toString();
+            }
+            catch (Exception e) {
+                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
+                publishProgress(e.getMessage());
+            }
+            return null;
+        }
+
+
+        protected void onProgressUpdate(String... progress) {
+            Toast.makeText(StartActivity.this, progress[0], Toast.LENGTH_LONG).show();
+        }
+
+
+
+        protected void onPostExecute(String result) {
+            if( result !=null ) {
+                finishSuccess();
+            }
+        }
+
+    }
+
+
 }

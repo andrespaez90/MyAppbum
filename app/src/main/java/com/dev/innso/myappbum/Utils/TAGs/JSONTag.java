@@ -14,6 +14,7 @@ public enum JSONTag {
     JSON_URLPROFILE("urlProfile"),
     JSON_URLCOVER("urlCover"),
     JSON_ARRAYPHOTOS("photos"),
+    JSON_FACEBOOK_COVER("cover"),
 
     PHOTO_ID("id"),
     PHOTO_URL("urlImagen"),
