@@ -6,12 +6,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by INNSO SAS on 23/06/2015.
  */
 public class FactoryModel {
 
     public static void createAppbums(JSONArray jsonArray) {
+        FacadeModel.Appbums = new ArrayList<>();
         JSONObject object;
         JSONObject jsonPhoto;
         Appbum appbum;

@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.Models.Appbum;
-import com.dev.innso.myappbum.Models.Render;
-import com.dev.innso.myappbum.Utils.TAGs.ItemImageList;
+import com.dev.innso.myappbum.Models.Intender;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.BuddiesActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -99,7 +97,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         @Override
         public void onClick(View v) {
-            Intent intent = Render.createIntent(appbum,mContext);
+            Intent intent = Intender.createIntent(appbum, mContext);
             mContext.startActivity(intent);
         }
     }

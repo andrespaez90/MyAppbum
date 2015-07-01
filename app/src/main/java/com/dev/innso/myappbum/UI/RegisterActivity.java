@@ -199,7 +199,7 @@ public class RegisterActivity extends ActionBarActivity {
 
 
         protected void onProgressUpdate(String... progress) {
-            Toast.makeText(RegisterActivity.this, progress[0], Toast.LENGTH_LONG).show();
+            //Toast.makeText(RegisterActivity.this, progress[0], Toast.LENGTH_LONG).show();
         }
 
 

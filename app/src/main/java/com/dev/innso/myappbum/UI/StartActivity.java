@@ -175,7 +175,7 @@ public class StartActivity extends Activity {
 
 
         protected void onProgressUpdate(String... progress) {
-            Toast.makeText(StartActivity.this, progress[0], Toast.LENGTH_LONG).show();
+            //Toast.makeText(StartActivity.this, progress[0], Toast.LENGTH_LONG).show();
         }
 
 

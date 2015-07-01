@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by INNSO SAS on 19/06/2015.
  */
-public class Render {
+public class Intender {
 
     public static Intent createIntent(Appbum appbum, Context mContext){
         Intent intent = null;
