@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,21 +19,30 @@ import com.dev.innso.myappbum.UI.Fragments.CustomizeFragment;
 import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
 import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class BuddiesActivity extends ActionBarActivity implements CustomizeFragment.OnCustomizeListener{
 
     private boolean isOpenActivitiesActivated = true;
 
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buddies);
+        ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
+
         getData();
         if (savedInstanceState == null) {
             manageFragment(ListBuddiesFragment.newInstance(isOpenActivitiesActivated), FragmentTags.LIST_BUDDIES, false);
         }
 
-        //ActionBar actionBar = getSupportActionBar();
+       // ActionBar actionBar = getSupportActionBar();
         //actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -40,7 +50,6 @@ public class BuddiesActivity extends ActionBarActivity implements CustomizeFragm
         Bundle extras = getIntent().getExtras();
         String appbumName = extras.getString("APPBUM_NAME");
         setTitle(appbumName);
-        //Find URLs
     }
 
     @Override
