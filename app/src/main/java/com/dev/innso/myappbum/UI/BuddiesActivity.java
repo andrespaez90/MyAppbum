@@ -42,8 +42,8 @@ public class BuddiesActivity extends ActionBarActivity implements CustomizeFragm
             manageFragment(ListBuddiesFragment.newInstance(isOpenActivitiesActivated), FragmentTags.LIST_BUDDIES, false);
         }
 
-       // ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+       ActionBar actionBar = getSupportActionBar();
+       actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void getData(){

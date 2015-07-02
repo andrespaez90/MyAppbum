@@ -114,12 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.main_action_profile:
-               Intent i = new Intent(this,ProfileActivity.class);
-                startActivity(i);
-                break;
-        }
+
         return true;
     }
 
