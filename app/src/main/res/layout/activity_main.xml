@@ -1,38 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dev.innso.myappbum.UI.Fragments.AppbumsFragment"
-    android:background="@color/dim_foreground_disabled_material_dark"
-    android:weightSum="1">
+    android:orientation="vertical">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recView"
+    <View
+        android:layout_gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dim_foreground_disabled_material_dark"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.9"/>
-
+        android:layout_height="35dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|bottom"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:contentInsetStart="0dp"
+            style="@style/Toolbar">
 
-        <Button
-            android:id="@+id/main_add"
+            <ImageView
+                android:id="@+id/content_hamburger"
+                style="@style/MenuImageView"
+                android:src="@mipmap/ic_menu_90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/title_activity_main"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/ic_account_plus"
-            android:text="Crear Appbum"
-            android:paddingLeft="6dp"
-            android:background="@drawable/darkred_button"
-            android:textColor="@color/background_material_light"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+            tools:context="com.dev.innso.myappbum.UI.Fragments.AppbumsFragment"
+            android:background="@color/dim_foreground_disabled_material_dark"
+            android:weightSum="1">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_recView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dim_foreground_disabled_material_dark"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="0.9"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|bottom"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/main_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_account_plus"
+                    android:text="Crear Appbum"
+                    android:paddingLeft="6dp"
+                    android:background="@drawable/darkred_button"
+                    android:textColor="@color/background_material_light"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-
-</LinearLayout>
+</FrameLayout>

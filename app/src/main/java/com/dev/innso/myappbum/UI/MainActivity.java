@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
+import com.dev.innso.myappbum.Animation.GuillotineAnimation;
 import com.dev.innso.myappbum.Models.Appbum;
 import com.dev.innso.myappbum.Models.FacadeModel;
 import com.dev.innso.myappbum.Models.FactoryModel;
@@ -37,10 +44,21 @@ import butterknife.OnClick;
 /**
  * Created by INNSO SAS on 22/05/2015.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private static final long RIPPLE_DURATION = 250;
 
     @InjectView(R.id.main_recView)
     RecyclerView AlbumsList;
+
+    @InjectView(R.id.root)
+    FrameLayout root;
+
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @InjectView(R.id.content_hamburger)
+    View contentHamburger;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -49,6 +67,14 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
         init();
 
+
+        View menu = LayoutInflater.from(this).inflate(R.layout.menu_main,null);
+        root.addView(menu);
+
+        new GuillotineAnimation.GuillotineBuilder(menu, menu.findViewById(R.id.menu_imgmenu), contentHamburger)
+                .setStartDelay(RIPPLE_DURATION)
+                .setActionBarViewForAnimation(toolbar)
+                .build();
     }
 
     private void init(){
