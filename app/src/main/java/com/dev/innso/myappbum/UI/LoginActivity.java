@@ -115,7 +115,7 @@ public class LoginActivity extends ActionBarActivity{
 
 
         protected void onProgressUpdate(String... progress) {
-             Toast.makeText(LoginActivity.this,progress[0],Toast.LENGTH_LONG).show();
+             //Toast.makeText(LoginActivity.this,progress[0],Toast.LENGTH_LONG).show();
         }
 
 

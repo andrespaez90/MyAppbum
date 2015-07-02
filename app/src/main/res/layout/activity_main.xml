@@ -23,15 +23,16 @@
 
             <ImageView
                 android:id="@+id/content_hamburger"
-                style="@style/MenuImageView"
+                style="@style/Toolbar.MenuImage"
                 android:src="@mipmap/ic_menu_90"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="start"
+                style="@style/Toolbar.Title"
                 android:text="@string/title_activity_main"/>
 
         </android.support.v7.widget.Toolbar>

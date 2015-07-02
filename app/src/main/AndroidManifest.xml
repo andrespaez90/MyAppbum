@@ -35,8 +35,7 @@
                 android:value="com.dev.innso.myappbum.UI.BuddiesActivity" />
         </activity>
         <activity
-            android:name=".UI.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

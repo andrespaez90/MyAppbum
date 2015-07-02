@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme"  parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="actionBarStyle">@style/MyActionBar</item>
@@ -15,12 +15,20 @@
         <item name="android:background">@color/primary</item>
     </style>
 
+    <style name="Toolbar.MenuImage">
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
+
+    <style name="Toolbar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
     </style>
 
-    <style name="MenuImageView" />
+
 
     <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>

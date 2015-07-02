@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         init();
 
-
+        setSupportActionBar(toolbar);
         View menu = LayoutInflater.from(this).inflate(R.layout.menu_main,null);
         root.addView(menu);
 
