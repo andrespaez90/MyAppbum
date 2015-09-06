@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 
 public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.OnBuddyItemClickListener {
@@ -36,7 +36,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
     private CircularAdapter mAdapterLeft;
     private CircularAdapter mAdapterRight;
 
-    @InjectView(R.id.listbuddies)
+    @Bind(R.id.listbuddies)
     ListBuddiesLayout mListBuddies;
     private List<String> mImagesLeft = new ArrayList<String>();
     private List<String> mImagesRight = new ArrayList<String>();
@@ -60,7 +60,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_listbuddies, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
 
         //If we do this we need to uncomment the container on the xml layout
         //createListBuddiesLayoutDinamically(rootView);

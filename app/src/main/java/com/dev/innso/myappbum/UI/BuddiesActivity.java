@@ -20,21 +20,21 @@ import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
 import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 
 public class BuddiesActivity extends ActionBarActivity implements CustomizeFragment.OnCustomizeListener{
 
     private boolean isOpenActivitiesActivated = true;
 
-    @InjectView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buddies);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         getData();

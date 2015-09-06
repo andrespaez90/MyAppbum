@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 /**
  * Created by INNSO SAS on 13/05/2015.
@@ -33,28 +33,28 @@ import butterknife.InjectView;
 public class CustomizeFragment extends Fragment {
 
     private static final String TAG = CustomizeFragment.class.getSimpleName();
-    @InjectView(R.id.seekBarGap)
+    @Bind(R.id.seekBarGap)
     SeekBar mSeekBarGap;
-    @InjectView(R.id.seekBarGapValue)
+    @Bind(R.id.seekBarGapValue)
     TextView seekBarGapValue;
 
-    @InjectView(R.id.seekBarSpeed)
+    @Bind(R.id.seekBarSpeed)
     SeekBar mSeekBarSpeed;
-    @InjectView(R.id.seekBarSpeedValue)
+    @Bind(R.id.seekBarSpeedValue)
     TextView seekBarSpeedValue;
 
-    @InjectView(R.id.seekBarDivHeight)
+    @Bind(R.id.seekBarDivHeight)
     SeekBar mSeekBarDivHeight;
-    @InjectView(R.id.seekBarDivHeightValue)
+    @Bind(R.id.seekBarDivHeightValue)
     TextView seekBarDivHeightValue;
 
-    @InjectView(R.id.fillGapSpinner)
+    @Bind(R.id.fillGapSpinner)
     Spinner mFillGapSpinner;
-    @InjectView(R.id.scrollSpinner)
+    @Bind(R.id.scrollSpinner)
     Spinner mManualScrollSpinner;
-    @InjectView(R.id.autoScrollSpinner)
+    @Bind(R.id.autoScrollSpinner)
     Spinner mAutoScrollSpinner;
-    @InjectView(R.id.dividerSpinner)
+    @Bind(R.id.dividerSpinner)
     Spinner mDividerSpinner;
 
     private OnCustomizeListener mOnCustomizeListener;
@@ -85,7 +85,7 @@ public class CustomizeFragment extends Fragment {
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                 View rootView = inflater.inflate(R.layout.fragment_customize, container, false);
-                ButterKnife.inject(this, rootView);
+                ButterKnife.bind(this, rootView);
                 startConfig();
                 return rootView;
             }

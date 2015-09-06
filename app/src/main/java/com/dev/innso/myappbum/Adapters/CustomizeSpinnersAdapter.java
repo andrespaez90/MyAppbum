@@ -13,13 +13,10 @@ import com.dev.innso.myappbum.R;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.Optional;
 
-/**
- * Created by jpardogo on 22/02/2014.
- */
+
 public class CustomizeSpinnersAdapter implements SpinnerAdapter {
 
     private Context mContext;
@@ -113,15 +110,14 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
     }
 
     static class ViewHolder {
-        @InjectView(R.id.title)
+        @Bind(R.id.title)
         TextView title;
 
-        @Optional
-        @InjectView(R.id.subtitle)
+        @Bind(R.id.subtitle)
         TextView subtitle;
 
         public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }

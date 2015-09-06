@@ -20,33 +20,32 @@ import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 
 import org.json.JSONObject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 
 public class LoginActivity extends ActionBarActivity{
 
-    @InjectView(R.id.login_username)
+    @Bind(R.id.login_username)
     TextView userEmail;
 
-    @InjectView(R.id.login_password)
+    @Bind(R.id.login_password)
     TextView userPass;
 
-    @InjectView(R.id.login_error)
+    @Bind(R.id.login_error)
     TextView loginError;
 
-    @InjectView(R.id.login_singin)
+    @Bind(R.id.login_singin)
     Button btnRegister;
 
-    @InjectView(R.id.login_Login)
+    @Bind(R.id.login_Login)
     Button btnLogin;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    @Override public  void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.login_singin)
@@ -107,7 +106,6 @@ public class LoginActivity extends ActionBarActivity{
                 return JSONTag.JSON_SUCCESS.toString();
             }
             catch (Exception e) {
-                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
                 publishProgress(e.getMessage());
             }
             return null;

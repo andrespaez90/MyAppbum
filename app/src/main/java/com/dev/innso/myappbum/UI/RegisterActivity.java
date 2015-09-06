@@ -22,24 +22,24 @@ import com.dev.innso.myappbum.Utils.SharePreferences;
 import org.json.JSONObject;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 public class RegisterActivity extends ActionBarActivity {
 
-    @InjectView(R.id.register_name)
+    @Bind(R.id.register_name)
     TextView tv_name;
 
-    @InjectView(R.id.register_email)
+    @Bind(R.id.register_email)
     TextView tv_email;
 
-    @InjectView(R.id.register_password)
+    @Bind(R.id.register_password)
     TextView tv_passwords;
 
-    @InjectView(R.id.register_rpasswords)
+    @Bind(R.id.register_rpasswords)
     TextView tv_rpassword;
 
-    @InjectView(R.id.register_button)
+    @Bind(R.id.register_button)
     Button btn_register;
 
     private String userName;
@@ -52,7 +52,7 @@ public class RegisterActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.register_button)

@@ -13,17 +13,17 @@ import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class ProfileActivity extends ActionBarActivity {
 
-    @InjectView(R.id.profile_image)
+    @Bind(R.id.profile_image)
     ImageView profilePicture;
 
-    @InjectView(R.id.profile_cover)
+    @Bind(R.id.profile_cover)
     ImageView profileCover;
 
-    @InjectView(R.id.profile_name)
+    @Bind(R.id.profile_name)
     TextView profileName;
 
 
@@ -31,8 +31,9 @@ public class ProfileActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.profile_in, R.anim.profile_out);
         setContentView(R.layout.activity_profile);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         init();
     }
 
@@ -73,5 +74,11 @@ public class ProfileActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        this.overridePendingTransition(R.anim.profile_out,R.anim.profile_out);
     }
 }

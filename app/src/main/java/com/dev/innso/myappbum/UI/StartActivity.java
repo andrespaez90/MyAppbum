@@ -29,12 +29,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 public class StartActivity extends Activity {
 
-    @InjectView(R.id.star_facebook)
+    @Bind(R.id.star_facebook)
     LoginButton FacebookLogin;
 
     CallbackManager callbackManager;
@@ -50,7 +50,7 @@ public class StartActivity extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_start);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         initFacebookButton();
     }
 

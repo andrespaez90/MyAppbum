@@ -9,12 +9,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 public class DetailActivity extends BaseActivity {
 
     public static final String EXTRA_URL = "url";
-    @InjectView(R.id.details_image)
+    @Bind(R.id.details_image)
     ImageView mImageView;
 
     @Override
@@ -22,7 +22,7 @@ public class DetailActivity extends BaseActivity {
         overridePendingTransition(0, 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         mBackground = mImageView;
         String imageUrl = getIntent().getExtras().getString(EXTRA_URL);
         Picasso.with(this).load(imageUrl).into(mImageView, new Callback() {

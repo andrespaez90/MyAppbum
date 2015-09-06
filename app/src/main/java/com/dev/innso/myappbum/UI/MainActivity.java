@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.dev.innso.myappbum.Models.Appbum;
 import com.dev.innso.myappbum.Models.FacadeModel;
 import com.dev.innso.myappbum.Models.FactoryModel;
 import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.UI.views.MainMenu;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
@@ -36,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -46,28 +48,29 @@ public class MainActivity extends AppCompatActivity {
 
     private static final long RIPPLE_DURATION = 250;
 
-    @InjectView(R.id.main_recView)
+    @Bind(R.id.main_recView)
     RecyclerView AlbumsList;
 
-    @InjectView(R.id.root)
+    @Bind(R.id.root)
     FrameLayout root;
 
-    @InjectView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    @InjectView(R.id.content_hamburger)
+    @Bind(R.id.content_hamburger)
     View contentHamburger;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         init();
 
+
         setSupportActionBar(toolbar);
-        View menu = LayoutInflater.from(this).inflate(R.layout.fragment_main_menu,null);
-        root.addView(menu);
+        MainMenu menu = new MainMenu(this);
+        root.addView(menu.getRootView());
 
         new GuillotineAnimation.GuillotineBuilder(menu, menu.findViewById(R.id.menu_imgmenu), contentHamburger)
                 .setStartDelay(RIPPLE_DURATION)
