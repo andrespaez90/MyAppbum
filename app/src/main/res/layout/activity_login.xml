@@ -4,17 +4,28 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        float:contentInsetStart="0dp"
+        style="@style/Toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/Toolbar.Title"
+            android:text="@string/title_activity_login"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:src="@drawable/ic_icon"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="15dp"
         android:layout_gravity="center_horizontal" />
 
@@ -93,6 +104,8 @@
         android:text="@string/Login"
         android:background="@drawable/red_button"
         android:textColor="@color/background_material_light"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:id="@+id/login_Login" />
 
     <Button
@@ -100,6 +113,8 @@
         android:layout_height="wrap_content"
         android:text="@string/Signin"
         android:id="@+id/login_singin"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="10px"
         android:textColor="@color/bright_foreground_inverse_material_light"
         android:background="@drawable/green_buttom"/>

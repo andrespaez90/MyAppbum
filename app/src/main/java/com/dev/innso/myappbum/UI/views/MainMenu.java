@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.dev.innso.myappbum.Animation.GuillotineAnimation;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.ProfileActivity;
 
@@ -23,6 +24,8 @@ import butterknife.OnItemSelected;
  * Created by INNSO SAS on 05/09/2015.
  */
 public class MainMenu extends FrameLayout {
+
+    GuillotineAnimation Listener;
 
     @Bind(R.id.main_menu_prfile)
     LinearLayout optionProfile;
@@ -50,4 +53,5 @@ public class MainMenu extends FrameLayout {
         Intent i = new Intent(getContext(), ProfileActivity.class);
         getContext().startActivity(i);
     }
+
 }

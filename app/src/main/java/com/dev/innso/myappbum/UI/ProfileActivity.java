@@ -2,6 +2,7 @@ package com.dev.innso.myappbum.UI;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
-public class ProfileActivity extends ActionBarActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Bind(R.id.profile_image)
     ImageView profilePicture;
@@ -27,11 +28,10 @@ public class ProfileActivity extends ActionBarActivity {
     TextView profileName;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.profile_in, R.anim.profile_out);
+        overridePendingTransition(R.anim.profile_in, R.anim.principal_in);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         init();
@@ -79,6 +79,6 @@ public class ProfileActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         finish();
-        this.overridePendingTransition(R.anim.profile_out,R.anim.profile_out);
+        this.overridePendingTransition(R.anim.principal_out,R.anim.profile_out);
     }
 }

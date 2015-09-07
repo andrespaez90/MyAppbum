@@ -2,13 +2,11 @@ package com.dev.innso.myappbum.UI;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dev.innso.myappbum.Providers.Functions;
 import com.dev.innso.myappbum.Providers.ServerConnection;
@@ -25,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends ActionBarActivity{
+public class LoginActivity extends AppCompatActivity{
 
     @Bind(R.id.login_username)
     TextView userEmail;
@@ -46,6 +44,7 @@ public class LoginActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        overridePendingTransition(R.anim.login_in,R.anim.principal_in);
     }
 
     @OnClick(R.id.login_singin)
@@ -85,6 +84,12 @@ public class LoginActivity extends ActionBarActivity{
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        this.overridePendingTransition(R.anim.principal_in,R.anim.login_out);
+    }
+
 
     private class loginService extends AsyncTask<Pair<String,String>,String,String> {
 
@@ -115,8 +120,6 @@ public class LoginActivity extends ActionBarActivity{
         protected void onProgressUpdate(String... progress) {
              //Toast.makeText(LoginActivity.this,progress[0],Toast.LENGTH_LONG).show();
         }
-
-
 
         protected void onPostExecute(String result) {
             if( result ==null ) {

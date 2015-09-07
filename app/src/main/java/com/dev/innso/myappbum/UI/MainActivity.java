@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 .setClosedOnStart(true)
                 .setActionBarViewForAnimation(toolbar)
                 .build();
+
     }
 
     private void init(){

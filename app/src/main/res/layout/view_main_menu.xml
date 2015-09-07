@@ -105,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -118,13 +119,35 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:layout_marginLeft="5dp"
-                android:text="Innso"
+                android:text="Andrés Páez"
                 android:gravity="center_vertical"
                 android:textAppearance="@android:style/TextAppearance.Medium"/>
 
         </LinearLayout>
 
+        <LinearLayout
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_account_circle_white_24dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:text="Cerrar Sesión"
+                android:gravity="center_vertical"
+                android:textAppearance="@android:style/TextAppearance.Medium"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
