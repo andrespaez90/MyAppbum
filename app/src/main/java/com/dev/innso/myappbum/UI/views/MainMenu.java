@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.dev.innso.myappbum.Animation.GuillotineAnimation;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.ProfileActivity;
+import com.dev.innso.myappbum.Utils.SharePreferences;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,13 +25,6 @@ import butterknife.OnItemSelected;
  * Created by INNSO SAS on 05/09/2015.
  */
 public class MainMenu extends FrameLayout {
-
-    GuillotineAnimation Listener;
-
-    @Bind(R.id.main_menu_prfile)
-    LinearLayout optionProfile;
-
-    LinearLayout optionNotification;
 
     public MainMenu(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -62,6 +56,17 @@ public class MainMenu extends FrameLayout {
     @OnClick(R.id.main_menu_invitation)
     void showInvitations(){
 
+    }
+
+    @OnClick(R.id.main_menu_about)
+    void showAbout() {
+
+
+    }
+
+    @OnClick(R.id.main_menu_logout)
+    void logOut(){
+        SharePreferences.resetUser();
     }
 
 }
