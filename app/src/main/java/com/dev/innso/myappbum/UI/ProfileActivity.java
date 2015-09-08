@@ -1,6 +1,5 @@
 package com.dev.innso.myappbum.UI;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -31,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.profile_in, R.anim.principal_in);
+        overridePendingTransition(R.anim.slide_up_in, R.anim.stay);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         init();
@@ -79,6 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        this.overridePendingTransition(R.anim.principal_out,R.anim.profile_out);
+        this.overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
     }
 }

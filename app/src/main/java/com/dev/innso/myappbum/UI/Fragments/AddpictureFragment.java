@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  */
 public class AddpictureFragment extends Fragment {
 
-    public static android.support.v4.app.Fragment newInstance() {
+    public static Fragment newInstance() {
         return new AddpictureFragment();
     }
 

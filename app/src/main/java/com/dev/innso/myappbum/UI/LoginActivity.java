@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        overridePendingTransition(R.anim.login_in,R.anim.principal_in);
+        overridePendingTransition(R.anim.slide_right_in,R.anim.stay);
     }
 
     @OnClick(R.id.login_singin)
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         finish();
-        this.overridePendingTransition(R.anim.principal_in,R.anim.login_out);
+        this.overridePendingTransition(R.anim.stay,R.anim.slide_right_out);
     }
 
 

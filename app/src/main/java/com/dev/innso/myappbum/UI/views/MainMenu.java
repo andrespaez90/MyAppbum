@@ -48,10 +48,20 @@ public class MainMenu extends FrameLayout {
         ButterKnife.bind(this, view);
     }
 
-    @OnClick(R.id.main_menu_prfile)
+    @OnClick(R.id.main_menu_profile)
     void startProfile(){
         Intent i = new Intent(getContext(), ProfileActivity.class);
         getContext().startActivity(i);
+    }
+
+    @OnClick(R.id.main_menu_notification)
+    void showNotifications(){
+
+    }
+
+    @OnClick(R.id.main_menu_invitation)
+    void showInvitations(){
+
     }
 
 }

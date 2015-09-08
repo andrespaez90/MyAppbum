@@ -38,6 +38,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
 
     @Bind(R.id.listbuddies)
     ListBuddiesLayout mListBuddies;
+
     private List<String> mImagesLeft = new ArrayList<String>();
     private List<String> mImagesRight = new ArrayList<String>();
 
