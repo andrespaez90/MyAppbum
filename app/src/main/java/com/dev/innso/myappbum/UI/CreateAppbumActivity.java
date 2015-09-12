@@ -7,6 +7,8 @@ import android.view.MenuItem;
 
 import com.dev.innso.myappbum.R;
 
+import butterknife.OnClick;
+
 public class CreateAppbumActivity extends ActionBarActivity {
 
     @Override
@@ -36,6 +38,12 @@ public class CreateAppbumActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.back)
+    void pressBack(){
+        finish();
+        this.overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
     }
 
     @Override

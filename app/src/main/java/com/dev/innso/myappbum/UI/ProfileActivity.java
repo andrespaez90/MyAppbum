@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -73,6 +74,13 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @OnClick(R.id.back)
+    void pressBack(){
+        finish();
+        this.overridePendingTransition(R.anim.stay,R.anim.slide_left_out);
     }
 
     @Override
