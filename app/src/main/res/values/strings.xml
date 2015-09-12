@@ -54,5 +54,8 @@
     <string name="title_activity_register">Nuevo Usuario</string>
     <string name="title_activity_profile">Perfil</string>
     <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_create_appbum">Crear Appbum</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -4,12 +4,13 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_start"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         float:contentInsetStart="0dp"
-        style="@style/Toolbar">
+        style="@style/Toolbar_login">
 
         <TextView
             android:layout_width="match_parent"
@@ -26,23 +27,24 @@
         android:id="@+id/imageView2"
         android:src="@drawable/ic_icon"
         android:layout_marginTop="35dp"
-        android:layout_marginBottom="15dp"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
 
         <ImageView
-            android:layout_width="81dp"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:id="@+id/login_img_profile"
-            android:src="@mipmap/ic_account_dark"/>
+            android:src="@mipmap/ic_face"/>
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             float:fletPadding="10dp"
             android:gravity="top">
 
@@ -51,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Username"
-                android:gravity="center_vertical|center" />
+                android:gravity="center_vertical|center"/>
+
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     </LinearLayout>
@@ -61,13 +64,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5px"
+        android:layout_margin="15dp"
         android:weightSum="1">
 
         <ImageView
-            android:layout_width="79dp"
-            android:layout_height="79dp"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
             android:id="@+id/imageView"
-            android:src="@mipmap/ic_dots_horizontal" />
+            android:src="@mipmap/ic_lock" />
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
@@ -82,6 +86,7 @@
                 android:hint="@string/Password"
                 android:inputType="textPassword"
                 android:gravity="bottom|center" />
+
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     </LinearLayout>
@@ -102,9 +107,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Login"
-        android:background="@drawable/red_button"
+        android:background="@drawable/orange_button"
         android:textColor="@color/background_material_light"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="16dp"
         android:id="@+id/login_Login" />
 

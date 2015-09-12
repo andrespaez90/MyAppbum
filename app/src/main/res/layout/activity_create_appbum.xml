@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dev.innso.myappbum.UI.CreateAppbumActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:contentInsetStart="0dp"
+        style="@style/Toolbar">
+
+        <ImageView
+            android:id="@+id/content_hamburger"
+            style="@style/Toolbar.MenuImage"
+            android:src="@mipmap/ic_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Toolbar.Title"
+            android:gravity="center"
+            android:text="@string/title_activity_create_appbum"/>
+
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>

@@ -102,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
         AlbumsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
+
+    @OnClick(R.id.main_add)
+    void createAppbum(){
+        Intent i = new Intent(this,CreateAppbumActivity.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);

@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_up_in, R.anim.stay);
+        overridePendingTransition(R.anim.slide_left_in, R.anim.stay);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         init();
@@ -78,6 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        this.overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
+        this.overridePendingTransition(R.anim.stay,R.anim.slide_left_out);
     }
 }
