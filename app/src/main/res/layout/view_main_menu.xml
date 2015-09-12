@@ -14,7 +14,8 @@
         <ImageView
             android:id="@+id/menu_imgmenu"
             android:src="@mipmap/ic_menu_90"
-            style="@style/Toolbar.MenuImage" />
+            style="@style/Toolbar.MenuImage"
+            android:layout_marginLeft="10dp"/>
 
     </android.support.v7.widget.Toolbar>
 

@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         else{
 
         }
-        profileName.setText(userName);
+        profileName.setText(userName.toUpperCase());
     }
 
     @Override

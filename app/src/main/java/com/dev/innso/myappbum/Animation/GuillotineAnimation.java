@@ -72,6 +72,10 @@ public class GuillotineAnimation {
 
     }
 
+    public boolean isClose() {
+        return isClosing;
+    }
+
     private void setUpOpeningView(final View openingView) {
         if (mActionBarView != null) {
             mActionBarView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

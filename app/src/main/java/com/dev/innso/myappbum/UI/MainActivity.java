@@ -41,9 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * Created by INNSO SAS on 22/05/2015.
- */
 public class MainActivity extends AppCompatActivity {
 
     private static final long RIPPLE_DURATION = 250;
@@ -60,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.content_hamburger)
     View contentHamburger;
 
+    GuillotineAnimation menuGuillotine;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         MainMenu menu = new MainMenu(this);
         root.addView(menu.getRootView());
 
-        new GuillotineAnimation.GuillotineBuilder(menu, menu.findViewById(R.id.menu_imgmenu), contentHamburger)
+        menuGuillotine = new GuillotineAnimation.GuillotineBuilder(menu, menu.findViewById(R.id.menu_imgmenu), contentHamburger)
                 .setStartDelay(RIPPLE_DURATION)
                 .setClosedOnStart(true)
                 .setActionBarViewForAnimation(toolbar)
@@ -84,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
         createList(FacadeModel.Appbums);
         String userID = SharePreferences.getApplicationValue(SharedPrefKeys.ID_USER);
         if(userID == ""){
-            Intent i = new Intent(this, StartActivity.class);
-            startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
+            startLogin();
         }
         else{
             Pair<String,String> userId = new Pair<>(JSONTag.JSON_USER_ID.toString(),userID);
@@ -93,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void startLogin(){
+        Intent i = new Intent(this, StartActivity.class);
+        startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
+    }
 
     private void createList(ArrayList<Appbum> list){
         AlbumsList.setHasFixedSize(true);
@@ -107,6 +109,20 @@ public class MainActivity extends AppCompatActivity {
     void createAppbum(){
         Intent i = new Intent(this,CreateAppbumActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if( !menuGuillotine.isClose() ){
+            closeMenu();
+        }else{
+            finish();
+            this.overridePendingTransition(R.anim.stay, R.anim.slide_left_out);
+        }
+    }
+
+    public void closeMenu(){
+        menuGuillotine.close();
     }
 
     @Override
@@ -138,11 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 new DownloadData().execute(pairId);
             }
         }
-    }
-
-
-    @OnClick(R.id.main_add) void closeSession(){
-        SharePreferences.resetUser();
     }
 
 

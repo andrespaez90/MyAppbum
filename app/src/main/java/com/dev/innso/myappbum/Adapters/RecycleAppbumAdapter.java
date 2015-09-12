@@ -91,7 +91,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         public void bindItem(Appbum item) {
             appbum = item;
-            txtTitle.setText(appbum.getName());
+            txtTitle.setText(appbum.getName().toUpperCase());
             Picasso.with(mContext).load(appbum.getUrlCover()).placeholder(R.drawable.bg_appbum_load).into(imageView);
         }
 
