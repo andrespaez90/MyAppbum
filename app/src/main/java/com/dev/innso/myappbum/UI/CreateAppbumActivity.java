@@ -1,22 +1,35 @@
 package com.dev.innso.myappbum.UI;
 
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.dev.innso.myappbum.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateAppbumActivity extends ActionBarActivity {
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_up_in, R.anim.stay);
         setContentView(R.layout.activity_create_appbum);
+        ButterKnife.bind(this);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
