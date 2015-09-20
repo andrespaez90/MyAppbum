@@ -113,12 +113,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if( !menuGuillotine.isClose() ){
+        if( menuGuillotine.isOpen() ){
             closeMenu();
-        }else{
-            finish();
-            this.overridePendingTransition(R.anim.stay, R.anim.slide_left_out);
-        }
+        }else
+           finish();
     }
 
     public void closeMenu(){

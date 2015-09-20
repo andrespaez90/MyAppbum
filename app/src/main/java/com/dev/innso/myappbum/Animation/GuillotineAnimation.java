@@ -37,6 +37,7 @@ public class GuillotineAnimation {
     private final long mDelay;
 
     private boolean isOpening;
+    private boolean isOpen;
     private boolean isClosing;
 
     private GuillotineAnimation(GuillotineBuilder builder) {
@@ -62,18 +63,20 @@ public class GuillotineAnimation {
     public void open() {
         if (!isOpening) {
             mOpeningAnimation.start();
+            isOpen = true;
         }
     }
 
     public void close() {
         if (!isClosing) {
             mClosingAnimation.start();
+            isOpen = false;
         }
 
     }
 
-    public boolean isClose() {
-        return isClosing;
+    public boolean isOpen() {
+        return isOpen;
     }
 
     private void setUpOpeningView(final View openingView) {

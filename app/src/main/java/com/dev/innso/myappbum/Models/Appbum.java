@@ -11,6 +11,7 @@ public class Appbum {
     private String Name;
     private String Rol;
     private String urlCover;
+    private String urlBackground;
 
     private int type;
 
@@ -20,7 +21,7 @@ public class Appbum {
         this.id = id;
         Name = name;
         Rol = rol;
-        this.urlCover = urlCover;
+        this. urlCover = urlCover;
         this.type = type;
         Pictures = new ArrayList<Picture>();
     }
@@ -30,7 +31,7 @@ public class Appbum {
     }
 
     public String getUrlCover() {
-        return urlCover;
+        return  urlCover;
     }
 
     public void add(Picture photo) {
