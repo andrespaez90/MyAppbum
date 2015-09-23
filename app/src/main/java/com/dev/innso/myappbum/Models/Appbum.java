@@ -11,17 +11,21 @@ public class Appbum {
     private String Name;
     private String Rol;
     private String urlCover;
+    private Boolean isPrivate;
+    private int passNumber;
     private String urlBackground;
 
     private int type;
 
     private ArrayList<Picture> Pictures;
 
-    public Appbum(int id, String name, String rol, String urlCover, int type) {
+    public Appbum(int id, String name, String rol, String urlCover, boolean isprivate, int passnumber, int type) {
         this.id = id;
         Name = name;
         Rol = rol;
         this. urlCover = urlCover;
+        isPrivate = isprivate;
+        passNumber = passnumber;
         this.type = type;
         Pictures = new ArrayList<Picture>();
     }
@@ -41,6 +45,10 @@ public class Appbum {
     public void setType(int type) {
         this.type = type;
     }
+
+    public boolean isPrivate(){ return isPrivate; }
+
+    public int getPassNumber(){ return passNumber; }
 
     public int gettype() {
         return type;

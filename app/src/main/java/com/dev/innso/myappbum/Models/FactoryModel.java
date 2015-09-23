@@ -22,7 +22,11 @@ public class FactoryModel {
         try {
             for(int i = 0; i < jsonArray.length();i++){
                 object = jsonArray.getJSONObject(i);
-                appbum = new Appbum(object.getInt("id"),object.getString("name"),object.getString("rol"),object.getString("urlCover"), object.getInt(JSONTag.PHOTO_TYPE.toString()) );
+
+                appbum = new Appbum(object.getInt("id"),object.getString("name"),object.getString("rol"),
+                        object.getString("urlCover"), object.getInt("private")==1,
+                        object.getInt("passnumber"),object.getInt(JSONTag.PHOTO_TYPE.toString()) );
+
                 JSONArray arrayPhotos = object.getJSONArray(JSONTag.JSON_ARRAYPHOTOS.toString());
                 for(int j=0; j<arrayPhotos.length();j++ ){
                     jsonPhoto = arrayPhotos.getJSONObject(j);

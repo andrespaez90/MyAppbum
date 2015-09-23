@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string name="acpass_repeat_PassNumaber">Por favor confirmar la contraseña</string>
+     <string name="acpass_confirmed_pass">Nueva contraseña confirmada.</string>
+     <string name="acpass_incorrect_pass">Las contraseñas no coincide, por favor intentelo de nuevo.</string>
+     <string name="acpass_title_error">Error</string>
+     <string name="acpass_title_info">Información</string>
+
+     <string name="numer_one">1</string>
+     <string name="number_two">2</string>
+     <string name="number_four">4</string>
+     <string name="number_five">5</string>
+     <string name="number_six">6</string>
+     <string name="number_three">3</string>
+     <string name="numer_seven">7</string>
+     <string name="numer_eight">8</string>
+     <string name="numer_nine">9</string>
+     <string name="numer_cero">0</string>
+
+</resources>

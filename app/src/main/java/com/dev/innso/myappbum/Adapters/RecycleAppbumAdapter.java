@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dev.innso.myappbum.Models.Appbum;
 import com.dev.innso.myappbum.Models.Intender;
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.UI.Activities.PassNumber;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -97,8 +98,15 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         @Override
         public void onClick(View v) {
-            Intent intent = Intender.createIntent(appbum, mContext);
-            mContext.startActivity(intent);
+            if( !appbum.isPrivate() ){
+                Intent intent = Intender.createIntent(appbum, mContext);
+                mContext.startActivity(intent);
+            }else{
+                Intent intent = new Intent(mContext, PassNumber.class);
+                intent.putExtra("Pass",appbum.getPassNumber());
+                mContext.startActivity(intent);
+            }
+
         }
     }
 

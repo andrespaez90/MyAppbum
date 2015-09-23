@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         protected void onProgressUpdate(String... progress) {
+            Log.v("JSON",progress[0]);
             Toast.makeText(MainActivity.this, progress[0], Toast.LENGTH_LONG).show();
         }
 

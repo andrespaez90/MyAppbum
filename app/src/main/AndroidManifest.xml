@@ -63,6 +63,10 @@
             android:label="@string/title_activity_start" >
         </activity>
         <activity
+            android:name=".UI.Activities.PassNumber"
+            android:label="@string/title_activity_create_appbum" >
+        </activity>
+        <activity
             android:name=".UI.CreateAppbumActivity"
             android:label="@string/title_activity_create_appbum" >
         </activity>
