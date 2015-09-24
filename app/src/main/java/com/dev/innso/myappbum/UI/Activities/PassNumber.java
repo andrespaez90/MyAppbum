@@ -116,6 +116,10 @@ public class PassNumber extends Activity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
+        close();
+    }
+
+    private void close(){
         finish();
         overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
     }
@@ -124,7 +128,7 @@ public class PassNumber extends Activity implements View.OnClickListener {
         if(Key.length() == 4 && Type == 0){
             if(Integer.parseInt(Key) == passNumber){
                 setResult(RESULT_OK);
-                finish();
+                close();
             }else{
                 LinearLayout Layout = (LinearLayout)findViewById(R.id.activity_pass_lay);
                 Animation animator = AnimationUtils.loadAnimation(this, R.anim.wrong_paassnumber);

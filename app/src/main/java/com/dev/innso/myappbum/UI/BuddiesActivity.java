@@ -8,14 +8,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.UI.Activities.PassNumber;
 import com.dev.innso.myappbum.UI.Fragments.AddpictureFragment;
 import com.dev.innso.myappbum.UI.Fragments.CustomizeFragment;
+import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
 import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
 
@@ -23,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.Bind;
 
 
-public class BuddiesActivity extends ActionBarActivity implements CustomizeFragment.OnCustomizeListener{
+public class BuddiesActivity extends AppCompatActivity implements CustomizeFragment.OnCustomizeListener{
 
     private boolean isOpenActivitiesActivated = true;
 
@@ -34,16 +37,31 @@ public class BuddiesActivity extends ActionBarActivity implements CustomizeFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buddies);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-        getData();
         if (savedInstanceState == null) {
             manageFragment(ListBuddiesFragment.newInstance(isOpenActivitiesActivated), FragmentTags.LIST_BUDDIES, false);
         }
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        isPrivate();
+    }
 
-       ActionBar actionBar = getSupportActionBar();
-       actionBar.setDisplayHomeAsUpEnabled(true);
+
+    private void isPrivate(){
+        boolean pass = getIntent().getBooleanExtra("isPrivate",false);
+        if( pass){
+            Intent intent = new Intent( this, PassNumber.class);
+            intent.putExtra("Pass",getIntent().getIntExtra("Pass",0));
+            startActivityForResult(intent, ActivityTags.ACTIVITY_PASSNUMBER.getCode());
+        }else{
+            init();
+        }
+    }
+
+
+    private void init(){
+        getData();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void getData(){
@@ -209,5 +227,13 @@ public class BuddiesActivity extends ActionBarActivity implements CustomizeFragm
     protected void onPause() {
         super.onPause();
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( requestCode == ActivityTags.ACTIVITY_PASSNUMBER.getCode() ){
+            if( resultCode == RESULT_CANCELED )
+                finish();
+        }
     }
 }

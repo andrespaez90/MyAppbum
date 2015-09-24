@@ -5,13 +5,15 @@ package com.dev.innso.myappbum.Utils.TAGs;
  */
 public enum ActivityTags {
 
-    ACTIVITY_START("START"),
-    ACTIVITY_LOGIN("LOGIN"),
-    ACTIVITY_REGISTER("REGISTER");
+    ACTIVITY_START("START",1),
+    ACTIVITY_LOGIN("LOGIN",2),
+    ACTIVITY_REGISTER("REGISTER",3),
+    ACTIVITY_PASSNUMBER("PASSNUMBER",4);
 
     private String text;
+    private int code;
 
-    private ActivityTags(String text) {
+    private ActivityTags(String text,int code) {
         this.text = text;
     }
 
@@ -20,5 +22,6 @@ public enum ActivityTags {
         return text;
     }
 
+    public int getCode(){ return code; }
 
 }

@@ -98,15 +98,10 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         @Override
         public void onClick(View v) {
-            if( !appbum.isPrivate() ){
                 Intent intent = Intender.createIntent(appbum, mContext);
-                mContext.startActivity(intent);
-            }else{
-                Intent intent = new Intent(mContext, PassNumber.class);
+                intent.putExtra("isPrivate",appbum.isPrivate());
                 intent.putExtra("Pass",appbum.getPassNumber());
                 mContext.startActivity(intent);
-            }
-
         }
     }
 
