@@ -64,6 +64,7 @@
                     android:hint="@string/Username"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
                     android:gravity="center_vertical|center"/>
 
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -96,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/Password"
                     android:inputType="textPassword"
+                    android:imeOptions="actionGo"
                     android:gravity="bottom|center" />
 
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>

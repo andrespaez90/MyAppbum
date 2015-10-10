@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -45,6 +47,19 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         overridePendingTransition(R.anim.slide_right_in,R.anim.stay);
+        init();
+    }
+
+    private void init(){
+        userPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if( actionId == EditorInfo.IME_ACTION_GO){
+                    login();
+                }
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.login_singin)

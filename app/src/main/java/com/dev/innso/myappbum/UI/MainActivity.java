@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        init();
-
 
         setSupportActionBar(toolbar);
         MainMenu menu = new MainMenu(this);
@@ -76,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 .setClosedOnStart(true)
                 .setActionBarViewForAnimation(toolbar)
                 .build();
+
+        init();
 
     }
 
