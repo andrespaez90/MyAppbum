@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startLogin(){
+        if( menuGuillotine.isOpen() )
+            closeMenu();
         Intent i = new Intent(this, StartActivity.class);
         startActivityForResult(i, ActivityTags.ACTIVITY_START.ordinal());
     }

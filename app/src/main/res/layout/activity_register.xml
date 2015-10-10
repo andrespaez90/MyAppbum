@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             style="@style/Toolbar.Title"
-            android:text="@string/title_activity_login"/>
+            android:text="@string/title_activity_register"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -61,7 +61,6 @@
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             app:fletPadding="10dp"
             android:gravity="top">
 
@@ -88,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Username"
                 android:inputType="textEmailAddress"
+                android:singleLine="true"
                 android:gravity="center_vertical|center" />
 
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>

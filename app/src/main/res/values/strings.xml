@@ -28,6 +28,11 @@
     <string name="title_activity_main">Mis Appbums</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Inicio de Sesión</string>
+    <string name="title_activity_register">Nuevo Usuario</string>
+    <string name="title_activity_profile">Perfil</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_create_appbum">Crear Appbum</string>
+
 
     <string name="Login">Iniciar Sesión</string>
     <string name="Logout">Cerrar Sesión</string>
@@ -49,12 +54,6 @@
     <string name="rPassword">Repita Contraseña:</string>
     <string name="newAccount">Crear Cuenta</string>
     <string name="access">Acceder</string>
-
-
-    <string name="title_activity_register">Nuevo Usuario</string>
-    <string name="title_activity_profile">Perfil</string>
-    <string name="title_activity_start">StartActivity</string>
-    <string name="title_activity_create_appbum">Crear Appbum</string>
 
     <string name="hello_world">Hello world!</string>
 

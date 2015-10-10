@@ -22,9 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
-/**
- * Created by INNSO SAS on 05/09/2015.
- */
 public class MainMenu extends FrameLayout {
 
     private MainActivity activityMain;
