@@ -42,7 +42,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/newAccount"
+                android:text="@string/copy.new_account"
                 android:id="@+id/register_button"
                 android:background="@drawable/green_buttom"
                 android:textColor="@color/background_material_light"/>
@@ -85,7 +85,7 @@
                 android:id="@+id/register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/Username"
+                android:hint="@string/copy.username"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:gravity="center_vertical|center" />
@@ -102,7 +102,7 @@
                 android:id="@+id/register_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/Password"
+                android:hint="@string/copy.password"
                 android:gravity="center_vertical|center"
                 android:inputType="textPassword"
                 android:imeOptions="actionNext"/>

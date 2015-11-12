@@ -9,7 +9,6 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dev.innso.myappbum.Providers.Functions;
 import com.dev.innso.myappbum.Providers.ServerConnection;
@@ -161,7 +160,7 @@ public class RegisterActivity extends ActionBarActivity {
                 return;
             }
             if( Tag == StringTags.REGISTER_EMAIL){
-                message =  getResources().getString(R.string.errirn_email);
+                message =  getResources().getString(R.string.error_email);
                 return;
             }
             if( Tag == StringTags.REGISTER_LENGHT_PASSWORD){

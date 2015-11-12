@@ -34,14 +34,14 @@
     <string name="title_activity_create_appbum">Crear Appbum</string>
 
 
-    <string name="Login">Iniciar Sesión</string>
-    <string name="Logout">Cerrar Sesión</string>
-    <string name="Back">Atras</string>
+    <string name="copy.Login">Iniciar Sesión</string>
+    <string name="copy.Logout">Cerrar Sesión</string>
+    <string name="copy.back">Atras</string>
     <string name="Name">Nombre:</string>
     <string name="Signin">Registro</string>
-    <string name="Username">Correo:</string>
-    <string name="Password">Contreaseña:</string>
-    <string name="share_appbum">Invitar Amigo</string>
+    <string name="copy.username">Correo:</string>
+    <string name="copy.password">Contraseña:</string>
+    <string name="copy.share_appbum">Invitar Amigo</string>
 
     <string name="action_search">Buscar Appbum</string>
     <string name="action_cloud_add">Nueva Foto</string>
@@ -52,7 +52,7 @@
 
     <string name="add_contact">Agregar Contacto</string>
     <string name="rPassword">Repita Contraseña:</string>
-    <string name="newAccount">Crear Cuenta</string>
+    <string name="copy.new_account">Crear Cuenta</string>
     <string name="access">Acceder</string>
 
     <string name="hello_world">Hello world!</string>
