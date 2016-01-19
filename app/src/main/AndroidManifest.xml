@@ -70,6 +70,9 @@
             android:name=".UI.CreateAppbumActivity"
             android:label="@string/title_activity_create_appbum" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="60c296b1834a7c2e31bf277e06414291e84ded47" />
     </application>
 
 </manifest>

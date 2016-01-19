@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
+import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.Animation.GuillotineAnimation;
 import com.dev.innso.myappbum.Models.Appbum;
@@ -32,6 +33,7 @@ import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
