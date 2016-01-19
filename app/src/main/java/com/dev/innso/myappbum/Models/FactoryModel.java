@@ -13,6 +13,13 @@ import java.util.ArrayList;
  */
 public class FactoryModel {
 
+    private final static String sAppbumId = "id";
+    private final static String sAppbumName = "name";
+    private final static String sAppbumRol = "rol";
+    private final static String sAppbumCover = "urlCover";
+    private final static String sAppbumPrivacity = "private";
+    private final static String sAppbumPassNumber = "rol";
+
     public static void createAppbums(JSONArray jsonArray) {
         FacadeModel.Appbums = new ArrayList<>();
         JSONObject object;
@@ -23,9 +30,9 @@ public class FactoryModel {
             for(int i = 0; i < jsonArray.length();i++){
                 object = jsonArray.getJSONObject(i);
 
-                appbum = new Appbum(object.getInt("id"),object.getString("name"),object.getString("rol"),
-                        object.getString("urlCover"), object.getInt("private")==1,
-                        object.getInt("passnumber"),object.getInt(JSONTag.PHOTO_TYPE.toString()) );
+                appbum = new Appbum(object.getInt(sAppbumId),object.getString(sAppbumName),object.getString(sAppbumRol),
+                        object.getString(sAppbumCover), object.getInt(sAppbumPrivacity)==1,
+                        object.getInt(sAppbumPassNumber),object.getInt(JSONTag.PHOTO_TYPE.toString()) );
 
                 JSONArray arrayPhotos = object.getJSONArray(JSONTag.JSON_ARRAYPHOTOS.toString());
                 for(int j=0; j<arrayPhotos.length();j++ ){
