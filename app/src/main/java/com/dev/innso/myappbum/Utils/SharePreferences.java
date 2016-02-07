@@ -7,11 +7,7 @@ import com.dev.innso.myappbum.Utils.TAGs.SharedPrefFiles;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
-/**
- * Created by jpardogo on 23/02/2014.
- */
 public class SharePreferences {
-
 
     public static void saveDataApplication(SharedPrefKeys preKey, String value){
         SharedPreferences sharedPreference = getCustomizePref();

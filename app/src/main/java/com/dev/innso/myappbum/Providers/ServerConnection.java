@@ -59,6 +59,7 @@ public class ServerConnection {
             return (stringBuilder.toString());
 
         } catch (Exception e) {
+            Log.e(ServerConnection.class.getName(),e.getMessage().toString());
             return e.getLocalizedMessage();
         }
 
@@ -74,6 +75,7 @@ public class ServerConnection {
             stringBuilder.append(line);
         }
         inputStream.close();
+        Log.e("ads", stringBuilder.toString());
         return stringBuilder;
     }
 

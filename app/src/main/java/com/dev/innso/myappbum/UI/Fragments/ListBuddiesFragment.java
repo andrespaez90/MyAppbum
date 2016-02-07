@@ -15,12 +15,11 @@ import com.dev.innso.myappbum.Adapters.CircularAdapter;
 import com.dev.innso.myappbum.Utils.ExtraArgumentKeys;
 import com.dev.innso.myappbum.Providers.BuddiesImages;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.DetailActivity;
+import com.dev.innso.myappbum.Models.UI.DetailActivity;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;

@@ -2,81 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingTop="15dp"
-    android:paddingBottom="10dp"
     android:background="@color/white_transparecy85"
     android:clickable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="15dp"
     android:weightSum="3">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addpicture_gallery"
-            android:src="@mipmap/ic_gallery"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/action_gallery"
-            android:id="@+id/addpicture_gallerytext"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addpictire_camera"
-            android:src="@mipmap/ic_camera"
-            android:adjustViewBounds="false"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/action_camera"
-            android:id="@+id/addpictire_cameratext"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/button_addPicture_fromGallery"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:drawableTop="@mipmap/ic_gallery"
+        android:gravity="center_horizontal"
+        android:text="@string/action_gallery"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addpictire_web"
-            android:src="@mipmap/ic_at"
-            android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/button_addPicture_fromCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawableTop="@mipmap/ic_camera"
+        android:gravity="center_horizontal"
+        android:text="@string/action_gallery"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/action_web"
-            android:id="@+id/addpictire_webtext"
-            android:layout_gravity="center"/>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/button_addPicture_fromWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawableTop="@mipmap/ic_at"
+        android:gravity="center_horizontal"
+        android:text="@string/action_gallery"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </LinearLayout>

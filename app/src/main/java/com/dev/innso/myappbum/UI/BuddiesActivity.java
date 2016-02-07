@@ -2,18 +2,14 @@ package com.dev.innso.myappbum.UI;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.dev.innso.myappbum.Models.UI.AppbumActivity;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.UI.Activities.PassNumber;
 import com.dev.innso.myappbum.UI.Fragments.AddpictureFragment;
@@ -26,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.Bind;
 
 
-public class BuddiesActivity extends AppCompatActivity implements CustomizeFragment.OnCustomizeListener{
+public class BuddiesActivity extends AppbumActivity implements CustomizeFragment.OnCustomizeListener{
 
     private boolean isOpenActivitiesActivated = true;
 
@@ -47,7 +43,7 @@ public class BuddiesActivity extends AppCompatActivity implements CustomizeFragm
 
 
     private void isPrivate(){
-        boolean pass = getIntent().getBooleanExtra("isPrivate",false);
+        boolean pass = getIntent().getBooleanExtra("isPrivate", false);
         if( pass){
             Intent intent = new Intent( this, PassNumber.class);
             intent.putExtra("Pass",getIntent().getIntExtra("Pass",0));
@@ -98,36 +94,6 @@ public class BuddiesActivity extends AppCompatActivity implements CustomizeFragm
                 break;*/
         }
         return false;
-    }
-
-    private void startActivityWith(Class clazz) {
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-    }
-
-    private void manageFragment(Fragment newInstanceFragment, FragmentTags tag, boolean addToBackStack) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        Fragment currentIntanceFragment = findFragmentByTag(tag);
-        if (currentIntanceFragment == null || (currentIntanceFragment != null && currentIntanceFragment.isHidden())) {
-            if (currentIntanceFragment != null) {
-                ft.show(currentIntanceFragment);
-            } else {
-                currentIntanceFragment = newInstanceFragment;
-                ft.add(R.id.container, currentIntanceFragment, tag.toString());
-                if (addToBackStack) {
-                    ft.addToBackStack(null);
-                }
-            }
-        } else {
-            ft.hide(currentIntanceFragment);
-            fm.popBackStack();
-        }
-        ft.commit();
-    }
-
-    private Fragment findFragmentByTag(FragmentTags tag) {
-        return getSupportFragmentManager().findFragmentByTag(tag.toString());
     }
 
     @Override

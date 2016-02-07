@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="12dp">
 
     <ImageView
         android:id="@+id/imagelist_img"
         android:layout_width="fill_parent"
-        android:scaleType="fitXY"
+        android:layout_height="210dp"
         android:adjustViewBounds="true"
-        android:layout_height="207dp"
-        android:src="@drawable/bg_appbum_load"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_appbum_load"
+        android:contentDescription="@string/app_name"/>
 
     <TextView
         android:id="@+id/imagelist_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginBottom="-6dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:background="@color/orangeButton"
-        android:text="title"
-        android:gravity="center"
         android:layout_alignBottom="@+id/imagelist_img"
-        android:textColor="@color/primary_text_default_material_dark"/>
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:background="@color/orangeButton"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/primary_text_default_material_dark"
+        tools:text="title" />
 
 </RelativeLayout>

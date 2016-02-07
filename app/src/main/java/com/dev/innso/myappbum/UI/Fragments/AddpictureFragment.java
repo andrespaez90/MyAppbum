@@ -10,9 +10,6 @@ import com.dev.innso.myappbum.R;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by INNSO SAS on 21/05/2015.
- */
 public class AddpictureFragment extends Fragment {
 
     public static Fragment newInstance() {

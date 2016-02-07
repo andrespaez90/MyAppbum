@@ -13,12 +13,13 @@ import android.widget.ImageView;
 
 import com.dev.innso.myappbum.Utils.Utils;
 
-public class BaseActivity extends Activity {
+public class BaseDetailActivity extends Activity {
 
 
     private static final int RightToLeft = 1;
     private static final int LeftToRight = 2;
     private static final int DURATION = 30000;
+
     private RectF mDisplayRect = new RectF();
     private final Matrix mMatrix = new Matrix();
     private int mDirection = RightToLeft;

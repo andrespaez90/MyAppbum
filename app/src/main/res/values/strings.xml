@@ -56,5 +56,8 @@
     <string name="access">Acceder</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="copy.Invitations">Invitaciones</string>
+    <string name="copy.notifications">Notificaciones</string>
+    <string name="copy.name_developer">Innovating Software</string>
 
 </resources>

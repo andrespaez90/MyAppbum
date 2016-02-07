@@ -18,7 +18,7 @@ public class FactoryModel {
     private final static String sAppbumRol = "rol";
     private final static String sAppbumCover = "urlCover";
     private final static String sAppbumPrivacity = "private";
-    private final static String sAppbumPassNumber = "rol";
+    private final static String sAppbumPassNumber = "passnumber";
 
     public static void createAppbums(JSONArray jsonArray) {
         FacadeModel.Appbums = new ArrayList<>();
