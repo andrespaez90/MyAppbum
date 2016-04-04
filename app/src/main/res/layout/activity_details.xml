@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:scaleType="matrix" />
 
-    <com.dev.innso.myappbum.UI.views.DrawInsetsFrameLayout
+    <com.dev.innso.myappbum.ui.views.DrawInsetsFrameLayout
         android:id="@+id/insets_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,23 +10,22 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
 import com.crashlytics.android.Crashlytics;
-import com.dev.innso.myappbum.Adapters.RecycleAppbumAdapter;
-import com.dev.innso.myappbum.Animation.GuillotineAnimation;
-import com.dev.innso.myappbum.Models.Appbum;
-import com.dev.innso.myappbum.Models.FacadeModel;
-import com.dev.innso.myappbum.Models.FactoryModel;
-import com.dev.innso.myappbum.Providers.ServerConnection;
-import com.dev.innso.myappbum.UI.views.MainMenu;
+import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
+import com.dev.innso.myappbum.animation.GuillotineAnimation;
+import com.dev.innso.myappbum.models.Appbum;
+import com.dev.innso.myappbum.models.FacadeModel;
+import com.dev.innso.myappbum.models.FactoryModel;
+import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.ui.CreateAppbumActivity;
+import com.dev.innso.myappbum.ui.views.MainMenu;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;

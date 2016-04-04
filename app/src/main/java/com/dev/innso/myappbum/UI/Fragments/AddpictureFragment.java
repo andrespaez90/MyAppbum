@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI.Fragments;
+package com.dev.innso.myappbum.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dev.innso.myappbum.R;
-
-import butterknife.ButterKnife;
 
 public class AddpictureFragment extends Fragment {
 

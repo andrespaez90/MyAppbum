@@ -1,10 +1,10 @@
-package com.dev.innso.myappbum.Models.UI;
+package com.dev.innso.myappbum.models.ui;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.BaseDetailActivity;
+import com.dev.innso.myappbum.ui.BaseDetailActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

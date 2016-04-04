@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Adapters;
+package com.dev.innso.myappbum.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

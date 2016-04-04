@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Models.UI;
+package com.dev.innso.myappbum.models.ui;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;

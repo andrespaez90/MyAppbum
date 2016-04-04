@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,14 +9,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.dev.innso.myappbum.Models.UI.AppbumActivity;
+import com.dev.innso.myappbum.models.ui.AppbumActivity;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.Activities.PassNumber;
-import com.dev.innso.myappbum.UI.Fragments.AddpictureFragment;
-import com.dev.innso.myappbum.UI.Fragments.CustomizeFragment;
+import com.dev.innso.myappbum.ui.activities.PassNumber;
+import com.dev.innso.myappbum.ui.fragments.AddpictureFragment;
+import com.dev.innso.myappbum.ui.fragments.CustomizeFragment;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
-import com.dev.innso.myappbum.UI.Fragments.ListBuddiesFragment;
+import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;

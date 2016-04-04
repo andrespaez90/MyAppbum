@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI.views;
+package com.dev.innso.myappbum.ui.views;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.MainActivity;
-import com.dev.innso.myappbum.UI.ProfileActivity;
+import com.dev.innso.myappbum.ui.activities.MainActivity;
+import com.dev.innso.myappbum.ui.ProfileActivity;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 
 import butterknife.ButterKnife;

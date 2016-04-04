@@ -2,13 +2,10 @@ package com.dev.innso.myappbum.Utils.TAGs;
 
 import android.content.Context;
 
-import com.dev.innso.myappbum.Adapters.CustomizeSpinnersAdapter;
+import com.dev.innso.myappbum.adapters.CustomizeSpinnersAdapter;
 import com.dev.innso.myappbum.R;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
-/**
- * Created by jpardogo on 22/02/2014.
- */
 public class KeyValuePair {
     private String key;
     private Object value;

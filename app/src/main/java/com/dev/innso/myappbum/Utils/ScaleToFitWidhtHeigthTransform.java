@@ -4,9 +4,6 @@ import android.graphics.Bitmap;
 
 import com.squareup.picasso.Transformation;
 
-/**
- * Created by INNSO SAS on 13/05/2015.
- */
 public class ScaleToFitWidhtHeigthTransform implements Transformation {
 
     private int mSize;

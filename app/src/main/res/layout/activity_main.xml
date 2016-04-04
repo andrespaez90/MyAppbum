@@ -46,7 +46,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             xmlns:fab="http://schemas.android.com/apk/res-auto"
-            tools:context="com.dev.innso.myappbum.UI.Fragments.AppbumsFragment"
+            tools:context="com.dev.innso.myappbum.ui.fragments.AppbumsFragment"
             android:background="@color/dim_foreground_disabled_material_dark"
             android:weightSum="1">
 

@@ -1,11 +1,8 @@
-package com.dev.innso.myappbum;
+package com.dev.innso.myappbum.app;
 
 import android.app.Application;
 import android.content.Context;
 
-/**
- * Created by jpardogo on 23/02/2014.
- */
 public class Appbum extends Application {
 
     private static Context mContext;

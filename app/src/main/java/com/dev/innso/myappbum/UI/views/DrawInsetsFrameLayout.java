@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dev.innso.myappbum.UI.views;
+package com.dev.innso.myappbum.ui.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,8 +10,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Providers.Functions;
-import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.Encrypt;
+import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.R;
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity{
 
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
-        pass = Functions.md5(pass);
+        pass = Encrypt.md5(pass);
 
         Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.JSON_USER_EMAIL.toString() , email);
         Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.JSON_USER_PASSWORD.toString() , pass);

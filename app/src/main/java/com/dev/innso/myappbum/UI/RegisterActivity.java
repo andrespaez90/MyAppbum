@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,8 +10,8 @@ import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Providers.Functions;
-import com.dev.innso.myappbum.Providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.Encrypt;
+import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.StringTags;
@@ -62,7 +62,7 @@ public class RegisterActivity extends ActionBarActivity {
         StringTags responseAction = confirmData();
         if( responseAction == StringTags.ACTION_SUCCESS ){
 
-            userPassword = Functions.md5(userPassword);
+            userPassword = Encrypt.md5(userPassword);
             Pair<String,String> pairName = new Pair<>(JSONTag.JSON_USER_NAME.toString(),userName);
             Pair<String,String> pairEmail = new Pair<>(JSONTag.JSON_USER_EMAIL.toString(),userEmail);
             Pair<String,String> pairPass = new Pair<>(JSONTag.JSON_USER_PASSWORD.toString(),userPassword);

@@ -1,6 +1,4 @@
-package com.dev.innso.myappbum.Providers;
-
-import android.content.Context;
+package com.dev.innso.myappbum.providers;
 
 import java.util.ArrayList;
 

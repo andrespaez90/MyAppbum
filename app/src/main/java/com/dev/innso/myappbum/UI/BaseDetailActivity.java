@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

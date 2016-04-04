@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI.Fragments;
+package com.dev.innso.myappbum.ui.fragments;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Adapters.CustomizeSpinnersAdapter;
+import com.dev.innso.myappbum.adapters.CustomizeSpinnersAdapter;
 import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.R;

@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI.Fragments;
+package com.dev.innso.myappbum.ui.fragments;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.dev.innso.myappbum.Adapters.CircularAdapter;
+import com.dev.innso.myappbum.adapters.CircularAdapter;
 import com.dev.innso.myappbum.Utils.ExtraArgumentKeys;
-import com.dev.innso.myappbum.Providers.BuddiesImages;
+import com.dev.innso.myappbum.providers.BuddiesImages;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Models.UI.DetailActivity;
+import com.dev.innso.myappbum.models.ui.DetailActivity;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 

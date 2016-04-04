@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI.Activities;
+package com.dev.innso.myappbum.ui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;

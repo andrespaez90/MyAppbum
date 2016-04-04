@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Animation;
+package com.dev.innso.myappbum.animation;
 
 /**
  * Created by Innso on 01/07/2015.
@@ -11,9 +11,9 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.dev.innso.myappbum.Animation.Listener.GuillotineListener;
-import com.dev.innso.myappbum.Animation.Util.ActionBarInterpolator;
-import com.dev.innso.myappbum.Animation.Util.GuillotineInterpolator;
+import com.dev.innso.myappbum.animation.Listener.GuillotineListener;
+import com.dev.innso.myappbum.animation.Util.ActionBarInterpolator;
+import com.dev.innso.myappbum.animation.Util.GuillotineInterpolator;
 
 
 /**

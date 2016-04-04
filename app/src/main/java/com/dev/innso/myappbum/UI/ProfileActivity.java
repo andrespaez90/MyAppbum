@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.UI;
+package com.dev.innso.myappbum.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -2,7 +2,7 @@ package com.dev.innso.myappbum.Utils;
 
 import android.content.SharedPreferences;
 
-import com.dev.innso.myappbum.Appbum;
+import com.dev.innso.myappbum.app.Appbum;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefFiles;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;

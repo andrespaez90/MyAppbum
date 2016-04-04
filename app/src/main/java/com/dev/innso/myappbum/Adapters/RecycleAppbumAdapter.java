@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Adapters;
+package com.dev.innso.myappbum.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Models.Appbum;
-import com.dev.innso.myappbum.Models.Intender;
+import com.dev.innso.myappbum.models.Appbum;
+import com.dev.innso.myappbum.models.Intender;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.UI.Activities.PassNumber;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

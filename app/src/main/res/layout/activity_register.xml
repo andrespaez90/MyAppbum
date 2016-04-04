@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_start"
     android:orientation="vertical"
-    tools:context="com.dev.innso.myappbum.UI.RegisterActivity">
+    tools:context="com.dev.innso.myappbum.ui.RegisterActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
