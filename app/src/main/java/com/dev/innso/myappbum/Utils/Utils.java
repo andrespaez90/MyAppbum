@@ -22,9 +22,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 
-/**
- * Class containing some static utility methods.
- */
 public class Utils {
     private static final String VERSION_UNAVAILABLE = "N/A";
 

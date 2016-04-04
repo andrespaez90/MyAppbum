@@ -1,8 +1,5 @@
 package com.dev.innso.myappbum.Utils.TAGs;
 
-/**
- * Created by INNSO SAS on 25/05/2015.
- */
 public enum ActivityTags {
 
     ACTIVITY_START("START",1),
