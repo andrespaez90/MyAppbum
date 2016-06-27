@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Utils;
+package com.dev.innso.myappbum.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

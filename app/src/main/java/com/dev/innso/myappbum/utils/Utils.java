@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dev.innso.myappbum.Utils;
+package com.dev.innso.myappbum.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

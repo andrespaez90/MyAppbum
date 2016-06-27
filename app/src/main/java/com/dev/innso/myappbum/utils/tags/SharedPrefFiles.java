@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Utils.TAGs;
+package com.dev.innso.myappbum.utils.tags;
 
 /**
  * Created by jpardogo on 23/02/2014.

@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Utils.TAGs;
+package com.dev.innso.myappbum.utils.tags;
 
 /**
  * Created by INNSO SAS on 24/06/2015.

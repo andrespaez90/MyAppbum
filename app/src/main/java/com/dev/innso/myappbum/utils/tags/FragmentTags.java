@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Utils.TAGs;
+package com.dev.innso.myappbum.utils.tags;
 
 
 public enum FragmentTags {
