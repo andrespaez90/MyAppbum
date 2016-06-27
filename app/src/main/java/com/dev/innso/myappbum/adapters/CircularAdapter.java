@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.ScaleToFitWidhtHeigthTransform;
+import com.dev.innso.myappbum.utils.ScaleToFitWidhtHeigthTransform;
 import com.jpardogo.listbuddies.lib.adapters.CircularLoopAdapter;
 import com.squareup.picasso.Picasso;
 

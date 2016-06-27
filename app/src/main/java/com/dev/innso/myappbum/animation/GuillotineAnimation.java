@@ -11,9 +11,9 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.dev.innso.myappbum.animation.Listener.GuillotineListener;
-import com.dev.innso.myappbum.animation.Util.ActionBarInterpolator;
-import com.dev.innso.myappbum.animation.Util.GuillotineInterpolator;
+import com.dev.innso.myappbum.animation.listener.GuillotineListener;
+import com.dev.innso.myappbum.animation.util.ActionBarInterpolator;
+import com.dev.innso.myappbum.animation.util.GuillotineInterpolator;
 
 
 /**

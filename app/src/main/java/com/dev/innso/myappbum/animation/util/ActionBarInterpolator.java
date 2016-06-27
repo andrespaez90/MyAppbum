@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.animation.Util;
+package com.dev.innso.myappbum.animation.util;
 
 import android.animation.TimeInterpolator;
 
