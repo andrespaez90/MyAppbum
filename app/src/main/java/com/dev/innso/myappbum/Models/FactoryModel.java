@@ -16,6 +16,7 @@ public class FactoryModel {
     private final static String sAppbumPassNumber = "passnumber";
 
     public static void createAppbums(JSONArray jsonArray) {
+        FacadeModel.Appbums.clear();
         JSONObject object;
         JSONObject jsonPhoto;
         Appbum appbum;
