@@ -10,13 +10,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.Encrypt;
-import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
-import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
 
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity{
     @OnClick(R.id.login_Login)
     protected void login(){
 
-        enbleActivity(false);
+        enableActivity(false);
 
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity{
         new loginService().execute(pairEmail, pairPass);
     }
 
-    private void enbleActivity(Boolean activate){
+    private void enableActivity(Boolean activate){
         userEmail.setEnabled(activate);
         userPass.setEnabled(activate);
         btnLogin.setEnabled(activate);
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity{
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;
                 }else{
-                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
                     SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, jsonObject.getString(JSONTag.JSON_USER_IDFACE.toString()) );
                     SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER, jsonObject.getString(JSONTag.JSON_USER_NAME.toString()));
                     SharePreferences.saveDataApplication(SharedPrefKeys.PROFILE_USER, jsonObject.getString(JSONTag.JSON_URLPROFILE.toString()));
@@ -144,7 +144,7 @@ public class LoginActivity extends AppCompatActivity{
                 setResult(RESULT_OK);
                 finish();
             }
-            enbleActivity(true);
+            enableActivity(true);
         }
 
     }

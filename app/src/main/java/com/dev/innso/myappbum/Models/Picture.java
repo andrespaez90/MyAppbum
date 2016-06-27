@@ -1,8 +1,5 @@
-package com.dev.innso.myappbum.Models;
+package com.dev.innso.myappbum.models;
 
-/**
- * Created by INNSO SAS on 30/06/2015.
- */
 public class Picture {
 
     private String id;

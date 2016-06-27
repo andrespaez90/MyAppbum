@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@mipmap/ic_account"
+            android:title="@string/title_activity_profile" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@mipmap/ic_chat_bubble_white_24dp"
+            android:title="@string/copy.notifications" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@mipmap/ic_mail_white_24dp"
+            android:title="@string/copy.Invitations" />
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item android:id="@+id/nav_company"
+                android:icon="@mipmap/ic_adb_white_24dp"
+                android:title="@string/copy.name_developer" />
+
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/copy.Logout" />
+        </menu>
+    </item>
+
+</menu>

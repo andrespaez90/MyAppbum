@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp">
+    android:layout_marginTop="@dimen/spacing_medium">
 
     <ImageView
         android:id="@+id/imagelist_img"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="210dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_appbum_load"
-        android:contentDescription="@string/app_name"/>
+        android:src="@drawable/bg_appbum_load" />
 
     <TextView
         android:id="@+id/imagelist_title"
@@ -23,7 +23,9 @@
         android:layout_marginLeft="@dimen/spacing_large"
         android:layout_marginRight="@dimen/spacing_large"
         android:background="@color/orangeButton"
+        android:elevation="@dimen/spacing_xlarge"
         android:gravity="center"
+        android:padding="@dimen/spacing_micro"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/primary_text_default_material_dark"
         tools:text="title" />

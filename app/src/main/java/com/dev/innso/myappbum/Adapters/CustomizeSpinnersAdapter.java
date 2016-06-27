@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
 
 public class CustomizeSpinnersAdapter implements SpinnerAdapter {
 
@@ -27,12 +26,6 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
         mContext = context;
         mItems = items;
         mMainItemTitle = mainTitle;
-    }
-
-    public enum OptionTypes {
-        BLACK,
-        EMPTY,
-        INSET;
     }
 
     @Override
@@ -107,6 +100,12 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    public enum OptionTypes {
+        BLACK,
+        EMPTY,
+        INSET
     }
 
     static class ViewHolder {

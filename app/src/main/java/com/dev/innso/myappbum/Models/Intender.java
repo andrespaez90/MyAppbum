@@ -1,16 +1,13 @@
-package com.dev.innso.myappbum.Models;
+package com.dev.innso.myappbum.models;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.dev.innso.myappbum.Providers.BuddiesImages;
-import com.dev.innso.myappbum.UI.BuddiesActivity;
+import com.dev.innso.myappbum.providers.BuddiesImages;
+import com.dev.innso.myappbum.ui.BuddiesActivity;
 
 import java.util.ArrayList;
 
-/**
- * Created by INNSO SAS on 19/06/2015.
- */
 public class Intender {
 
     public static Intent createIntent(Appbum appbum, Context mContext){

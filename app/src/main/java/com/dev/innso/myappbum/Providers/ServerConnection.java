@@ -14,7 +14,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 public class ServerConnection {
 
     public static String requestPOST(String url, Pair<String,String>... data){

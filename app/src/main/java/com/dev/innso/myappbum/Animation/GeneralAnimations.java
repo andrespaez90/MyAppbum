@@ -450,14 +450,12 @@ public class GeneralAnimations {
         return animationSet;
     }
 
-
     public static void appearFromBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAppearFromBottom(view, duration, delay, animatorListenerAdapter);
 
         startAnimation(view, objectAnimator, new AccelerateDecelerateInterpolator());
     }
-
 
     public static void disappearToBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 

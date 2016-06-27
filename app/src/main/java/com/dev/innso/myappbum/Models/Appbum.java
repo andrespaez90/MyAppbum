@@ -1,10 +1,7 @@
-package com.dev.innso.myappbum.Models;
+package com.dev.innso.myappbum.models;
 
 import java.util.ArrayList;
 
-/**
- * Created by INNSO SAS on 23/06/2015.
- */
 public class Appbum {
 
     private int id;

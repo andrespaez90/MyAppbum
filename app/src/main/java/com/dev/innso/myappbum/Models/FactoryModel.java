@@ -1,4 +1,4 @@
-package com.dev.innso.myappbum.Models;
+package com.dev.innso.myappbum.models;
 
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 
@@ -6,11 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-/**
- * Created by INNSO SAS on 23/06/2015.
- */
 public class FactoryModel {
 
     private final static String sAppbumId = "id";
@@ -21,21 +16,20 @@ public class FactoryModel {
     private final static String sAppbumPassNumber = "passnumber";
 
     public static void createAppbums(JSONArray jsonArray) {
-        FacadeModel.Appbums = new ArrayList<>();
         JSONObject object;
         JSONObject jsonPhoto;
         Appbum appbum;
         Picture photoApp;
         try {
-            for(int i = 0; i < jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 object = jsonArray.getJSONObject(i);
 
-                appbum = new Appbum(object.getInt(sAppbumId),object.getString(sAppbumName),object.getString(sAppbumRol),
-                        object.getString(sAppbumCover), object.getInt(sAppbumPrivacity)==1,
-                        object.getInt(sAppbumPassNumber),object.getInt(JSONTag.PHOTO_TYPE.toString()) );
+                appbum = new Appbum(object.getInt(sAppbumId), object.getString(sAppbumName), object.getString(sAppbumRol),
+                        object.getString(sAppbumCover), object.getInt(sAppbumPrivacity) == 1,
+                        object.getInt(sAppbumPassNumber), object.getInt(JSONTag.PHOTO_TYPE.toString()));
 
                 JSONArray arrayPhotos = object.getJSONArray(JSONTag.JSON_ARRAYPHOTOS.toString());
-                for(int j=0; j<arrayPhotos.length();j++ ){
+                for (int j = 0; j < arrayPhotos.length(); j++) {
                     jsonPhoto = arrayPhotos.getJSONObject(j);
                     photoApp = new Picture();
                     photoApp.setId(jsonPhoto.getString(JSONTag.PHOTO_ID.toString()));
@@ -48,7 +42,6 @@ public class FactoryModel {
 
                 FacadeModel.Appbums.add(appbum);
             }
-            return;
         } catch (JSONException e) {
             e.printStackTrace();
         }

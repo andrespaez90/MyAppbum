@@ -14,9 +14,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by INNSO SAS on 13/05/2015.
- */
 public class CircularAdapter extends CircularLoopAdapter {
 
     private List<String> mItems = new ArrayList<String>();

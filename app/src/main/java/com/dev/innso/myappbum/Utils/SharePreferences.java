@@ -2,9 +2,9 @@ package com.dev.innso.myappbum.Utils;
 
 import android.content.SharedPreferences;
 
-import com.dev.innso.myappbum.app.Appbum;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefFiles;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.app.Appbum;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
 public class SharePreferences {
@@ -72,7 +72,7 @@ public class SharePreferences {
     }
 
     public static void resetUser() {
-        saveDataApplication(SharedPrefKeys.ID_USER,"");
+        saveDataApplication(SharedPrefKeys.USER_ID,"");
         saveDataApplication(SharedPrefKeys.FACEBOOK_USERID,"");
         saveDataApplication(SharedPrefKeys.NAME_USER,"");
         saveDataApplication(SharedPrefKeys.PROFILE_USER,"");

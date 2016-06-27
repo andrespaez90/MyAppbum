@@ -44,21 +44,22 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.1.0'
     //ListBuddies
-    compile 'com.jpardogo.listbuddies:library:1.1.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.squareup.picasso:picasso:2.5.0'
     //FloatingActionButton
-    compile 'com.melnykov:floatingactionbutton:1.3.0'
     //Recycl
-    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-    compile 'de.hdodenhof:circleimageview:1.3.0'
     //Facebook
-    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
     //Process Button
-    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.jpardogo.listbuddies:library:1.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.picasso:picasso:2.5.0'
+    compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
+    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
+    compile 'com.android.support:design:22.2.1'
 }

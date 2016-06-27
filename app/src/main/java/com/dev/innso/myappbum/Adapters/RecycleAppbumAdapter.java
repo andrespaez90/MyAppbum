@@ -9,16 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.models.Appbum;
 import com.dev.innso.myappbum.models.Intender;
-import com.dev.innso.myappbum.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * Created by INNSO SAS on 13/05/2015.
- */
 public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdapter.DataViewHolder> {
 
 
@@ -27,19 +24,25 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     private Context mContext;
 
     public RecycleAppbumAdapter(ArrayList<Appbum> data, Context context){
+
+        super();
         mContext = context;
+
         allItems = data;
-        flushFilter();
+
+        visibleItems = new ArrayList<>();
+
+        visibleItems.addAll(allItems);
     }
 
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.image_list, viewGroup, false);
+
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_appbum_list, viewGroup, false);
 
         DataViewHolder tvh = new DataViewHolder(itemView,mContext);
-        itemView.setOnClickListener(tvh);
 
+        itemView.setOnClickListener(tvh);
 
         return tvh;
     }
@@ -55,12 +58,6 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
         return visibleItems.size();
     }
 
-    public void flushFilter(){
-        visibleItems = new ArrayList<Appbum>();
-        visibleItems.addAll(allItems);
-        notifyDataSetChanged();
-    }
-
     public void setFilter(String queryText) {
 
         visibleItems = new ArrayList<Appbum>();
@@ -70,7 +67,6 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
         }
         notifyDataSetChanged();
     }
-
 
     public static class DataViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 

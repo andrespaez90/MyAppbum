@@ -1,19 +1,27 @@
 package com.dev.innso.myappbum.ui.activities;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.ui.LoginActivity;
 import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.animation.GeneralAnimations;
+import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.ui.LoginActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -36,6 +44,12 @@ public class StartActivity extends Activity {
     @Bind(R.id.star_facebook)
     LoginButton FacebookLogin;
 
+    @Bind(R.id.splash_layout_buttons)
+    LinearLayout layoutActionButtons;
+
+    @Bind(R.id.layout_center_image)
+    RelativeLayout layoutCenterImage;
+
     CallbackManager callbackManager;
 
     private String userID;
@@ -50,9 +64,42 @@ public class StartActivity extends Activity {
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
-        initFacebookButton();
+        launchHandler();
     }
 
+    private void launchHandler() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validateUser();
+            }
+        }, 2000);
+    }
+
+    private void validateUser() {
+        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
+        if (TextUtils.isEmpty(userId)) {
+            initFacebookButton();
+            animateButtons();
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void animateButtons(){
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator animationButton = (ObjectAnimator) GeneralAnimations.getAppearFromBottom(layoutActionButtons, 1000, 0);
+        ObjectAnimator animationCenterImage = (ObjectAnimator) GeneralAnimations.getTranslationY(layoutCenterImage,1000,0,getMoveHeight());
+        animatorSet.playTogether(animationButton,animationCenterImage);
+        animatorSet.setInterpolator(new DecelerateInterpolator());
+        animatorSet.start();
+    }
+
+    private float getMoveHeight(){
+        return -layoutActionButtons.getMeasuredHeight()/2;
+    }
 
     @OnClick(R.id.start_access)
     protected void accessApp() {
@@ -65,7 +112,7 @@ public class StartActivity extends Activity {
         FacebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                succesFacebookLogin(loginResult.getAccessToken());
+                successFacebookLogin(loginResult.getAccessToken());
             }
 
             @Override
@@ -80,7 +127,7 @@ public class StartActivity extends Activity {
         });
     }
 
-    private void succesFacebookLogin(AccessToken Token) {
+    private void successFacebookLogin(AccessToken Token) {
         //Save Preference
         String accessToken = Token.getToken();
         String userId = Token.getUserId();
@@ -156,7 +203,7 @@ public class StartActivity extends Activity {
                 if (!jsonObject.getString(JSONTag.JSON_RESPONSE.toString()).equals(JSONTag.JSON_SUCCESS.toString())) {
                     return null;
                 } else {
-                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
                     savePreference();
                 }
                 publishProgress(response);

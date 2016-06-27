@@ -19,12 +19,12 @@ public enum SharedPrefKeys {
     COVER_USER("COVER_USER"),
     NAME_USER("NAME_USER"),
     EMAIL_USER("EMAIL_USER"),
-    ID_USER("ID_USER"),
+    USER_ID("USER_ID"),
     PROFILE_USER("PROFILE_USER");
 
     private String text;
 
-    private SharedPrefKeys(String text) {
+    SharedPrefKeys(String text) {
         this.text = text;
     }
 

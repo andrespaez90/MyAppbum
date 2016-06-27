@@ -59,5 +59,9 @@
     <string name="copy.Invitations">Invitaciones</string>
     <string name="copy.notifications">Notificaciones</string>
     <string name="copy.name_developer">Innovating Software</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

@@ -3,25 +3,25 @@ package com.dev.innso.myappbum.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.Utils.Encrypt;
-import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.Utils.SharePreferences;
 import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
 import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
 import com.dev.innso.myappbum.Utils.TAGs.StringTags;
-import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.SharePreferences;
+import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends ActionBarActivity {
@@ -40,12 +40,12 @@ public class RegisterActivity extends ActionBarActivity {
 
     @Bind(R.id.register_button)
     Button btn_register;
-
+    String message = "";
     private String userName;
     private String userEmail;
     private String userPassword;
     private String rePassword;
-
+    private String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,6 @@ public class RegisterActivity extends ActionBarActivity {
         return StringTags.ACTION_SUCCESS;
     }
 
-
     private boolean validateEmail(){
         if(userEmail == "" || !userEmail.contains("@") )
             return false;
@@ -128,10 +127,6 @@ public class RegisterActivity extends ActionBarActivity {
         setResult(RESULT_OK);
         finish();
     }
-
-
-    private String title = "";
-    String message = "";
 
     private void showDialog(final StringTags tag){
         getMesagge(tag);
@@ -184,7 +179,7 @@ public class RegisterActivity extends ActionBarActivity {
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;
                 }else{
-                    SharePreferences.saveDataApplication(SharedPrefKeys.ID_USER, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
                     savePreference();
                 }
                 publishProgress(response);
@@ -206,7 +201,7 @@ public class RegisterActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             if( result ==null ) {
-                //loginError.setText("Usuario o contraseña incorrecta");
+                //loginError.setText("Usuario o contraseï¿½a incorrecta");
             }
             else if( result.equals(JSONTag.JSON_SUCCESS.toString())){
                 RegisterActivity.this.showDialog(StringTags.ACTION_SUCCESS);
