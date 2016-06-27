@@ -25,7 +25,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.Utils;
+import com.dev.innso.myappbum.utils.Utils;
 
 
 /**

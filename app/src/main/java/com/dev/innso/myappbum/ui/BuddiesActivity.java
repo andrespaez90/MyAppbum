@@ -14,8 +14,8 @@ import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.ui.activities.PassNumber;
 import com.dev.innso.myappbum.ui.fragments.AddpictureFragment;
 import com.dev.innso.myappbum.ui.fragments.CustomizeFragment;
-import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
-import com.dev.innso.myappbum.Utils.TAGs.FragmentTags;
+import com.dev.innso.myappbum.utils.tags.ActivityTags;
+import com.dev.innso.myappbum.utils.tags.FragmentTags;
 import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
 
 import butterknife.ButterKnife;

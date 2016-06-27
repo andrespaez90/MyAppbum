@@ -14,10 +14,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.adapters.CustomizeSpinnersAdapter;
-import com.dev.innso.myappbum.Utils.TAGs.KeyValuePair;
-import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.utils.tags.KeyValuePair;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.SharePreferences;
+import com.dev.innso.myappbum.utils.SharePreferences;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 

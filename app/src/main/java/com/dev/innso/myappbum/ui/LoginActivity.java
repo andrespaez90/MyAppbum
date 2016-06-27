@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.Encrypt;
-import com.dev.innso.myappbum.Utils.SharePreferences;
-import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
-import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
-import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.utils.Encrypt;
+import com.dev.innso.myappbum.utils.SharePreferences;
+import com.dev.innso.myappbum.utils.tags.ActivityTags;
+import com.dev.innso.myappbum.utils.tags.JSONTag;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity{
 
         protected void onPostExecute(String result) {
             if( result ==null ) {
-                loginError.setText("Usuario o contraseña incorrecta");
+                loginError.setText("Usuario o contraseï¿½a incorrecta");
             }
             else if( result.equals(JSONTag.JSON_SUCCESS.toString())){
                 setResult(RESULT_OK);

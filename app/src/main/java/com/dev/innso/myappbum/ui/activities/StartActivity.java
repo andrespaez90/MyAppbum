@@ -15,10 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.SharePreferences;
-import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
-import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
-import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.utils.SharePreferences;
+import com.dev.innso.myappbum.utils.tags.ActivityTags;
+import com.dev.innso.myappbum.utils.tags.JSONTag;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.animation.GeneralAnimations;
 import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.ui.LoginActivity;

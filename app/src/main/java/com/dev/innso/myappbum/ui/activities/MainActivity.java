@@ -25,10 +25,10 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.SharePreferences;
-import com.dev.innso.myappbum.Utils.TAGs.ActivityTags;
-import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
-import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
+import com.dev.innso.myappbum.utils.SharePreferences;
+import com.dev.innso.myappbum.utils.tags.ActivityTags;
+import com.dev.innso.myappbum.utils.tags.JSONTag;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.models.FacadeModel;
 import com.dev.innso.myappbum.models.FactoryModel;

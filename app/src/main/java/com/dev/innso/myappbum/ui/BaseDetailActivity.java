@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.dev.innso.myappbum.Utils.Utils;
+import com.dev.innso.myappbum.utils.Utils;
 
 public class BaseDetailActivity extends Activity {
 

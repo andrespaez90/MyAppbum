@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.Utils.Encrypt;
-import com.dev.innso.myappbum.Utils.SharePreferences;
-import com.dev.innso.myappbum.Utils.TAGs.JSONTag;
-import com.dev.innso.myappbum.Utils.TAGs.SharedPrefKeys;
-import com.dev.innso.myappbum.Utils.TAGs.StringTags;
+import com.dev.innso.myappbum.utils.Encrypt;
+import com.dev.innso.myappbum.utils.SharePreferences;
+import com.dev.innso.myappbum.utils.tags.JSONTag;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
+import com.dev.innso.myappbum.utils.tags.StringTags;
 import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
