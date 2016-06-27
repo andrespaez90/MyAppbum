@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -62,6 +64,8 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
         launchHandler();
@@ -188,6 +192,8 @@ public class StartActivity extends Activity {
     }
 
     private void finishSuccess() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
         setResult(RESULT_OK);
         finish();
     }
