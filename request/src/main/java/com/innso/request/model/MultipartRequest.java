@@ -1,9 +1,10 @@
 package com.innso.request.model;
 
-import com.innso.request.Interfaces.BaseRequest;
+import com.innso.request.interfaces.BaseRequest;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MultipartRequest implements BaseRequest{
 
@@ -13,12 +14,32 @@ public class MultipartRequest implements BaseRequest{
     }
 
     @Override
+    public Map<String, String> getUrlParams() {
+        return null;
+    }
+
+    @Override
     public String getMediaType() {
         return null;
     }
 
     @Override
-    public Object getFormParams() {
+    public String getUrl() {
+        return null;
+    }
+
+    @Override
+    public HttpMethod getMethod() {
+        return null;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() {
+        return null;
+    }
+
+    @Override
+    public Map<String,String> getFormParams() {
         return null;
     }
 

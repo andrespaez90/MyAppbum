@@ -3,7 +3,7 @@ package com.innso.request.dispatcher;
 import android.content.Context;
 import android.os.Handler;
 
-import com.innso.request.Interfaces.BaseRequest;
+import com.innso.request.interfaces.BaseRequest;
 import com.innso.request.model.BaseResponse;
 import com.innso.request.model.OkHttpFactory;
 import com.squareup.okhttp.Callback;

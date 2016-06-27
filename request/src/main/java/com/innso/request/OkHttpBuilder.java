@@ -2,7 +2,7 @@ package com.innso.request;
 
 import android.net.Uri;
 
-import com.innso.request.Interfaces.BaseRequest;
+import com.innso.request.interfaces.BaseRequest;
 import com.innso.request.dispatcher.OkHttpRequestDispatcher;
 import com.innso.request.model.MultipartRequest;
 import com.squareup.okhttp.FormEncodingBuilder;

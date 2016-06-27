@@ -1,4 +1,4 @@
-package com.innso.request.Interfaces;
+package com.innso.request.interfaces;
 
 import java.util.Map;
 

@@ -2,7 +2,7 @@ package com.innso.request;
 
 import android.content.Context;
 
-import com.innso.request.Interfaces.BaseRequest;
+import com.innso.request.interfaces.BaseRequest;
 
 public abstract class Dispatcher {
 
