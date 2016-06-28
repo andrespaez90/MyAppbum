@@ -15,40 +15,14 @@
         android:fitsSystemWindows="true"
         tools:context=".ui.activities.MainActivity">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/main_barLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_recView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/dim_foreground_disabled_material_dark" />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
+        <include layout="@layout/content_main"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            app:backgroundTint="@color/apptheme_color"
             android:layout_margin="@dimen/fab_margin"
             android:src="@android:drawable/ic_media_play" />
 

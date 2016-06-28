@@ -3,7 +3,6 @@ package com.dev.innso.myappbum.ui.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.BinderThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -23,18 +22,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.utils.SharePreferences;
-import com.dev.innso.myappbum.utils.tags.ActivityTags;
-import com.dev.innso.myappbum.utils.tags.JSONTag;
-import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
 import com.dev.innso.myappbum.models.FacadeModel;
 import com.dev.innso.myappbum.models.FactoryModel;
 import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.utils.SharePreferences;
+import com.dev.innso.myappbum.utils.tags.ActivityTags;
+import com.dev.innso.myappbum.utils.tags.JSONTag;
+import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -72,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Bind(R.id.profile_name)
     TextView profileName;
 
+    @Bind(R.id.textView_emptyList_appbum)
+    LinearLayout emptyTextMessage;
+
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
 
     private RecycleAppbumAdapter listAdapter;
 
@@ -240,9 +244,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         protected void onPostExecute(String result) {
-            listAdapter.notifyDataSetChanged();
-            ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter("");
-            swipeRefreshLayout.setRefreshing(false);
+            if (FacadeModel.Appbums.size() != 0) {
+                listAdapter.notifyDataSetChanged();
+                ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter("");
+                swipeRefreshLayout.setRefreshing(false);
+                emptyTextMessage.setVisibility(View.GONE);
+                albumsList.setVisibility(View.VISIBLE);
+            }
         }
     }
 

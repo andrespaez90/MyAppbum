@@ -31,7 +31,7 @@
         android:layout_below="@+id/imageView_profile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@color/apptheme_color"
+        android:background="@color/white_transparecy85"
         android:paddingBottom="@dimen/spacing_small"
         android:paddingLeft="@dimen/spacing_xlarge"
         android:paddingRight="@dimen/spacing_xlarge"
