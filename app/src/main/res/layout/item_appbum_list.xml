@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_medium">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imagelist_img"
@@ -11,7 +10,7 @@
         android:layout_height="210dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_appbum_load" />
 
     <TextView

@@ -3,11 +3,13 @@ package com.dev.innso.myappbum.ui.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.BinderThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,7 +46,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.main_recView)
     RecyclerView albumsList;
@@ -58,8 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Bind(R.id.nav_view)
     NavigationView navigationView;
 
-    @Bind(R.id.profile_image)
+    @Bind(R.id.imageView_profile)
     ImageView profilePicture;
+
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Bind(R.id.profile_cover)
     ImageView profileCover;
@@ -132,7 +137,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initListeners() {
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,8 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -200,6 +208,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public void onRefresh() {
+        init();
+    }
+
     private class DownloadData extends AsyncTask<Pair<String, String>, String, String> {
 
         protected String doInBackground(Pair<String, String>... data) {
@@ -229,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(String result) {
             listAdapter.notifyDataSetChanged();
             ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter("");
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 

@@ -89,6 +89,7 @@ public class StartActivity extends Activity {
         } else {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
