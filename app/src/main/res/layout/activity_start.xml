@@ -5,7 +5,7 @@
     android:layout_weight="1"
     android:background="@drawable/bg_start"
     android:clipChildren="false"
-    tools:context=".ui.activities.StartActivity">
+    tools:context=".ui.activities.SplashActivity">
 
     <RelativeLayout
         android:id="@+id/layout_center_image"

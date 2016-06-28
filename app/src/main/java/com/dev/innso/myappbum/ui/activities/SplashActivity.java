@@ -41,7 +41,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class StartActivity extends Activity {
+public class SplashActivity extends Activity {
 
     @Bind(R.id.star_facebook)
     LoginButton FacebookLogin;
@@ -224,7 +224,7 @@ public class StartActivity extends Activity {
 
 
         protected void onProgressUpdate(String... progress) {
-            //Toast.makeText(StartActivity.this, progress[0], Toast.LENGTH_LONG).show();
+            //Toast.makeText(SplashActivity.this, progress[0], Toast.LENGTH_LONG).show();
         }
 
 

@@ -18,7 +18,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".ui.activities.StartActivity"
+            android:name=".ui.activities.SplashActivity"
             android:label="@string/title_activity_start">
 
             <intent-filter>
