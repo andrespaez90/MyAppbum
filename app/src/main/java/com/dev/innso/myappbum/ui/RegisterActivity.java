@@ -11,35 +11,36 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.utils.Encrypt;
 import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.utils.tags.StringTags;
-import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends ActionBarActivity {
 
-    @Bind(R.id.register_name)
+    @BindView(R.id.register_name)
     TextView tv_name;
 
-    @Bind(R.id.register_email)
+    @BindView(R.id.register_email)
     TextView tv_email;
 
-    @Bind(R.id.register_password)
+    @BindView(R.id.register_password)
     TextView tv_passwords;
 
-    @Bind(R.id.register_rpasswords)
+    @BindView(R.id.register_rpasswords)
     TextView tv_rpassword;
 
-    @Bind(R.id.register_button)
+    @BindView(R.id.register_button)
     Button btn_register;
+
     String message = "";
     private String userName;
     private String userEmail;

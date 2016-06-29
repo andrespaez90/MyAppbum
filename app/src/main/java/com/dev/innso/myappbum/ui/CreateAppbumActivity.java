@@ -1,20 +1,20 @@
 package com.dev.innso.myappbum.ui;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dev.innso.myappbum.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateAppbumActivity extends ActionBarActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar_main)
     Toolbar toolbar;
 
     @Override

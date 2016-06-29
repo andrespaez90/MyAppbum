@@ -11,57 +11,55 @@ import android.widget.LinearLayout;
 
 import com.dev.innso.myappbum.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by INNSO SAS on 22/09/2015.
- */
+
 public class PassNumber extends Activity implements View.OnClickListener {
 
-    @Bind(R.id.pass_num1)
+    @BindView(R.id.pass_num1)
     Button btn_1;
 
-    @Bind(R.id.pass_num2)
+    @BindView(R.id.pass_num2)
     Button btn_2;
 
-    @Bind(R.id.pass_num3)
+    @BindView(R.id.pass_num3)
     Button btn_3;
 
-    @Bind(R.id.pass_num4)
+    @BindView(R.id.pass_num4)
     Button btn_4;
 
-    @Bind(R.id.pass_num5)
+    @BindView(R.id.pass_num5)
     Button btn_5;
 
-    @Bind(R.id.pass_num6)
+    @BindView(R.id.pass_num6)
     Button btn_6;
 
-    @Bind(R.id.pass_num7)
+    @BindView(R.id.pass_num7)
     Button btn_7;
 
-    @Bind(R.id.pass_num8)
+    @BindView(R.id.pass_num8)
     Button btn_8;
 
-    @Bind(R.id.pass_num9)
+    @BindView(R.id.pass_num9)
     Button btn_9;
 
-    @Bind(R.id.pass_num0)
+    @BindView(R.id.pass_num0)
     Button btn_0;
 
-    @Bind(R.id.pass_delete)
+    @BindView(R.id.pass_delete)
     Button btn_delete;
 
-    @Bind(R.id.pass_1)
+    @BindView(R.id.pass_1)
     EditText pass_1;
 
-    @Bind(R.id.pass_2)
+    @BindView(R.id.pass_2)
     EditText pass_2;
 
-    @Bind(R.id.pass_3)
+    @BindView(R.id.pass_3)
     EditText pass_3;
 
-    @Bind(R.id.pass_4)
+    @BindView(R.id.pass_4)
     EditText pass_4;
 
     private String Key;

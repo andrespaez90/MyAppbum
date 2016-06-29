@@ -6,7 +6,7 @@
     tools:context="com.dev.innso.myappbum.ui.CreateAppbumActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_main"
         style="@style/Toolbar"
         app:contentInsetStart="0dp">
 

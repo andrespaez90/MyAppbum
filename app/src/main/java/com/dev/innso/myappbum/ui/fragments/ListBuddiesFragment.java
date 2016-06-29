@@ -11,19 +11,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.dev.innso.myappbum.adapters.CircularAdapter;
-import com.dev.innso.myappbum.utils.ExtraArgumentKeys;
-import com.dev.innso.myappbum.providers.BuddiesImages;
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.adapters.CircularAdapter;
 import com.dev.innso.myappbum.models.ui.DetailActivity;
+import com.dev.innso.myappbum.providers.BuddiesImages;
+import com.dev.innso.myappbum.utils.ExtraArgumentKeys;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Bind;
 
 
 public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.OnBuddyItemClickListener {
@@ -35,7 +35,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
     private CircularAdapter mAdapterLeft;
     private CircularAdapter mAdapterRight;
 
-    @Bind(R.id.listbuddies)
+    @BindView(R.id.listbuddies)
     ListBuddiesLayout mListBuddies;
 
     private List<String> mImagesLeft = new ArrayList<String>();

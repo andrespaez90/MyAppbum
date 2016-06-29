@@ -13,48 +13,46 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.adapters.CustomizeSpinnersAdapter;
+import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.KeyValuePair;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
-import com.dev.innso.myappbum.R;
-import com.dev.innso.myappbum.utils.SharePreferences;
 import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Bind;
 
-/**
- * Created by INNSO SAS on 13/05/2015.
- */
+
 public class CustomizeFragment extends Fragment {
 
     private static final String TAG = CustomizeFragment.class.getSimpleName();
-    @Bind(R.id.seekBarGap)
+    @BindView(R.id.seekBarGap)
     SeekBar mSeekBarGap;
-    @Bind(R.id.seekBarGapValue)
+    @BindView(R.id.seekBarGapValue)
     TextView seekBarGapValue;
 
-    @Bind(R.id.seekBarSpeed)
+    @BindView(R.id.seekBarSpeed)
     SeekBar mSeekBarSpeed;
-    @Bind(R.id.seekBarSpeedValue)
+    @BindView(R.id.seekBarSpeedValue)
     TextView seekBarSpeedValue;
 
-    @Bind(R.id.seekBarDivHeight)
+    @BindView(R.id.seekBarDivHeight)
     SeekBar mSeekBarDivHeight;
-    @Bind(R.id.seekBarDivHeightValue)
+    @BindView(R.id.seekBarDivHeightValue)
     TextView seekBarDivHeightValue;
 
-    @Bind(R.id.fillGapSpinner)
+    @BindView(R.id.fillGapSpinner)
     Spinner mFillGapSpinner;
-    @Bind(R.id.scrollSpinner)
+    @BindView(R.id.scrollSpinner)
     Spinner mManualScrollSpinner;
-    @Bind(R.id.autoScrollSpinner)
+    @BindView(R.id.autoScrollSpinner)
     Spinner mAutoScrollSpinner;
-    @Bind(R.id.dividerSpinner)
+    @BindView(R.id.dividerSpinner)
     Spinner mDividerSpinner;
 
     private OnCustomizeListener mOnCustomizeListener;

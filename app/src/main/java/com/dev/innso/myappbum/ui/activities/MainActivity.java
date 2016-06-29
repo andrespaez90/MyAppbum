@@ -42,42 +42,30 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.main_recView)
-    RecyclerView albumsList;
+    private Toolbar toolbar;
 
-    @Bind(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
+    private LinearLayout emptyTextMessage;
 
-    @Bind(R.id.fab)
-    FloatingActionButton floatingActionButton;
+    private NavigationView navigationView;
 
-    @Bind(R.id.nav_view)
-    NavigationView navigationView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    @Bind(R.id.imageView_profile)
-    ImageView profilePicture;
+    private FloatingActionButton floatingActionButton;
 
-    @Bind(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView albumsList;
 
-    @Bind(R.id.profile_cover)
-    ImageView profileCover;
+    private DrawerLayout drawerLayout;
 
-    @Bind(R.id.profile_name)
-    TextView profileName;
+    private TextView profileName;
 
-    @Bind(R.id.textView_emptyList_appbum)
-    LinearLayout emptyTextMessage;
+    private ImageView profileCover;
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-
+    private ImageView profilePicture;
 
     private RecycleAppbumAdapter listAdapter;
 
@@ -90,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initViews();
+        configureViews();
         initProfile();
         initListeners();
         init();
@@ -104,12 +93,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initViews() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        albumsList = (RecyclerView) findViewById(R.id.main_recView);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingButton_main);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        emptyTextMessage = (LinearLayout) findViewById(R.id.layout_emptyList_appbum);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        profileName = (TextView) headerView.findViewById(R.id.profile_name);
+
+        profileCover = (ImageView) headerView.findViewById(R.id.profile_cover);
+
+        profilePicture = (ImageView) headerView.findViewById(R.id.imageView_profile);
+    }
+
+    private void configureViews() {
 
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-        drawerLayout.setDrawerListener(toggle);
+        drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
 
@@ -118,6 +131,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         albumsList.setHasFixedSize(true);
 
         listAdapter = new RecycleAppbumAdapter(dataList, this);
+
+        RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager manager = ((LinearLayoutManager) recyclerView.getLayoutManager());
+                boolean enabled = manager.findFirstCompletelyVisibleItemPosition() == 0;
+                swipeRefreshLayout.setEnabled(enabled);
+            }
+        };
+
+        albumsList.addOnScrollListener(scrollListener);
 
         albumsList.setAdapter(listAdapter);
 
@@ -244,10 +268,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         protected void onPostExecute(String result) {
+            swipeRefreshLayout.setRefreshing(false);
+
             if (FacadeModel.Appbums.size() != 0) {
                 listAdapter.notifyDataSetChanged();
                 ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter("");
-                swipeRefreshLayout.setRefreshing(false);
                 emptyTextMessage.setVisibility(View.GONE);
                 albumsList.setVisibility(View.VISIBLE);
             }

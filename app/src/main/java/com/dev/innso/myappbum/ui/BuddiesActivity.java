@@ -2,31 +2,31 @@ package com.dev.innso.myappbum.ui;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.dev.innso.myappbum.models.ui.AppbumActivity;
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.models.ui.AppbumActivity;
 import com.dev.innso.myappbum.ui.activities.PassNumber;
 import com.dev.innso.myappbum.ui.fragments.AddpictureFragment;
 import com.dev.innso.myappbum.ui.fragments.CustomizeFragment;
+import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.FragmentTags;
-import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Bind;
 
 
 public class BuddiesActivity extends AppbumActivity implements CustomizeFragment.OnCustomizeListener{
 
     private boolean isOpenActivitiesActivated = true;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar_main)
     Toolbar toolbar;
 
     @Override

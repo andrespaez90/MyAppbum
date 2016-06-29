@@ -9,35 +9,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/profile_cover"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/default_bg" />
+        <ImageView
+            android:id="@+id/profile_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_bg"
+            android:contentDescription="@string/app_name" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_profile"
-        android:layout_centerInParent="true"
-        app:border_width="1dp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_profile"
+            android:layout_centerInParent="true"
+            app:border_width="1dp" />
 
-    <TextView
-        android:id="@+id/profile_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView_profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:background="@color/white_transparecy85"
-        android:paddingBottom="@dimen/spacing_small"
-        android:paddingLeft="@dimen/spacing_xlarge"
-        android:paddingRight="@dimen/spacing_xlarge"
-        android:paddingTop="@dimen/spacing_small"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:text="User Name" />
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView_profile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@color/white_transparecy85"
+            android:paddingBottom="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_xlarge"
+            android:paddingRight="@dimen/spacing_xlarge"
+            android:paddingTop="@dimen/spacing_small"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="User Name" />
     </RelativeLayout>
 
 </LinearLayout>

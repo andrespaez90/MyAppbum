@@ -13,7 +13,7 @@ import com.dev.innso.myappbum.utils.tags.KeyValuePair;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CustomizeSpinnersAdapter implements SpinnerAdapter {
@@ -109,10 +109,10 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
     }
 
     static class ViewHolder {
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
 
-        @Bind(R.id.subtitle)
+        @BindView(R.id.subtitle)
         TextView subtitle;
 
         public ViewHolder(View view) {

@@ -17,13 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.animation.GeneralAnimations;
+import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.ui.LoginActivity;
 import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
-import com.dev.innso.myappbum.animation.GeneralAnimations;
-import com.dev.innso.myappbum.providers.ServerConnection;
-import com.dev.innso.myappbum.ui.LoginActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -37,19 +37,19 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SplashActivity extends Activity {
 
-    @Bind(R.id.star_facebook)
+    @BindView(R.id.star_facebook)
     LoginButton FacebookLogin;
 
-    @Bind(R.id.splash_layout_buttons)
+    @BindView(R.id.splash_layout_buttons)
     LinearLayout layoutActionButtons;
 
-    @Bind(R.id.layout_center_image)
+    @BindView(R.id.layout_center_image)
     RelativeLayout layoutCenterImage;
 
     CallbackManager callbackManager;

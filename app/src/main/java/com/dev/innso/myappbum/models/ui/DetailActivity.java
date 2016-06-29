@@ -8,14 +8,14 @@ import com.dev.innso.myappbum.ui.BaseDetailActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends BaseDetailActivity {
 
     public static final String EXTRA_URL = "url";
 
-    @Bind(R.id.details_image)
+    @BindView(R.id.details_image)
     ImageView mImageView;
 
     @Override

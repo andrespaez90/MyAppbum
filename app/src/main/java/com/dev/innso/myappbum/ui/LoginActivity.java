@@ -11,35 +11,35 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.utils.Encrypt;
 import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
-import com.dev.innso.myappbum.providers.ServerConnection;
 
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class LoginActivity extends AppCompatActivity{
 
-    @Bind(R.id.login_username)
+    @BindView(R.id.login_username)
     TextView userEmail;
 
-    @Bind(R.id.login_password)
+    @BindView(R.id.login_password)
     TextView userPass;
 
-    @Bind(R.id.login_error)
+    @BindView(R.id.login_error)
     TextView loginError;
 
-    @Bind(R.id.login_singin)
+    @BindView(R.id.login_singin)
     Button btnRegister;
 
-    @Bind(R.id.login_Login)
+    @BindView(R.id.login_Login)
     Button btnLogin;
 
     @Override public  void onCreate(Bundle savedInstanceState)  {
