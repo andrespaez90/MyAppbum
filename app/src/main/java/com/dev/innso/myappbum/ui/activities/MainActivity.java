@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        albumsList = (RecyclerView) findViewById(R.id.main_recView);
+        albumsList = (RecyclerView) findViewById(R.id.list_mainAppbums);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingButton_main);
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.main_navigationView);
 
         emptyTextMessage = (LinearLayout) findViewById(R.id.layout_emptyList_appbum);
 
@@ -131,17 +131,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         albumsList.setHasFixedSize(true);
 
         listAdapter = new RecycleAppbumAdapter(dataList, this);
-
-        RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                LinearLayoutManager manager = ((LinearLayoutManager) recyclerView.getLayoutManager());
-                boolean enabled = manager.findFirstCompletelyVisibleItemPosition() == 0;
-                swipeRefreshLayout.setEnabled(enabled);
-            }
-        };
-
-        albumsList.addOnScrollListener(scrollListener);
 
         albumsList.setAdapter(listAdapter);
 

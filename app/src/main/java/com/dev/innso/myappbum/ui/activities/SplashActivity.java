@@ -10,9 +10,11 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -37,22 +39,17 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class SplashActivity extends Activity implements View.OnClickListener {
 
-public class SplashActivity extends Activity {
+    private LoginButton FacebookLogin;
 
-    @BindView(R.id.star_facebook)
-    LoginButton FacebookLogin;
+    private LinearLayout layoutActionButtons;
 
-    @BindView(R.id.splash_layout_buttons)
-    LinearLayout layoutActionButtons;
+    private RelativeLayout layoutCenterImage;
 
-    @BindView(R.id.layout_center_image)
-    RelativeLayout layoutCenterImage;
+    private CallbackManager callbackManager;
 
-    CallbackManager callbackManager;
+    private Button buttonAccess;
 
     private String userID;
     private String userEmail;
@@ -67,8 +64,24 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
-        ButterKnife.bind(this);
+        initView();
+        addListeners();
         launchHandler();
+    }
+
+    private void initView() {
+
+        FacebookLogin = (LoginButton) findViewById(R.id.star_facebook);
+
+        layoutActionButtons = (LinearLayout) findViewById(R.id.splash_layout_buttons);
+
+        layoutCenterImage = (RelativeLayout) findViewById(R.id.layout_center_image);
+
+        buttonAccess = (Button) findViewById(R.id.start_access);
+    }
+
+    private void addListeners() {
+        buttonAccess.setOnClickListener(this);
     }
 
     private void launchHandler() {
@@ -106,11 +119,6 @@ public class SplashActivity extends Activity {
         return -layoutActionButtons.getMeasuredHeight()/2;
     }
 
-    @OnClick(R.id.start_access)
-    protected void accessApp() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent, ActivityTags.ACTIVITY_LOGIN.ordinal());
-    }
 
     private void initFacebookButton() {
         FacebookLogin.setReadPermissions("public_profile ", "email", "user_photos");
@@ -197,6 +205,21 @@ public class SplashActivity extends Activity {
         startActivity(intent);
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        int viewId = view.getId();
+        switch (viewId) {
+            case R.id.start_access:
+                accessApp();
+                break;
+        }
+    }
+
+    protected void accessApp() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivityForResult(intent, ActivityTags.ACTIVITY_LOGIN.ordinal());
     }
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,32 +26,41 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    @BindView(R.id.login_username)
-    TextView userEmail;
+    private TextView userEmail;
 
-    @BindView(R.id.login_password)
-    TextView userPass;
+    private TextView userPass;
 
-    @BindView(R.id.login_error)
-    TextView loginError;
+    private TextView loginError;
 
-    @BindView(R.id.login_singin)
-    Button btnRegister;
+    private Button btnRegister;
 
-    @BindView(R.id.login_Login)
-    Button btnLogin;
+    private Button btnLogin;
 
     @Override public  void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         overridePendingTransition(R.anim.slide_right_in,R.anim.stay);
-        init();
+        initViews();
+        addListeners();
     }
 
-    private void init(){
+    private void initViews() {
+
+        userEmail = (TextView) findViewById(R.id.login_username);
+
+        userPass = (TextView) findViewById(R.id.login_password);
+
+        loginError = (TextView) findViewById(R.id.login_error);
+
+        btnRegister = (Button) findViewById(R.id.login_singin);
+
+        btnLogin = (Button) findViewById(R.id.login_Login);
+    }
+
+    private void addListeners() {
         userPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -60,27 +70,6 @@ public class LoginActivity extends AppCompatActivity{
                 return false;
             }
         });
-    }
-
-    @OnClick(R.id.login_singin)
-    protected void signin(){
-        Intent intent = new Intent(this,RegisterActivity.class);
-        this.startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
-    }
-
-    @OnClick(R.id.login_Login)
-    protected void login(){
-
-        enableActivity(false);
-
-        String email = userEmail.getText().toString();
-        String pass = userPass.getText().toString();
-        pass = Encrypt.md5(pass);
-
-        Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.JSON_USER_EMAIL.toString() , email);
-        Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.JSON_USER_PASSWORD.toString() , pass);
-
-        new loginService().execute(pairEmail, pairPass);
     }
 
     private void enableActivity(Boolean activate){
@@ -103,6 +92,38 @@ public class LoginActivity extends AppCompatActivity{
     public void onBackPressed() {
         finish();
         this.overridePendingTransition(R.anim.stay,R.anim.slide_right_out);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int viewId = view.getId();
+        switch (viewId){
+            case R.id.login_singin:
+                signin();
+                break;
+            case R.id.login_Login:
+                login();
+                break;
+        }
+    }
+
+    protected void signin(){
+        Intent intent = new Intent(this,RegisterActivity.class);
+        this.startActivityForResult(intent, ActivityTags.ACTIVITY_REGISTER.ordinal());
+    }
+
+    protected void login(){
+
+        enableActivity(false);
+
+        String email = userEmail.getText().toString();
+        String pass = userPass.getText().toString();
+        pass = Encrypt.md5(pass);
+
+        Pair<String, String> pairEmail =  new Pair<String, String>(JSONTag.JSON_USER_EMAIL.toString() , email);
+        Pair<String, String> pairPass =  new Pair<String, String>(JSONTag.JSON_USER_PASSWORD.toString() , pass);
+
+        new loginService().execute(pairEmail, pairPass);
     }
 
 

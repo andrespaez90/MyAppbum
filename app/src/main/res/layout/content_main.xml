@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recView"
+            android:id="@+id/list_mainAppbums"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/dim_foreground_disabled_material_dark"
