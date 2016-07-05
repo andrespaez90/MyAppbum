@@ -42,7 +42,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
@@ -76,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         initViews();
         configureViews();
         initProfile();

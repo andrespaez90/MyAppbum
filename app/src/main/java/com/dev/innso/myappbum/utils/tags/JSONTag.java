@@ -1,8 +1,5 @@
 package com.dev.innso.myappbum.utils.tags;
 
-/**
- * Created by INNSO SAS on 24/06/2015.
- */
 public enum JSONTag {
 
     JSON_RESPONSE("result"),
@@ -27,7 +24,7 @@ public enum JSONTag {
 
     String text;
 
-    private JSONTag(String text){ this.text = text; }
+    JSONTag(String text){ this.text = text; }
 
     @Override
     public String toString(){
