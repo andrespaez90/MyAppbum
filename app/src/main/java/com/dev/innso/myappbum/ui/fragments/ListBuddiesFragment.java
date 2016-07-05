@@ -13,39 +13,34 @@ import android.widget.Toast;
 
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.adapters.CircularAdapter;
-import com.dev.innso.myappbum.models.ui.DetailActivity;
+import com.dev.innso.myappbum.models.ui.DetailPhotoActivity;
 import com.dev.innso.myappbum.providers.BuddiesImages;
 import com.dev.innso.myappbum.utils.ExtraArgumentKeys;
-import com.jpardogo.listbuddies.lib.provider.ScrollConfigOptions;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.OnBuddyItemClickListener {
 
-   // private static final String TAG = ListBuddiesFragment.class.getSimpleName();
+    private static final String TAG = ListBuddiesFragment.class.getSimpleName();
+
+    private ListBuddiesLayout mListBuddies;
+
     int mMarginDefault;
+
     int[] mScrollConfig;
+
     private boolean isOpenActivities;
-    private CircularAdapter mAdapterLeft;
-    private CircularAdapter mAdapterRight;
-
-    @BindView(R.id.listbuddies)
-    ListBuddiesLayout mListBuddies;
-
-    private List<String> mImagesLeft = new ArrayList<String>();
-    private List<String> mImagesRight = new ArrayList<String>();
 
     public static ListBuddiesFragment newInstance(boolean isOpenActivitiesActivated) {
+
         ListBuddiesFragment fragment = new ListBuddiesFragment();
+
         Bundle bundle = new Bundle();
+
         bundle.putBoolean(ExtraArgumentKeys.OPEN_ACTIVITES.toString(), isOpenActivitiesActivated);
+
         fragment.setArguments(bundle);
+
         return fragment;
     }
 
@@ -59,32 +54,36 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_listbuddies, container, false);
-        ButterKnife.bind(this, rootView);
 
-        //If we do this we need to uncomment the container on the xml layout
-        //createListBuddiesLayoutDinamically(rootView);
-        mImagesLeft.addAll(BuddiesImages.imageUrls_left);
-        mImagesRight.addAll(BuddiesImages.imageUrls_right);
-        mAdapterLeft = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small), mImagesLeft);
-        mAdapterRight = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), mImagesRight);
-        mListBuddies.setAdapters(mAdapterLeft, mAdapterRight);
+        View rootView = inflater.inflate(R.layout.fragment_listbuddies, container, false);
+
+        initViews(rootView);
+
+        initList();
+
         mListBuddies.setOnItemClickListener(this);
+
         return rootView;
     }
 
-    private void createListBuddiesLayoutDinamically(View rootView) {
-        mListBuddies = new ListBuddiesLayout(getActivity());
-        resetLayout();
-        //Once the container is created we can add the ListViewLayout into it
-        //((FrameLayout)rootView.findViewById(R.id.<container_id>)).addView(mListBuddies);
+    private void initViews(View view) {
+        mListBuddies = (ListBuddiesLayout) view.findViewById(R.id.listbuddies);
+    }
+
+    private void initList() {
+
+        CircularAdapter mAdapterLeft = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_small), BuddiesImages.imageUrls_left);
+
+        CircularAdapter mAdapterRight = new CircularAdapter(getActivity(), getResources().getDimensionPixelSize(R.dimen.item_height_tall), BuddiesImages.imageUrls_right);
+
+        mListBuddies.setAdapters(mAdapterLeft, mAdapterRight);
     }
 
     @Override
     public void onBuddyItemClicked(AdapterView<?> parent, View view, int buddy, int position, long id) {
         if (isOpenActivities) {
-            Intent intent = new Intent(getActivity(), DetailActivity.class);
-            intent.putExtra(DetailActivity.EXTRA_URL, getImage(buddy, position));
+            Intent intent = new Intent(getActivity(), DetailPhotoActivity.class);
+            intent.putExtra(DetailPhotoActivity.EXTRA_URL, getImage(buddy, position));
             startActivity(intent);
         } else {
             Resources resources = getResources();
@@ -100,41 +99,8 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
         mListBuddies.setGap(value);
     }
 
-    public void setSpeed(int value) {
-        mListBuddies.setSpeed(value);
-    }
-
-    public void setDividerHeight(int value) {
-        mListBuddies.setDividerHeight(value);
-    }
-
-    public void setGapColor(int color) {
-        mListBuddies.setGapColor(color);
-    }
-
-    public void setAutoScrollFaster(int option) {
-        mListBuddies.setAutoScrollFaster(option);
-    }
-
-    public void setScrollFaster(int option) {
-        mListBuddies.setManualScrollFaster(option);
-    }
 
     public void setDivider(Drawable drawable) {
         mListBuddies.setDivider(drawable);
-    }
-
-    public void setOpenActivities(Boolean openActivities) {
-        this.isOpenActivities = openActivities;
-    }
-
-    public void resetLayout() {
-        mListBuddies.setGap(mMarginDefault)
-                .setSpeed(ListBuddiesLayout.DEFAULT_SPEED)
-                .setDividerHeight(mMarginDefault)
-                .setGapColor(getResources().getColor(R.color.frame))
-                .setAutoScrollFaster(mScrollConfig[ScrollConfigOptions.RIGHT.getConfigValue()])
-                .setManualScrollFaster(mScrollConfig[ScrollConfigOptions.LEFT.getConfigValue()])
-                .setDivider(getResources().getDrawable(R.drawable.divider));
     }
 }

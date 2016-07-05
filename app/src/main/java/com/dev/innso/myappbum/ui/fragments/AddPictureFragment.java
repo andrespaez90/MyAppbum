@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.dev.innso.myappbum.R;
 
-public class AddpictureFragment extends Fragment {
+public class AddPictureFragment extends Fragment {
 
     public static Fragment newInstance() {
-        return new AddpictureFragment();
+        return new AddPictureFragment();
     }
 
     @Override

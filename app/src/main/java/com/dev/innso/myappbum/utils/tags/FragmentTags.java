@@ -4,11 +4,11 @@ package com.dev.innso.myappbum.utils.tags;
 public enum FragmentTags {
     LIST_BUDDIES("ListBuddiesFragment"),
     CUSTOMIZE("CustomizeFragment"),
-    ADDPICTURE("AddpictureFragment");
+    ADDPICTURE("AddPictureFragment");
 
     private String text;
 
-    private FragmentTags(String text) {
+    FragmentTags(String text) {
         this.text = text;
     }
 
