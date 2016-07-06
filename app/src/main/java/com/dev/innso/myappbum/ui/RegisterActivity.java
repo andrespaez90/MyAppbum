@@ -4,9 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,28 +21,18 @@ import com.dev.innso.myappbum.utils.tags.StringTags;
 
 import org.json.JSONObject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class RegisterActivity extends ActionBarActivity {
 
-    @BindView(R.id.register_name)
-    TextView tv_name;
+    private TextView tv_name;
+    private TextView tv_email;
+    private TextView tv_passwords;
+    private TextView tv_rpassword;
 
-    @BindView(R.id.register_email)
-    TextView tv_email;
-
-    @BindView(R.id.register_password)
-    TextView tv_passwords;
-
-    @BindView(R.id.register_rpasswords)
-    TextView tv_rpassword;
-
-    @BindView(R.id.register_button)
-    Button btn_register;
+    private Button btn_register;
 
     String message = "";
+
     private String userName;
     private String userEmail;
     private String userPassword;
@@ -53,11 +44,36 @@ public class RegisterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.scale_center_in, R.anim.stay);
         setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
+        initViews();
+        initListeners();
     }
 
-    @OnClick(R.id.register_button)
-    protected void Register(){
+    private void initViews() {
+        tv_name = (TextView) findViewById(R.id.register_name);
+
+        tv_email = (TextView) findViewById(R.id.register_email);
+
+        tv_passwords = (TextView) findViewById(R.id.register_password);
+
+        tv_rpassword = (TextView) findViewById(R.id.register_rpasswords);
+
+        btn_register = (Button) findViewById(R.id.register_button);
+    }
+
+    private void initListeners() {
+        findViewById(R.id.register_button).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.register_button:
+                registerUser();
+                break;
+        }
+    }
+
+    protected void registerUser() {
         enableActivity( false );
         getData();
         StringTags responseAction = confirmData();

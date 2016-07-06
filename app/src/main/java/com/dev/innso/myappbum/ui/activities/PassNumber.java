@@ -5,66 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.dev.innso.myappbum.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 public class PassNumber extends Activity implements View.OnClickListener {
 
-    @BindView(R.id.pass_num1)
-    Button btn_1;
-
-    @BindView(R.id.pass_num2)
-    Button btn_2;
-
-    @BindView(R.id.pass_num3)
-    Button btn_3;
-
-    @BindView(R.id.pass_num4)
-    Button btn_4;
-
-    @BindView(R.id.pass_num5)
-    Button btn_5;
-
-    @BindView(R.id.pass_num6)
-    Button btn_6;
-
-    @BindView(R.id.pass_num7)
-    Button btn_7;
-
-    @BindView(R.id.pass_num8)
-    Button btn_8;
-
-    @BindView(R.id.pass_num9)
-    Button btn_9;
-
-    @BindView(R.id.pass_num0)
-    Button btn_0;
-
-    @BindView(R.id.pass_delete)
-    Button btn_delete;
-
-    @BindView(R.id.pass_1)
-    EditText pass_1;
-
-    @BindView(R.id.pass_2)
-    EditText pass_2;
-
-    @BindView(R.id.pass_3)
-    EditText pass_3;
-
-    @BindView(R.id.pass_4)
-    EditText pass_4;
+    private EditText pass_1;
+    private EditText pass_2;
+    private EditText pass_3;
+    private EditText pass_4;
 
     private String Key;
 
-    private int Type; // if type is for nuew passnumber the value is 1
+    private int type;
     private int passNumber;
     private String firstPass;
 
@@ -73,13 +29,19 @@ public class PassNumber extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passnumber);
         overridePendingTransition(R.anim.slide_up_in, R.anim.stay);
-
-        ButterKnife.bind(this);
+        initViews();
         init();
     }
 
+    private void initViews() {
+        pass_1 = (EditText) findViewById(R.id.pass_1);
+        pass_2 = (EditText) findViewById(R.id.pass_2);
+        pass_3 = (EditText) findViewById(R.id.pass_3);
+        pass_4 = (EditText) findViewById(R.id.pass_4);
+    }
+
     private void init() {
-        Type = getIntent().getIntExtra("Type", 0);
+        type = getIntent().getIntExtra("type", 0);
         passNumber = getIntent().getIntExtra("Pass",0);
         firstPass ="-1";
         Key = "";
@@ -87,22 +49,22 @@ public class PassNumber extends Activity implements View.OnClickListener {
     }
 
     private void addListeners(){
-        btn_1.setOnClickListener(this);
-        btn_2.setOnClickListener(this);
-        btn_3.setOnClickListener(this);
-        btn_4.setOnClickListener(this);
-        btn_5.setOnClickListener(this);
-        btn_6.setOnClickListener(this);
-        btn_7.setOnClickListener(this);
-        btn_8.setOnClickListener(this);
-        btn_9.setOnClickListener(this);
-        btn_0.setOnClickListener(this);
-        btn_delete.setOnClickListener(this);
+        findViewById(R.id.pass_num1).setOnClickListener(this);
+        findViewById(R.id.pass_num2).setOnClickListener(this);
+        findViewById(R.id.pass_num3).setOnClickListener(this);
+        findViewById(R.id.pass_num4).setOnClickListener(this);
+        findViewById(R.id.pass_num5).setOnClickListener(this);
+        findViewById(R.id.pass_num6).setOnClickListener(this);
+        findViewById(R.id.pass_num7).setOnClickListener(this);
+        findViewById(R.id.pass_num8).setOnClickListener(this);
+        findViewById(R.id.pass_num9).setOnClickListener(this);
+        findViewById(R.id.pass_num0).setOnClickListener(this);
+        findViewById(R.id.pass_delete).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == btn_delete.getId()){
+        if (v.getId() == R.id.pass_delete) {
             deleteNumber();
             return;
         }
@@ -123,7 +85,7 @@ public class PassNumber extends Activity implements View.OnClickListener {
     }
 
     private void validateKey() {
-        if(Key.length() == 4 && Type == 0){
+        if (Key.length() == 4 && type == 0) {
             if(Integer.parseInt(Key) == passNumber){
                 setResult(RESULT_OK);
                 close();
@@ -149,31 +111,31 @@ public class PassNumber extends Activity implements View.OnClickListener {
                 Layout.startAnimation(animator);
 
             }
-        }else if(Key.length() == 4 && Type == 1){
+        } else if (Key.length() == 4 && type == 1) {
             //TODO:Create the appbum with passnumber
         }
     }
 
     private void addKey(int viewId) {
-        if(viewId == btn_1.getId())
+        if (viewId == R.id.pass_num1)
             Key=Key+"1";
-        if(viewId == btn_2.getId())
+        if (viewId == R.id.pass_num2)
             Key=Key+"2";
-        if(viewId == btn_3.getId())
+        if (viewId == R.id.pass_num3)
             Key=Key+"3";
-        if(viewId == btn_4.getId())
+        if (viewId == R.id.pass_num4)
             Key=Key+"4";
-        if(viewId == btn_5.getId())
+        if (viewId == R.id.pass_num5)
             Key=Key+"5";
-        if(viewId == btn_6.getId())
+        if (viewId == R.id.pass_num6)
             Key=Key+"6";
-        if(viewId == btn_7.getId())
+        if (viewId == R.id.pass_num7)
             Key=Key+"7";
-        if(viewId == btn_8.getId())
+        if (viewId == R.id.pass_num8)
             Key=Key+"8";
-        if(viewId == btn_9.getId())
+        if (viewId == R.id.pass_num9)
             Key=Key+"9";
-        if(viewId == btn_0.getId())
+        if (viewId == R.id.pass_num0)
             Key=Key+"0";
     }
 

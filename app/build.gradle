@@ -55,7 +55,6 @@ dependencies {
     }
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.jpardogo.listbuddies:library:1.1.1'
-    compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'

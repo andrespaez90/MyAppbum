@@ -13,9 +13,6 @@ import com.dev.innso.myappbum.utils.tags.KeyValuePair;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class CustomizeSpinnersAdapter implements SpinnerAdapter {
 
     private Context mContext;
@@ -38,7 +35,7 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.title.setText(mItems.get(position).getKey());
+        holder.textViewTitle.setText(mItems.get(position).getKey());
         return convertView;
     }
 
@@ -82,7 +79,7 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.title.setText(mMainItemTitle);
+        holder.textViewTitle.setText(mMainItemTitle);
         holder.subtitle.setText(mItems.get(position).getKey());
         return convertView;
     }
@@ -109,14 +106,14 @@ public class CustomizeSpinnersAdapter implements SpinnerAdapter {
     }
 
     static class ViewHolder {
-        @BindView(R.id.title)
-        TextView title;
 
-        @BindView(R.id.subtitle)
-        TextView subtitle;
+        private TextView textViewTitle;
+
+        private TextView subtitle;
 
         public ViewHolder(View view) {
-            ButterKnife.bind(this, view);
+            textViewTitle = (TextView) view.findViewById(R.id.title);
+            subtitle = (TextView) view.findViewById(R.id.subtitle);
         }
     }
 }

@@ -8,8 +8,6 @@ import com.dev.innso.myappbum.ui.BaseDetailActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import butterknife.BindView;
-
 public class DetailPhotoActivity extends BaseDetailActivity implements Callback{
 
     public static final String EXTRA_URL = "url";

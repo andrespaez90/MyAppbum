@@ -21,10 +21,6 @@ import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 
 import org.json.JSONObject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -41,7 +37,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override public  void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
         overridePendingTransition(R.anim.slide_right_in,R.anim.stay);
         initViews();
         addListeners();

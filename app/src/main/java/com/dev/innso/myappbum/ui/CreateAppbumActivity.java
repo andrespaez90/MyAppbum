@@ -1,28 +1,29 @@
 package com.dev.innso.myappbum.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dev.innso.myappbum.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+public class CreateAppbumActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class CreateAppbumActivity extends ActionBarActivity {
-
-    @BindView(R.id.toolbar_main)
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_up_in, R.anim.stay);
         setContentView(R.layout.activity_create_appbum);
-        ButterKnife.bind(this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        initListeners();
+    }
+
+    private void initListeners() {
+        findViewById(R.id.back).setOnClickListener(this);
     }
 
 
@@ -48,15 +49,20 @@ public class CreateAppbumActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.back)
-    void pressBack(){
+    @Override
+    public void onBackPressed() {
         finish();
         this.overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-        this.overridePendingTransition(R.anim.stay,R.anim.slide_up_out);
+    public void onClick(View view) {
+        int viewId = view.getId();
+        switch (viewId) {
+            case R.id.back:
+                finish();
+                this.overridePendingTransition(R.anim.stay, R.anim.slide_up_out);
+                break;
+        }
     }
 }
