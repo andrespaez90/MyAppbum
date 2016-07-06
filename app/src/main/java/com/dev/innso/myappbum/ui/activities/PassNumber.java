@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
 
@@ -18,7 +19,7 @@ public class PassNumber extends Activity implements View.OnClickListener {
     private EditText pass_3;
     private EditText pass_4;
 
-    private String Key;
+    private String keyNumber;
 
     private int type;
     private int passNumber;
@@ -44,7 +45,7 @@ public class PassNumber extends Activity implements View.OnClickListener {
         type = getIntent().getIntExtra("type", 0);
         passNumber = getIntent().getIntExtra("Pass",0);
         firstPass ="-1";
-        Key = "";
+        keyNumber = "";
         addListeners();
     }
 
@@ -63,13 +64,13 @@ public class PassNumber extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.pass_delete) {
+    public void onClick(View view) {
+        if (view.getId() == R.id.pass_delete) {
             deleteNumber();
             return;
         }
         addPassNumber();
-        addKey(v.getId());
+        keyNumber += ((TextView) view).getText();
         validateKey();
     }
 
@@ -85,8 +86,8 @@ public class PassNumber extends Activity implements View.OnClickListener {
     }
 
     private void validateKey() {
-        if (Key.length() == 4 && type == 0) {
-            if(Integer.parseInt(Key) == passNumber){
+        if (keyNumber.length() == 4 && type == 0) {
+            if(Integer.parseInt(keyNumber) == passNumber){
                 setResult(RESULT_OK);
                 close();
             }else{
@@ -111,36 +112,13 @@ public class PassNumber extends Activity implements View.OnClickListener {
                 Layout.startAnimation(animator);
 
             }
-        } else if (Key.length() == 4 && type == 1) {
+        } else if (keyNumber.length() == 4 && type == 1) {
             //TODO:Create the appbum with passnumber
         }
     }
 
-    private void addKey(int viewId) {
-        if (viewId == R.id.pass_num1)
-            Key=Key+"1";
-        if (viewId == R.id.pass_num2)
-            Key=Key+"2";
-        if (viewId == R.id.pass_num3)
-            Key=Key+"3";
-        if (viewId == R.id.pass_num4)
-            Key=Key+"4";
-        if (viewId == R.id.pass_num5)
-            Key=Key+"5";
-        if (viewId == R.id.pass_num6)
-            Key=Key+"6";
-        if (viewId == R.id.pass_num7)
-            Key=Key+"7";
-        if (viewId == R.id.pass_num8)
-            Key=Key+"8";
-        if (viewId == R.id.pass_num9)
-            Key=Key+"9";
-        if (viewId == R.id.pass_num0)
-            Key=Key+"0";
-    }
-
     private void addPassNumber() {
-        switch (Key.length()) {
+        switch (keyNumber.length()) {
             case 0:
                 pass_1.setText("1");
                 break;
@@ -161,11 +139,11 @@ public class PassNumber extends Activity implements View.OnClickListener {
         pass_2.setText("");
         pass_3.setText("");
         pass_4.setText("");
-        Key="";
+        keyNumber ="";
     }
 
     private void deleteNumber() {
-        int count = Key.length();
+        int count = keyNumber.length();
         if(count > 0){
             switch (count) {
                 case 1:
@@ -178,7 +156,7 @@ public class PassNumber extends Activity implements View.OnClickListener {
                     pass_3.setText("");
                     break;
             }
-            Key = Key.substring(0, Key.length()-1);
+            keyNumber = keyNumber.substring(0, keyNumber.length()-1);
         }
     }
 
