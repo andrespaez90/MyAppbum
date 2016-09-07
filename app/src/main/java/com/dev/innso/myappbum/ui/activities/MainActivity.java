@@ -1,7 +1,6 @@
 package com.dev.innso.myappbum.ui.activities;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,7 +16,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,21 +26,24 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
-import com.dev.innso.myappbum.models.FacadeModel;
-import com.dev.innso.myappbum.models.FactoryModel;
-import com.dev.innso.myappbum.providers.ServerConnection;
+import com.dev.innso.myappbum.api.services.AppbumApi;
+import com.dev.innso.myappbum.di.ApiModule;
+import com.dev.innso.myappbum.di.component.AppComponent;
+import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.models.Appbum;
 import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
-import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import io.fabric.sdk.android.Fabric;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -70,24 +71,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ArrayList dataList;
 
+    @Inject
+    AppbumApi appbumApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.activity_main);
+
+        AppComponent daggerComponent = DaggerAppComponent.builder().apiModule(new ApiModule()).build();
+
+        daggerComponent.inject(this);
+
         initViews();
+
         configureViews();
+
         initProfile();
+
         initListeners();
-        init();
-    }
 
-    private void init() {
-        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
-
-        Pair<String, String> userData = new Pair<>(JSONTag.JSON_USER_ID.toString(), userId);
-
-        new DownloadData().execute(userData);
+        getUserAppbums();
     }
 
     private void initViews() {
@@ -124,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toggle.syncState();
 
-        dataList = FacadeModel.Appbums;
+        dataList = new ArrayList();
 
         albumsList.setHasFixedSize(true);
 
@@ -133,6 +140,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         albumsList.setAdapter(listAdapter);
 
         albumsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    private void getUserAppbums() {
+
+        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
+
+        Call<ArrayList<Appbum>> appbumCall = appbumApi.getUserAppbums(userId);
+
+        appbumCall.enqueue(new Callback<ArrayList<Appbum>>() {
+
+            @Override
+            public void onResponse(Call<ArrayList<Appbum>> call, Response<ArrayList<Appbum>> response) {
+
+                if (response.isSuccessful()) {
+
+                    dataList = response.body();
+
+                    listAdapter.setData(dataList);
+
+                    swipeRefreshLayout.setRefreshing(false);
+
+                    if (dataList.size() != 0) {
+
+                        listAdapter.notifyDataSetChanged();
+
+                        emptyTextMessage.setVisibility(View.GONE);
+
+                        albumsList.setVisibility(View.VISIBLE);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Appbum>> call, Throwable t) {
+                Log.e("error", t.getMessage());
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void initProfile() {
@@ -201,9 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == RESULT_CANCELED) {
                 finish();
             } else {
-                String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
-                Pair<String, String> pairId = new Pair<>(JSONTag.JSON_USER_ID.toString(), userId);
-                new DownloadData().execute(pairId);
+                getUserAppbums();
             }
         }
     }
@@ -225,45 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onRefresh() {
-        init();
-    }
-
-    private class DownloadData extends AsyncTask<Pair<String, String>, String, String> {
-
-        protected String doInBackground(Pair<String, String>... data) {
-            try {
-
-                String result = ServerConnection.requestPOST(getResources().getString(R.string.getAppbumsService), data);
-                publishProgress(result);
-                JSONObject jsonObject = new JSONObject(result);
-
-                JSONArray jsonArray = jsonObject.getJSONArray("Appbums");
-                FactoryModel.createAppbums(jsonArray);
-
-                return "Success";
-
-            } catch (Exception e) {
-                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
-            }
-            return null;
-        }
-
-
-        protected void onProgressUpdate(String... progress) {
-            Log.v("JSON", progress[0]);
-        }
-
-
-        protected void onPostExecute(String result) {
-            swipeRefreshLayout.setRefreshing(false);
-
-            if (FacadeModel.Appbums.size() != 0) {
-                listAdapter.notifyDataSetChanged();
-                ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter("");
-                emptyTextMessage.setVisibility(View.GONE);
-                albumsList.setVisibility(View.VISIBLE);
-            }
-        }
+        getUserAppbums();
     }
 
     public class MainController implements SearchView.OnQueryTextListener {
