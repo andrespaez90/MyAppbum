@@ -235,12 +235,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_menu_close_session) {
+            managerPreferences.resetPreferences();
+            startActivit(SplashActivity.class);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void startActivit(Class activity){
+        startActivity(new Intent(this,activity));
+        finish();
     }
 
 

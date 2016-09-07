@@ -23,7 +23,7 @@
                 android:title="@string/copy.name_developer" />
 
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_menu_close_session"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/copy.Logout" />
         </menu>

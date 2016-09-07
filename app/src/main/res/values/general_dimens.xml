@@ -7,4 +7,6 @@
     <dimen name="spacing_xxlarge">29dp</dimen>
     <dimen name="spacing_xxxlarge">34dp</dimen>
 
+    <dimen name="elevation_header">4dp</dimen>
+
 </resources>
