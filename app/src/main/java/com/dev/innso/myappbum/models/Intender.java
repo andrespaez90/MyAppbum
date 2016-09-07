@@ -24,7 +24,7 @@ public class Intender {
         BuddiesImages.imageUrls_left = new ArrayList<>();
         BuddiesImages.imageUrls_right = new ArrayList<>();
 
-        for(Picture p : appbum.getPictures()){
+        for(Picture p : appbum.getPhotos()){
             if(p.getTypePicture() == 1){
                 BuddiesImages.imageUrls_left.add(p.getUrlPicture());
             }else{
