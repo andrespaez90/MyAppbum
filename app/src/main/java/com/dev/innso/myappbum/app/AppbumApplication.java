@@ -3,7 +3,7 @@ package com.dev.innso.myappbum.app;
 import android.app.Application;
 import android.content.Context;
 
-public class Appbum extends Application {
+public class AppbumApplication extends Application {
 
     private static Context mContext;
 
