@@ -30,10 +30,10 @@ import com.dev.innso.myappbum.api.services.AppbumApi;
 import com.dev.innso.myappbum.di.ApiModule;
 import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.managers.AppPreference;
+import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
-import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
-import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Inject
     AppbumApi appbumApi;
+
+    @Inject
+    ManagerPreferences managerPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void getUserAppbums() {
 
-        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
+        String userId = managerPreferences.getString(AppPreference.USER_ID);
 
         Call<ArrayList<Appbum>> appbumCall = appbumApi.getUserAppbums(userId);
 
@@ -182,9 +185,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initProfile() {
-        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.FACEBOOK_USERID);
-        String userName = SharePreferences.getApplicationValue(SharedPrefKeys.NAME_USER);
-        String userCover = SharePreferences.getApplicationValue(SharedPrefKeys.COVER_USER);
+        String userId = managerPreferences.getString(AppPreference.FACEBOOK_USERID);
+        String userName = managerPreferences.getString(AppPreference.NAME_USER);
+        String userCover = managerPreferences.getString(AppPreference.COVER_USER);
 
         if (!TextUtils.isEmpty(userId)) {
             String imageURL = "https://graph.facebook.com/" + userId + "/picture?type=large";

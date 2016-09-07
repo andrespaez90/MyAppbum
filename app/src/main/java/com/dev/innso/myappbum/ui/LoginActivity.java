@@ -12,14 +12,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.di.ApiModule;
+import com.dev.innso.myappbum.di.component.AppComponent;
+import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.managers.AppPreference;
+import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.utils.Encrypt;
-import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
-import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 
 import org.json.JSONObject;
+
+import javax.inject.Inject;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -30,14 +35,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private TextView loginError;
 
-    private Button btnRegister;
+    private Button buttonRegister;
 
-    private Button btnLogin;
+    private Button buttonLogin;
+
+    @Inject
+    ManagerPreferences managerPreferences;
 
     @Override public  void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         overridePendingTransition(R.anim.slide_right_in,R.anim.stay);
+        AppComponent daggerComponent = DaggerAppComponent.builder().apiModule(new ApiModule()).build();
+
+        daggerComponent.inject(this);
         initViews();
         addListeners();
     }
@@ -50,12 +61,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loginError = (TextView) findViewById(R.id.login_error);
 
-        btnRegister = (Button) findViewById(R.id.login_singin);
+        buttonRegister = (Button) findViewById(R.id.login_button_Login);
 
-        btnLogin = (Button) findViewById(R.id.login_Login);
+        buttonLogin = (Button) findViewById(R.id.login_button_singin);
     }
 
     private void addListeners() {
+
+        buttonLogin.setOnClickListener(this);
+
+        buttonRegister.setOnClickListener(this);
+
         userPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -70,8 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void enableActivity(Boolean activate){
         userEmail.setEnabled(activate);
         userPass.setEnabled(activate);
-        btnLogin.setEnabled(activate);
-        btnRegister.setEnabled(activate);
+        buttonLogin.setEnabled(activate);
+        buttonRegister.setEnabled(activate);
 
     }
 
@@ -93,10 +109,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId){
-            case R.id.login_singin:
+            case R.id.login_button_Login:
                 signin();
                 break;
-            case R.id.login_Login:
+            case R.id.login_button_singin:
                 login();
                 break;
         }
@@ -132,11 +148,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;
                 }else{
-                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
-                    SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, jsonObject.getString(JSONTag.JSON_USER_IDFACE.toString()) );
-                    SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER, jsonObject.getString(JSONTag.JSON_USER_NAME.toString()));
-                    SharePreferences.saveDataApplication(SharedPrefKeys.PROFILE_USER, jsonObject.getString(JSONTag.JSON_URLPROFILE.toString()));
-                    SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER, jsonObject.getString(JSONTag.JSON_URLCOVER.toString()));
+                    managerPreferences.set(AppPreference.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    managerPreferences.set(AppPreference.FACEBOOK_USERID, jsonObject.getString(JSONTag.JSON_USER_IDFACE.toString()) );
+                    managerPreferences.set(AppPreference.NAME_USER, jsonObject.getString(JSONTag.JSON_USER_NAME.toString()));
+                    managerPreferences.set(AppPreference.PROFILE_USER, jsonObject.getString(JSONTag.JSON_URLPROFILE.toString()));
+                    managerPreferences.set(AppPreference.COVER_USER, jsonObject.getString(JSONTag.JSON_URLCOVER.toString()));
                 }
                 publishProgress(response);
                 return JSONTag.JSON_SUCCESS.toString();
