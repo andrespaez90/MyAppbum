@@ -5,30 +5,30 @@ import java.util.ArrayList;
 public class Appbum {
 
     private int id;
-    private String Name;
-    private String Rol;
+    private String name;
+    private String rol;
     private String urlCover;
-    private Boolean isPrivate;
+    private int isPrivate;
     private int passNumber;
     private String urlBackground;
 
     private int type;
 
-    private ArrayList<Picture> Pictures;
+    private ArrayList<Picture> photos;
 
-    public Appbum(int id, String name, String rol, String urlCover, boolean isprivate, int passnumber, int type) {
+    public Appbum(int id, String name, String rol, String urlCover, int isprivate, int passnumber, int type) {
         this.id = id;
-        Name = name;
-        Rol = rol;
+        this.name = name;
+        this.rol = rol;
         this. urlCover = urlCover;
         isPrivate = isprivate;
         passNumber = passnumber;
         this.type = type;
-        Pictures = new ArrayList<Picture>();
+        photos = new ArrayList<Picture>();
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getUrlCover() {
@@ -36,14 +36,14 @@ public class Appbum {
     }
 
     public void add(Picture photo) {
-        this.Pictures.add(photo);
+        this.photos.add(photo);
     }
 
     public void setType(int type) {
         this.type = type;
     }
 
-    public boolean isPrivate(){ return isPrivate; }
+    public boolean isPrivate(){ return isPrivate == 1; }
 
     public int getPassNumber(){ return passNumber; }
 
@@ -51,7 +51,7 @@ public class Appbum {
         return type;
     }
 
-    public ArrayList<Picture> getPictures() {
-        return Pictures;
+    public ArrayList<Picture> getPhotos() {
+        return photos;
     }
 }
