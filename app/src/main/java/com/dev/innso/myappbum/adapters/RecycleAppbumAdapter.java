@@ -23,11 +23,14 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     private ArrayList<Appbum> allItems;
     private Context mContext;
 
-    public RecycleAppbumAdapter(ArrayList<Appbum> data, Context context){
-
+    public RecycleAppbumAdapter(ArrayList<Appbum> data, Context context) {
         super();
         mContext = context;
 
+        setData(data);
+    }
+
+    public void setData(ArrayList data) {
         allItems = data;
 
         visibleItems = new ArrayList<>();
@@ -40,7 +43,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_appbum_list, viewGroup, false);
 
-        DataViewHolder tvh = new DataViewHolder(itemView,mContext);
+        DataViewHolder tvh = new DataViewHolder(itemView, mContext);
 
         itemView.setOnClickListener(tvh);
 
@@ -61,14 +64,18 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     public void setFilter(String queryText) {
 
         visibleItems = new ArrayList<Appbum>();
-        for (Appbum item: allItems) {
-            if (item.getName().toLowerCase().contains(queryText))
+
+        for (Appbum item : allItems) {
+
+            if (item.getName().toLowerCase().contains(queryText)){
                 visibleItems.add(item);
+            }
         }
         notifyDataSetChanged();
     }
 
-    public static class DataViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+
+    public static class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView imageView;
         private TextView txtTitle;
@@ -81,8 +88,8 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
             super(itemView);
             mRowHeight = 100;
             mContext = context;
-            imageView = (ImageView)itemView.findViewById(R.id.imagelist_img);
-            txtTitle = (TextView)itemView.findViewById(R.id.imagelist_title);
+            imageView = (ImageView) itemView.findViewById(R.id.imagelist_img);
+            txtTitle = (TextView) itemView.findViewById(R.id.imagelist_title);
         }
 
         public void bindItem(Appbum item) {
@@ -93,10 +100,10 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         @Override
         public void onClick(View v) {
-                Intent intent = Intender.createIntent(appbum, mContext);
-                intent.putExtra("isPrivate",appbum.isPrivate());
-                intent.putExtra("Pass",appbum.getPassNumber());
-                mContext.startActivity(intent);
+            Intent intent = Intender.createIntent(appbum, mContext);
+            intent.putExtra("isPrivate", appbum.isPrivate());
+            intent.putExtra("Pass", appbum.getPassNumber());
+            mContext.startActivity(intent);
         }
     }
 

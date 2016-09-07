@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 
 import com.dev.innso.myappbum.utils.tags.SharedPrefFiles;
 import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
-import com.dev.innso.myappbum.app.Appbum;
+import com.dev.innso.myappbum.app.AppbumApplication;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
 public class SharePreferences {
@@ -36,7 +36,7 @@ public class SharePreferences {
     }
 
     private static SharedPreferences getCustomizePref() {
-        return Appbum.getAppContext().getSharedPreferences(SharedPrefFiles.CUSTOMIZE_SETTINGS.toString(), 0);
+        return AppbumApplication.getAppContext().getSharedPreferences(SharedPrefFiles.CUSTOMIZE_SETTINGS.toString(), 0);
     }
 
     private static String getAplicationDefaultValue(SharedPrefKeys prefKey){
@@ -59,13 +59,13 @@ public class SharePreferences {
         int defaultValue = 0;
         switch (prefKey) {
             case GAP_PROGRESS:
-                defaultValue = Appbum.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                defaultValue = AppbumApplication.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
                 break;
             case SPEED_PROGRESS:
                 defaultValue = ListBuddiesLayout.DEFAULT_SPEED;
                 break;
             case DIV_HEIGHT_PROGRESS:
-                defaultValue = Appbum.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                defaultValue = AppbumApplication.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
                 break;
         }
         return defaultValue;

@@ -3,9 +3,9 @@ package com.dev.innso.myappbum.models;
 public class Picture {
 
     private String id;
-    private String urlPicture;
-    private String namePicture;
-    private int typePicture;
+    private String urlImagen;
+    private String name;
+    private int type;
 
     public String getId() {
         return id;
@@ -16,27 +16,27 @@ public class Picture {
     }
 
     public String getUrlPicture() {
-        return urlPicture;
+        return urlImagen;
     }
 
     public void setUrlPicture(String urlPicture) {
-        this.urlPicture = urlPicture;
+        this.urlImagen = urlPicture;
     }
 
     public String getNamePicture() {
-        return namePicture;
+        return name;
     }
 
     public void setNamePicture(String namePicture) {
-        this.namePicture = namePicture;
+        this.name = namePicture;
     }
 
     public int getTypePicture() {
-        return typePicture;
+        return type;
     }
 
     public void setTypePicture(int typePicture) {
-        this.typePicture = typePicture;
+        this.type = typePicture;
     }
 
 
