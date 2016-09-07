@@ -12,14 +12,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
+import com.dev.innso.myappbum.di.ApiModule;
+import com.dev.innso.myappbum.di.component.AppComponent;
+import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.managers.AppPreference;
+import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.utils.Encrypt;
-import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
-import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.dev.innso.myappbum.utils.tags.StringTags;
 
 import org.json.JSONObject;
+
+import javax.inject.Inject;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,11 +44,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String rePassword;
     private String title = "";
 
+    @Inject
+    ManagerPreferences managerPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.scale_center_in, R.anim.stay);
         setContentView(R.layout.activity_register);
+        AppComponent daggerComponent = DaggerAppComponent.builder().apiModule(new ApiModule()).build();
+        daggerComponent.inject(this);
         initViews();
         initListeners();
     }
@@ -136,8 +146,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void savePreference(){
-        SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER, userName);
-        SharePreferences.saveDataApplication(SharedPrefKeys.EMAIL_USER, userEmail);
+        managerPreferences.set(AppPreference.NAME_USER, userName);
+        managerPreferences.set(AppPreference.EMAIL_USER, userEmail);
     }
 
     private void finishSuccess(){
@@ -196,7 +206,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if( !jsonObject.getString( JSONTag.JSON_RESPONSE.toString()).equals( JSONTag.JSON_SUCCESS.toString() )){
                     return null;
                 }else{
-                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    managerPreferences.set(AppPreference.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
                     savePreference();
                 }
                 publishProgress(response);

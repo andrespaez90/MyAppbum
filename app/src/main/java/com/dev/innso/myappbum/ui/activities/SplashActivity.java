@@ -20,12 +20,15 @@ import android.widget.RelativeLayout;
 
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.animation.GeneralAnimations;
+import com.dev.innso.myappbum.di.ApiModule;
+import com.dev.innso.myappbum.di.component.AppComponent;
+import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.managers.AppPreference;
+import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.ui.LoginActivity;
-import com.dev.innso.myappbum.utils.SharePreferences;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
-import com.dev.innso.myappbum.utils.tags.SharedPrefKeys;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,6 +41,8 @@ import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javax.inject.Inject;
 
 public class SplashActivity extends Activity implements View.OnClickListener {
 
@@ -56,6 +61,9 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     private String userName;
     private String usercover;
 
+    @Inject
+    ManagerPreferences managerPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +72,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
+        AppComponent daggerComponent = DaggerAppComponent.builder().apiModule(new ApiModule()).build();
+        daggerComponent.inject(this);
         initView();
         addListeners();
         launchHandler();
@@ -95,7 +105,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     }
 
     private void validateUser() {
-        String userId = SharePreferences.getApplicationValue(SharedPrefKeys.USER_ID);
+        String userId = managerPreferences.getString(AppPreference.USER_ID);
         if (TextUtils.isEmpty(userId)) {
             initFacebookButton();
             animateButtons();
@@ -144,8 +154,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         //Save Preference
         String accessToken = Token.getToken();
         String userId = Token.getUserId();
-        SharePreferences.saveDataApplication(SharedPrefKeys.ACCESS_TOKEN, accessToken);
-        SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, userId);
+        managerPreferences.set(AppPreference.ACCESS_TOKEN, accessToken);
+        managerPreferences.set(AppPreference.FACEBOOK_USERID, userId);
 
         //Save information of facebook account
         GraphRequest request = GraphRequest.newMeRequest(
@@ -195,9 +205,9 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
 
     private void savePreference() {
-        SharePreferences.saveDataApplication(SharedPrefKeys.FACEBOOK_USERID, userID);
-        SharePreferences.saveDataApplication(SharedPrefKeys.NAME_USER, userName);
-        SharePreferences.saveDataApplication(SharedPrefKeys.COVER_USER, usercover);
+        managerPreferences.set(AppPreference.FACEBOOK_USERID, userID);
+        managerPreferences.set(AppPreference.NAME_USER, userName);
+        managerPreferences.set(AppPreference.COVER_USER, usercover);
     }
 
     private void finishSuccess() {
@@ -233,7 +243,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 if (!jsonObject.getString(JSONTag.JSON_RESPONSE.toString()).equals(JSONTag.JSON_SUCCESS.toString())) {
                     return null;
                 } else {
-                    SharePreferences.saveDataApplication(SharedPrefKeys.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
+                    managerPreferences.set(AppPreference.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
                     savePreference();
                 }
                 publishProgress(response);
