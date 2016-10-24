@@ -35,7 +35,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -60,6 +59,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     private String userEmail;
     private String userName;
     private String usercover;
+
+    private GeneralAnimations generalAnimations;
 
     @Inject
     ManagerPreferences managerPreferences;
@@ -88,6 +89,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         layoutCenterImage = (RelativeLayout) findViewById(R.id.layout_center_image);
 
         buttonAccess = (Button) findViewById(R.id.start_access);
+
+        generalAnimations = new GeneralAnimations();
     }
 
     private void addListeners() {
@@ -96,12 +99,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     private void launchHandler() {
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                validateUser();
-            }
-        }, 2000);
+        handler.postDelayed(this::validateUser, 2000);
     }
 
     private void validateUser() {
@@ -116,17 +114,17 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private void animateButtons(){
+    private void animateButtons() {
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator animationButton = (ObjectAnimator) GeneralAnimations.getAppearFromBottom(layoutActionButtons, 1000, 0);
-        ObjectAnimator animationCenterImage = (ObjectAnimator) GeneralAnimations.getTranslationY(layoutCenterImage,1000,0,getMoveHeight());
-        animatorSet.playTogether(animationButton,animationCenterImage);
+        ObjectAnimator animationButton = (ObjectAnimator) generalAnimations.getAppearFromBottom(layoutActionButtons, 1000, 0);
+        ObjectAnimator animationCenterImage = (ObjectAnimator) generalAnimations.getTranslationY(layoutCenterImage, 1000, 0, getMoveHeight());
+        animatorSet.playTogether(animationButton, animationCenterImage);
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.start();
     }
 
-    private float getMoveHeight(){
-        return -layoutActionButtons.getMeasuredHeight()/2;
+    private float getMoveHeight() {
+        return -layoutActionButtons.getMeasuredHeight() / 2;
     }
 
 
@@ -160,12 +158,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         //Save information of facebook account
         GraphRequest request = GraphRequest.newMeRequest(
                 Token,
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        saveFacebookInformation(object);
-                    }
-                });
+                (object, response) -> saveFacebookInformation(object));
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,cover");
         request.setParameters(parameters);
@@ -211,7 +204,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     }
 
     private void finishSuccess() {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         setResult(RESULT_OK);
         finish();

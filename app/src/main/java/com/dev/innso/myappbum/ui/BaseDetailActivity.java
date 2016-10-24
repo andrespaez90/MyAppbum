@@ -35,14 +35,11 @@ public class BaseDetailActivity extends Activity {
 
     protected void moveBackground() {
         if (Utils.hasHoneycomb()) {
-            mBackground.post(new Runnable() {
-                @Override
-                public void run() {
-                    mScaleFactor = (float) mBackground.getHeight() / (float) mBackground.getDrawable().getIntrinsicHeight();
-                    mMatrix.postScale(mScaleFactor, mScaleFactor);
-                    mBackground.setImageMatrix(mMatrix);
-                    animate();
-                }
+            mBackground.post(() -> {
+                mScaleFactor = (float) mBackground.getHeight() / (float) mBackground.getDrawable().getIntrinsicHeight();
+                mMatrix.postScale(mScaleFactor, mScaleFactor);
+                mBackground.setImageMatrix(mMatrix);
+                animate();
             });
         }
     }
@@ -66,18 +63,15 @@ public class BaseDetailActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void animate(float from, float to) {
         mCurrentAnimator = ValueAnimator.ofFloat(from, to);
-        mCurrentAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (Float) animation.getAnimatedValue();
+        mCurrentAnimator.addUpdateListener(animation -> {
+            float value = (Float) animation.getAnimatedValue();
 
-                mMatrix.reset();
-                mMatrix.postScale(mScaleFactor, mScaleFactor);
-                mMatrix.postTranslate(value, 0);
+            mMatrix.reset();
+            mMatrix.postScale(mScaleFactor, mScaleFactor);
+            mMatrix.postTranslate(value, 0);
 
-                mBackground.setImageMatrix(mMatrix);
+            mBackground.setImageMatrix(mMatrix);
 
-            }
         });
         mCurrentAnimator.setDuration(DURATION);
         mCurrentAnimator.addListener(new AnimatorListenerAdapter() {
