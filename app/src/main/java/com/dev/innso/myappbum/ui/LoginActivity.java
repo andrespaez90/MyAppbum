@@ -72,14 +72,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         buttonRegister.setOnClickListener(this);
 
-        userPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if( actionId == EditorInfo.IME_ACTION_GO){
-                    login();
-                }
-                return false;
+        userPass.setOnEditorActionListener((v, actionId, event) -> {
+            if( actionId == EditorInfo.IME_ACTION_GO){
+                login();
             }
+            return false;
         });
     }
 

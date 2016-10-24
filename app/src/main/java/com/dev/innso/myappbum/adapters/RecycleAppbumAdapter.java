@@ -1,12 +1,18 @@
 package com.dev.innso.myappbum.adapters;
 
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dev.innso.myappbum.R;
@@ -21,6 +27,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
     private ArrayList<Appbum> visibleItems;
     private ArrayList<Appbum> allItems;
+    private int lastPosition = -1;
     private Context mContext;
 
     public RecycleAppbumAdapter(ArrayList<Appbum> data, Context context) {
@@ -54,6 +61,19 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
     public void onBindViewHolder(DataViewHolder data, int i) {
         Appbum item = visibleItems.get(i);
         data.bindItem(item);
+        setAnimation(data.getcontainer(), i);
+    }
+
+
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.enter_list_item);
+            animation.setDuration(animation.getDuration() + (position * 33));
+            animation.setInterpolator(new AccelerateDecelerateInterpolator());
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override
@@ -67,7 +87,7 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
         for (Appbum item : allItems) {
 
-            if (item.getName().toLowerCase().contains(queryText)){
+            if (item.getName().toLowerCase().contains(queryText)) {
                 visibleItems.add(item);
             }
         }
@@ -77,17 +97,18 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
 
     public static class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private RelativeLayout layoutContainer;
+
         private ImageView imageView;
         private TextView txtTitle;
-        private int mRowHeight;
 
         private Context mContext;
         private Appbum appbum;
 
         public DataViewHolder(View itemView, Context context) {
             super(itemView);
-            mRowHeight = 100;
             mContext = context;
+            layoutContainer = (RelativeLayout) itemView.findViewById(R.id.layout_item_appbum_container);
             imageView = (ImageView) itemView.findViewById(R.id.imagelist_img);
             txtTitle = (TextView) itemView.findViewById(R.id.imagelist_title);
         }
@@ -104,6 +125,10 @@ public class RecycleAppbumAdapter extends RecyclerView.Adapter<RecycleAppbumAdap
             intent.putExtra("isPrivate", appbum.isPrivate());
             intent.putExtra("Pass", appbum.getPassNumber());
             mContext.startActivity(intent);
+        }
+
+        public ViewGroup getcontainer() {
+            return layoutContainer;
         }
     }
 

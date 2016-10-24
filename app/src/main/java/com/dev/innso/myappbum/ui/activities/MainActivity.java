@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (response.isSuccessful()) {
 
+                    albumsList.setVisibility(View.VISIBLE);
+
                     dataList = response.body();
 
                     listAdapter.setData(dataList);
@@ -170,10 +172,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         emptyTextMessage.setVisibility(View.GONE);
 
-                        albumsList.setVisibility(View.VISIBLE);
                     }
                 }
-
             }
 
             @Override
@@ -206,13 +206,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        floatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     @Override
@@ -235,12 +230,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_menu_close_session) {
+            managerPreferences.resetPreferences();
+            startActivit(SplashActivity.class);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void startActivit(Class activity){
+        startActivity(new Intent(this,activity));
+        finish();
     }
 
 

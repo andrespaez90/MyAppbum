@@ -26,31 +26,36 @@ import java.util.ArrayList;
 
 public class GeneralAnimations {
 
-    private static final AccelerateInterpolator sAccelerator = new AccelerateInterpolator();
+    private final AccelerateInterpolator sAccelerator;
 
-    private static final DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
+    private final DecelerateInterpolator sDecelerator;
 
     static long SHORT_DURATION = 150;
 
     static float sDurationScale = 1f;
 
+    public GeneralAnimations() {
 
-    public static Animator getAnimationFadeOut(View view, int duration, AnimationListener animationListener) {
+        sAccelerator = new AccelerateInterpolator();
+        sDecelerator = new DecelerateInterpolator();
+    }
+
+    public Animator getAnimationFadeOut(View view, int duration, AnimationListener animationListener) {
         return getAnimationFadeOut(view, duration, 0, sDecelerator, animationListener);
     }
 
-    public static Animator getAnimationFadeOut(View view, int duration, int delay, AnimationListener animationListener) {
+    public Animator getAnimationFadeOut(View view, int duration, int delay, AnimationListener animationListener) {
         return getAnimationFadeOut(view, duration, delay, sDecelerator, animationListener);
     }
 
-    public static void animateFadeOut(final View view, int duration, final AnimationListener animationListener) {
+    public void animateFadeOut(final View view, int duration, final AnimationListener animationListener) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAnimationFadeOut(view, duration, animationListener);
 
         objectAnimator.start();
     }
 
-    public static Animator getAnimationFadeOut(final View view, int duration, int delay, TimeInterpolator interpolator, final AnimationListener animationListener) {
+    public Animator getAnimationFadeOut(final View view, int duration, int delay, TimeInterpolator interpolator, final AnimationListener animationListener) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, 0);
         objectAnimator.setDuration(duration);
         objectAnimator.setStartDelay(delay);
@@ -85,7 +90,7 @@ public class GeneralAnimations {
         return objectAnimator;
     }
 
-    public static void animateFadeOut(final View view, int duration) {
+    public void animateFadeOut(final View view, int duration) {
 
         animateFadeOut(view, duration, new AnimationListener() {
             @Override
@@ -103,7 +108,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void rotate360(final View view, int duration) {
+    public void rotate360(final View view, int duration) {
         Animation rotate = new RotateAnimation(0f, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
         rotate.setFillAfter(true);
         rotate.setInterpolator(new DecelerateInterpolator());
@@ -111,7 +116,7 @@ public class GeneralAnimations {
         view.setAnimation(rotate);
     }
 
-    public static void animateFadeIn(final View view, int duration) {
+    public void animateFadeIn(final View view, int duration) {
         animateFadeIn(view, duration, new AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -122,7 +127,7 @@ public class GeneralAnimations {
         });
     }
 
-    public static Animator getAnimationFadeIn(final View view, int duration) {
+    public Animator getAnimationFadeIn(final View view, int duration) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, 1);
         objectAnimator.setDuration(duration);
         objectAnimator.addListener(new AnimatorListenerAdapter() {
@@ -137,10 +142,10 @@ public class GeneralAnimations {
         return objectAnimator;
     }
 
-    public static void animateFadeIn(final View view, int duration, final AnimationListener animationListener) {
+    public void animateFadeIn(final View view, int duration, final AnimationListener animationListener) {
 
         ViewCompat.setAlpha(view, 0);
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 1);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, 1);
         objectAnimator.setDuration(duration);
         objectAnimator.addListener(new Animator.AnimatorListener() {
 
@@ -171,14 +176,14 @@ public class GeneralAnimations {
 
     }
 
-    public static void hideDialog(final View view, final AnimationListener animationListener) {
+    public void hideDialog(final View view, final AnimationListener animationListener) {
 
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
-                ObjectAnimator.ofFloat(view, "scaleY", 1.5f),
-                ObjectAnimator.ofFloat(view, "scaleX", 1.5f),
-                ObjectAnimator.ofFloat(view, "alpha", 0));
+                ObjectAnimator.ofFloat(view, View.SCALE_Y, 1.5f),
+                ObjectAnimator.ofFloat(view, View.SCALE_X, 1.5f),
+                ObjectAnimator.ofFloat(view, View.ALPHA, 0));
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorSet.setDuration(200);
         animatorSet.addListener(new Animator.AnimatorListener() {
@@ -210,7 +215,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void showDialog(final View view) {
+    public void showDialog(final View view) {
 
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
@@ -246,7 +251,7 @@ public class GeneralAnimations {
         animatorSet.start();
     }
 
-    public static void zoomIn(final View view) {
+    public void zoomIn(final View view) {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
                 ObjectAnimator.ofFloat(view, "scaleY", 1.8f, 1),
@@ -266,7 +271,7 @@ public class GeneralAnimations {
         animatorSet.start();
     }
 
-    public static void zoomOut(final View view) {
+    public void zoomOut(final View view) {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
                 ObjectAnimator.ofFloat(view, "scaleY", 1.8f),
@@ -278,7 +283,7 @@ public class GeneralAnimations {
         animatorSet.start();
     }
 
-    public static ObjectAnimator animateChild(final View view, int delay, int from) {
+    public ObjectAnimator animateChild(final View view, int delay, int from) {
         ObjectAnimator oa = ObjectAnimator.ofFloat(view, "translationY", from, 0);
         oa.setStartDelay(delay);
         oa.setDuration(1300);
@@ -293,7 +298,7 @@ public class GeneralAnimations {
         return oa;
     }
 
-    public static void rotateInfiniteAnimation(View view, int duration, AnimatorListenerAdapter listner) {
+    public void rotateInfiniteAnimation(View view, int duration, AnimatorListenerAdapter listner) {
         final ObjectAnimator anim = ObjectAnimator.ofFloat(view, "rotation", 0f, 360f);
         anim.setDuration(duration);
         anim.setInterpolator(new LinearInterpolator());
@@ -323,11 +328,11 @@ public class GeneralAnimations {
         anim.start();
     }
 
-    public static void appearFromTop(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearFromTop(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
         appearFromTop(view, duration, delay, false, animatorListenerAdapter);
     }
 
-    public static Animator getShakeAnimation(View view, int duration, AnimatorListenerAdapter animatorListenerListener) {
+    public Animator getShakeAnimation(View view, int duration, AnimatorListenerAdapter animatorListenerListener) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -10f, 10);
 
@@ -343,7 +348,7 @@ public class GeneralAnimations {
         return objectAnimator;
     }
 
-    public static void startAnimation(final View view, final ObjectAnimator objectAnimator, final TimeInterpolator interpolation) {
+    public void startAnimation(final View view, final ObjectAnimator objectAnimator, final TimeInterpolator interpolation) {
 
 
         view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -362,7 +367,7 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getTranslationY(View view, int duration, int delay, float moveY) {
+    public Animator getTranslationY(View view, int duration, int delay, float moveY) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0, moveY);
 
@@ -373,7 +378,7 @@ public class GeneralAnimations {
         return objectAnimator;
     }
 
-    public static void appearFromRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearFromRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAppearFromRight(view, duration, delay, animatorListenerAdapter);
 
@@ -381,7 +386,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void appearFromLeft(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearFromLeft(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAppearFromLeft(view, duration, delay, animatorListenerAdapter);
 
@@ -389,20 +394,20 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getAppearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, int startChild) {
+    public Animator getAppearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, int startChild) {
         return getAppearChildFromRight(view, duration, delay, delayChild, startChild, null);
     }
 
-    public static void appearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, AnimatorListenerAdapter animatorListenerAdapter) {
         getAppearChildFromRight(view, duration, delay, delayChild, 0, animatorListenerAdapter).start();
     }
 
-    public static void appearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, AnimatorListenerAdapter animatorListenerAdapter) {
 
         getAppearChildFromLeft(view, duration, delay, delayChild, 0, animatorListenerAdapter).start();
     }
 
-    public static Animator getAppearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, int startChild, AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearChildFromRight(ViewGroup view, int duration, int delay, int delayChild, int startChild, AnimatorListenerAdapter animatorListenerAdapter) {
         ArrayList<Animator> childAnimations = new ArrayList<>();
 
         for (int i = startChild; i < view.getChildCount(); i++) {
@@ -415,12 +420,12 @@ public class GeneralAnimations {
     }
 
 
-    public static Animator getAppearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, int startChild) {
+    public Animator getAppearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, int startChild) {
         return getAppearChildFromLeft(view, duration, delay, delayChild, startChild, null);
     }
 
 
-    public static Animator getAppearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, int startChild, AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearChildFromLeft(ViewGroup view, int duration, int delay, int delayChild, int startChild, AnimatorListenerAdapter animatorListenerAdapter) {
 
         ArrayList<Animator> childAnimations = new ArrayList<>();
 
@@ -434,7 +439,7 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getAnimationChildren(ArrayList<Animator> childAnimations, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAnimationChildren(ArrayList<Animator> childAnimations, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
 
         AnimatorSet animationSet = new AnimatorSet();
 
@@ -450,14 +455,14 @@ public class GeneralAnimations {
         return animationSet;
     }
 
-    public static void appearFromBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearFromBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAppearFromBottom(view, duration, delay, animatorListenerAdapter);
 
         startAnimation(view, objectAnimator, new AccelerateDecelerateInterpolator());
     }
 
-    public static void disappearToBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void disappearToBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getDisappearToBottom(view, duration, delay, animatorListenerAdapter);
 
@@ -465,7 +470,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void disappearToTop(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void disappearToTop(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getDisappearToTop(view, duration, delay, animatorListenerAdapter);
 
@@ -473,7 +478,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void disappearToRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void disappearToRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getDisappearToRight(view, duration, delay, animatorListenerAdapter);
 
@@ -481,7 +486,7 @@ public class GeneralAnimations {
 
     }
 
-    public static void disappearToLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void disappearToLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getDisappearToLeft(view, duration, delay, animatorListenerAdapter);
 
@@ -490,7 +495,7 @@ public class GeneralAnimations {
     }
 
 
-    public static void appearFromTop(final View view, final int duration, final int delay, final boolean bounce, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public void appearFromTop(final View view, final int duration, final int delay, final boolean bounce, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = (ObjectAnimator) getAppearFromTop(view, duration, delay, animatorListenerAdapter);
 
@@ -501,15 +506,15 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getAppearFromTop(View view, int duration, int delay) {
+    public Animator getAppearFromTop(View view, int duration, int delay) {
         return getAppearFromTop(view, duration, delay, null);
     }
 
-    public static Animator getAppearFromTop(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromTop(View view, int duration, int delay, AnimatorListenerAdapter animatorListenerAdapter) {
         return getAppearFrom(view, duration, delay, -(view.getMeasuredHeight() * 4), 0, animatorListenerAdapter);
     }
 
-    public static Animator getAppearFrom(final View view, final int duration, final int delay, int to, int from, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFrom(final View view, final int duration, final int delay, int to, int from, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", to, from);
 
@@ -540,11 +545,11 @@ public class GeneralAnimations {
     }
 
 
-    public static Animator getAppearFromLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
         return getAppearFromLeft(view, duration, delay, new OvershootInterpolator(1f), animatorListenerAdapter);
     }
 
-    public static Animator getAppearFromLeft(final View view, final int duration, final int delay, TimeInterpolator timeInterpolator, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromLeft(final View view, final int duration, final int delay, TimeInterpolator timeInterpolator, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, -(view.getMeasuredWidth() * 2), 0);
 
@@ -575,11 +580,11 @@ public class GeneralAnimations {
     }
 
 
-    public static Animator getAppearFromRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
         return getAppearFromRight(view, duration, delay, new OvershootInterpolator(1f), animatorListenerAdapter);
     }
 
-    public static Animator getAppearFromRight(final View view, final int duration, final int delay, TimeInterpolator timeInterpolator, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromRight(final View view, final int duration, final int delay, TimeInterpolator timeInterpolator, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, (view.getMeasuredWidth() * 2), 0);
 
@@ -610,12 +615,12 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getAppearFromBottom(View view, int duration, int delay) {
+    public Animator getAppearFromBottom(View view, int duration, int delay) {
         return getAppearFromBottom(view, duration, delay, null);
     }
 
 
-    public static Animator getAppearFromBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getAppearFromBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", (view.getMeasuredHeight() * 2), 0);
 
@@ -626,7 +631,6 @@ public class GeneralAnimations {
         objectAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
                 view.setVisibility(View.VISIBLE);
                 if (animatorListenerAdapter != null) {
                     animatorListenerAdapter.onAnimationStart(animation);
@@ -635,7 +639,6 @@ public class GeneralAnimations {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
                 if (animatorListenerAdapter != null) {
                     animatorListenerAdapter.onAnimationEnd(animation);
                 }
@@ -646,7 +649,7 @@ public class GeneralAnimations {
     }
 
 
-    public static Animator getDisappearToBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getDisappearToBottom(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         final float previewY = view.getTranslationY();
 
@@ -678,7 +681,7 @@ public class GeneralAnimations {
         return objectAnimator;
     }
 
-    public static Animator getDisappearToTop(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getDisappearToTop(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         final float previewY = view.getTranslationY();
 
@@ -691,7 +694,6 @@ public class GeneralAnimations {
         objectAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
                 view.setVisibility(View.VISIBLE);
                 if (animatorListenerAdapter != null)
                     animatorListenerAdapter.onAnimationStart(animation);
@@ -699,7 +701,6 @@ public class GeneralAnimations {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
                 view.setVisibility(View.INVISIBLE);
                 view.setTranslationY(previewY);
                 if (animatorListenerAdapter != null)
@@ -711,7 +712,7 @@ public class GeneralAnimations {
     }
 
 
-    public static Animator getDisappearToRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getDisappearToRight(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationX", 0, (view.getMeasuredWidth() * 2));
 
@@ -741,7 +742,7 @@ public class GeneralAnimations {
 
     }
 
-    public static Animator getDisappearToLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public Animator getDisappearToLeft(final View view, final int duration, final int delay, final AnimatorListenerAdapter animatorListenerAdapter) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationX", 0, -(view.getMeasuredWidth() * 2));
 
@@ -770,7 +771,7 @@ public class GeneralAnimations {
     }
 
 
-    public static void appearFromBottomAndFadeIn(final View view, int duration, final AnimatorListenerAdapter listener) {
+    public void appearFromBottomAndFadeIn(final View view, int duration, final AnimatorListenerAdapter listener) {
         ObjectAnimator translationY = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, (view.getMeasuredHeight() * 2), 0);
         translationY.setDuration(duration);
 
@@ -800,7 +801,7 @@ public class GeneralAnimations {
     }
 
 
-    public static void scaleY(final View view, int duration, float start, float end, final AnimatorListenerAdapter listener) {
+    public void scaleY(final View view, int duration, float start, float end, final AnimatorListenerAdapter listener) {
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, View.SCALE_Y, start, end);
         scaleY.setDuration(duration);
 
@@ -828,7 +829,7 @@ public class GeneralAnimations {
         animatorSet.start();
     }
 
-    public static void animateAlpha(final View view, int duration, float start, float end, final AnimationListener animationListener) {
+    public void animateAlpha(final View view, int duration, float start, float end, final AnimationListener animationListener) {
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, start, end);
         objectAnimator.setDuration(duration);
@@ -863,19 +864,19 @@ public class GeneralAnimations {
 
     }
 
-    public static void fadeOutViews(int duration, View... views) {
+    public void fadeOutViews(int duration, View... views) {
         for (View view : views) {
             animateFadeOut(view, duration);
         }
     }
 
-    public static void fadeInViews(int duration, View... views) {
+    public void fadeInViews(int duration, View... views) {
         for (View view : views) {
             animateFadeIn(view, duration);
         }
     }
 
-    public static ObjectAnimator scaleY(View view, int duration, float from, float to) {
+    public ObjectAnimator scaleY(View view, int duration, float from, float to) {
 
         ObjectAnimator animScaleY = ObjectAnimator.ofFloat(view, View.SCALE_Y, from, to);
 
@@ -884,11 +885,11 @@ public class GeneralAnimations {
         return animScaleY;
     }
 
-    public static AnimatorSet scaleView(View view, int duration, float from, float to) {
+    public AnimatorSet scaleView(View view, int duration, float from, float to) {
         return scaleView(view, duration, from, to, false);
     }
 
-    public static AnimatorSet scaleView(View view, int duration, float from, float to, boolean repeat) {
+    public AnimatorSet scaleView(View view, int duration, float from, float to, boolean repeat) {
         ObjectAnimator anim_scale_X = ObjectAnimator.ofFloat(view, "scaleX", from, to);
         ObjectAnimator anim_scale_Y = ObjectAnimator.ofFloat(view, "scaleY", from, to);
 
@@ -908,14 +909,14 @@ public class GeneralAnimations {
         return animatorSet;
     }
 
-    public static void scaleChildrenView(ViewGroup view, int duration, float from, float to) {
+    public void scaleChildrenView(ViewGroup view, int duration, float from, float to) {
         int countChildren = view.getChildCount();
         for (int i = 0; i < countChildren; i++) {
             scaleView(view.getChildAt(i), duration, from, to).start();
         }
     }
 
-    public static void throbInfiniteAnimation(View view, int duration, Animator.AnimatorListener listener) {
+    public void throbInfiniteAnimation(View view, int duration, Animator.AnimatorListener listener) {
         AnimatorSet animatorSet1 = scaleView(view, duration, 1, 1.15f, true);
 
         if (listener != null)
@@ -925,7 +926,7 @@ public class GeneralAnimations {
     }
 
 
-    public static void beatAnimation(final View view, final long startDelay, int duration) {
+    public void beatAnimation(final View view, final long startDelay, int duration) {
 
         beatAnimation(view, startDelay, duration, new AnimatorListenerAdapter() {
 
@@ -936,7 +937,7 @@ public class GeneralAnimations {
         });
     }
 
-    public static void beatAnimation(final View view, final long startDelay, int duration, Animator.AnimatorListener listener) {
+    public void beatAnimation(final View view, final long startDelay, int duration, Animator.AnimatorListener listener) {
 
         AnimatorSet animatorSet1 = scaleView(view, duration, 1, 1.3f);
         AnimatorSet animatorSet2 = scaleView(view, (int) (duration / 2.5f), 1.3f, 0.75f);
@@ -952,11 +953,11 @@ public class GeneralAnimations {
         animatorSet.start();
     }
 
-    public static void beatAnimation(View view, long startDelay) {
+    public void beatAnimation(View view, long startDelay) {
         beatAnimation(view, startDelay, 400);
     }
 
-    public static void showViewSlideY(View view, int translate, int duration) {
+    public void showViewSlideY(View view, int translate, int duration) {
         ObjectAnimator translationY = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, translate);
         AnimatorSet set = new AnimatorSet();
         set.setInterpolator(new AccelerateDecelerateInterpolator());
