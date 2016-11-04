@@ -18,14 +18,14 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    AppbumApi appbumApi(Retrofit retrofit) {
+    protected AppbumApi appbumApi(Retrofit retrofit) {
         return retrofit.create(AppbumApi.class);
     }
 
 
     @Provides
     @Singleton
-    public Retrofit retrofit(Gson gson) {
+    protected Retrofit retrofit(Gson gson) {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
@@ -44,7 +44,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public Gson gson() {
+    protected Gson gson() {
         return new GsonBuilder()
                 .create();
     }

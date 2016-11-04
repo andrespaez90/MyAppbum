@@ -15,7 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +25,11 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
-import com.dev.innso.myappbum.api.services.AppbumApi;
 import com.dev.innso.myappbum.di.ApiModule;
 import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
 import com.dev.innso.myappbum.managers.AppPreference;
+import com.dev.innso.myappbum.api.controllers.AppbumController;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
@@ -41,9 +40,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import io.fabric.sdk.android.Fabric;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -72,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList dataList;
 
     @Inject
-    AppbumApi appbumApi;
+    AppbumController controller;
 
     @Inject
     ManagerPreferences managerPreferences;
@@ -147,38 +143,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void getUserAppbums() {
 
-        String userId = managerPreferences.getString(AppPreference.USER_ID);
-
-        Call<ArrayList<Appbum>> appbumCall = appbumApi.getUserAppbums(userId);
-
-        appbumCall.enqueue(new Callback<ArrayList<Appbum>>() {
-
+        controller.getUserAppbums(managerPreferences.getString(AppPreference.USER_ID), new AppbumController.AppbumResponse() {
             @Override
-            public void onResponse(Call<ArrayList<Appbum>> call, Response<ArrayList<Appbum>> response) {
+            public void success(ArrayList<Appbum> appbumList) {
 
-                if (response.isSuccessful()) {
+                albumsList.setVisibility(View.VISIBLE);
 
-                    albumsList.setVisibility(View.VISIBLE);
+                dataList = appbumList;
 
-                    dataList = response.body();
+                listAdapter.setData(dataList);
 
-                    listAdapter.setData(dataList);
+                swipeRefreshLayout.setRefreshing(false);
 
-                    swipeRefreshLayout.setRefreshing(false);
+                if (dataList.size() != 0) {
 
-                    if (dataList.size() != 0) {
+                    listAdapter.notifyDataSetChanged();
 
-                        listAdapter.notifyDataSetChanged();
+                    emptyTextMessage.setVisibility(View.GONE);
 
-                        emptyTextMessage.setVisibility(View.GONE);
-
-                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Appbum>> call, Throwable t) {
-                Log.e("error", t.getMessage());
+            public void onFail(String errorMessage) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
