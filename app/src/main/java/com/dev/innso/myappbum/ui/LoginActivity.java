@@ -111,12 +111,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 login();
                 break;
             case R.id.login_button_singin:
-                signin();
+                signUp();
                 break;
         }
     }
 
-    protected void signin() {
+    protected void signUp() {
 
         enableActivity(false);
 
