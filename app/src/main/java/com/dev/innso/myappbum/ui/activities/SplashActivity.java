@@ -199,7 +199,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     private void savePreference() {
         managerPreferences.set(AppPreference.FACEBOOK_USERID, userID);
-        managerPreferences.set(AppPreference.NAME_USER, userName);
+        managerPreferences.set(AppPreference.USER_NAME, userName);
         managerPreferences.set(AppPreference.COVER_USER, usercover);
     }
 

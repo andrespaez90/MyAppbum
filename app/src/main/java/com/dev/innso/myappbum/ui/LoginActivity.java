@@ -3,6 +3,7 @@ package com.dev.innso.myappbum.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,10 +14,11 @@ import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.di.ApiModule;
 import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
+import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
-import com.dev.innso.myappbum.utils.Encrypt;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
 
@@ -36,7 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Inject
     ManagerPreferences managerPreferences;
 
-    private FirebaseAuth firebaseAuth;
+    @Inject
+    FirebaseAuth userManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +48,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(R.anim.slide_right_in, R.anim.stay);
         AppComponent daggerComponent = DaggerAppComponent.builder().apiModule(new ApiModule()).build();
         daggerComponent.inject(this);
-        init();
         initViews();
         addListeners();
-    }
-
-    private void init() {
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     private void initViews() {
@@ -124,11 +122,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         String pass = userPass.getText().toString();
 
-        firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
+        userManager.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
             if (!task.isSuccessful()) {
                 Log.e("Login", "Authentication failed." + task.getException());
             } else {
-                Log.e("Login", "SuccessfulAuthentication failed." + task.getException());
+                UpdateProfile(task.getResult().getUser());
+                setResult(RESULT_OK);
+                finish();
             }
         });
     }
@@ -139,18 +139,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
-        pass = Encrypt.md5(pass);
 
-        firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
+        userManager.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
             enableActivity(true);
 
             if (!task.isSuccessful()) {
                 loginError.setText("Usuario o contraseña incorrecta");
             } else {
+                UpdateProfile(task.getResult().getUser());
                 setResult(RESULT_OK);
                 finish();
             }
         });
+    }
+
+
+    private void UpdateProfile(FirebaseUser currentUser) {
+
+        String userName = TextUtils.isEmpty(currentUser.getDisplayName()) ? currentUser.getEmail() : currentUser.getDisplayName();
+
+        managerPreferences.set(AppPreference.USER_ID, currentUser.getUid());
+
+        managerPreferences.set(AppPreference.USER_NAME, userName);
     }
 
 }

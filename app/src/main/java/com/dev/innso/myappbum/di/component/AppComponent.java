@@ -5,7 +5,6 @@ import com.dev.innso.myappbum.di.ApiModule;
 import com.dev.innso.myappbum.di.AppModule;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.ui.LoginActivity;
-import com.dev.innso.myappbum.ui.RegisterActivity;
 import com.dev.innso.myappbum.ui.activities.MainActivity;
 import com.dev.innso.myappbum.ui.activities.SplashActivity;
 
@@ -27,8 +26,6 @@ public interface AppComponent {
     void inject(MainActivity mainActivity);
 
     void inject(SplashActivity splashActivity);
-
-    void inject(RegisterActivity registerActivity);
 
     void inject(LoginActivity loginActivity);
 }

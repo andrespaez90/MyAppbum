@@ -17,7 +17,7 @@ public class AppPreference {
     public static PreferencesKey FACEBOOK_USERID = new PreferencesKey("FACEBOOK_USERID", "");
 
     public static PreferencesKey COVER_USER = new PreferencesKey("COVER_USER", "");
-    public static PreferencesKey NAME_USER = new PreferencesKey("NAME_USER", "");
+    public static PreferencesKey USER_NAME = new PreferencesKey("USER_NAME", "");
     public static PreferencesKey EMAIL_USER = new PreferencesKey("EMAIL_USER", "");
     public static PreferencesKey USER_ID = new PreferencesKey("USER_ID", "");
     public static PreferencesKey PROFILE_USER = new PreferencesKey("PROFILE_USER", "");

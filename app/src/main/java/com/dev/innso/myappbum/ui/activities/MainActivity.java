@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +33,8 @@ import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList dataList;
 
     @Inject
+    FirebaseAuth userManager;
+
+    @Inject
     AppbumApi appbumApi;
 
     @Inject
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getUserAppbums();
     }
+
 
     private void initViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -145,6 +149,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         albumsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
+    private void initProfile() {
+
+        FirebaseUser currentUser = userManager.getCurrentUser();
+
+        if (currentUser != null) {
+
+            profileName.setText(managerPreferences.getString(AppPreference.USER_NAME));
+        }
+    }
+
+
+    private void initListeners() {
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        floatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
+    }
+
+
     private void getUserAppbums() {
 
         String userId = managerPreferences.getString(AppPreference.USER_ID);
@@ -171,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         listAdapter.notifyDataSetChanged();
 
                         emptyTextMessage.setVisibility(View.GONE);
-
                     }
                 }
             }
@@ -182,32 +207,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-    }
-
-    private void initProfile() {
-        String userId = managerPreferences.getString(AppPreference.FACEBOOK_USERID);
-        String userName = managerPreferences.getString(AppPreference.NAME_USER);
-        String userCover = managerPreferences.getString(AppPreference.COVER_USER);
-
-        if (!TextUtils.isEmpty(userId)) {
-            String imageURL = "https://graph.facebook.com/" + userId + "/picture?type=large";
-            Picasso.with(this).load(imageURL).placeholder(R.drawable.ic_profile).into(profilePicture);
-            Picasso.with(this).load(userCover).placeholder(R.mipmap.default_bg).into(profileCover);
-
-        } else {
-
-        }
-        profileName.setText(userName.toUpperCase());
-    }
-
-    private void initListeners() {
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        swipeRefreshLayout.setOnRefreshListener(this);
-
-        floatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
     }
 
     @Override
@@ -232,18 +231,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_menu_close_session) {
             managerPreferences.resetPreferences();
-            startActivit(SplashActivity.class);
+            userManager.signOut();
+            startActivity(SplashActivity.class);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void startActivit(Class activity){
-        startActivity(new Intent(this,activity));
+    private void startActivity(Class activity) {
+        startActivity(new Intent(this, activity));
         finish();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -255,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
