@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private TextView loginError;
 
+    private TextView textViewForgotPassword;
+
     private Button buttonRegister;
 
     private Button buttonLogin;
@@ -61,13 +63,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonRegister = (Button) findViewById(R.id.login_button_Login);
 
         buttonLogin = (Button) findViewById(R.id.login_button_singin);
+
+        textViewForgotPassword = (TextView) findViewById(R.id.textView_forgot_password);
     }
 
     private void addListeners() {
 
         buttonLogin.setOnClickListener(this);
 
-        buttonRegister.setOnClickListener(this);
+        buttonLogin.setOnClickListener(this);
+
+        textViewForgotPassword.setOnClickListener(this);
 
         userPass.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_GO) {
@@ -101,10 +107,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_button_singin:
                 signUp();
                 break;
+            case R.id.textView_forgot_password:
+                recoverPassword();
         }
     }
 
-    protected void signUp() {
+
+    private void signUp() {
 
         enableActivity(false);
 
@@ -123,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    protected void login() {
+    private void login() {
 
         enableActivity(false);
 
@@ -143,6 +152,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    private void recoverPassword() {
+        if (!TextUtils.isEmpty(userEmail.getText().toString())) {
+            userManager.sendPasswordResetEmail(userEmail.getText().toString());
+        } else {
+            loginError.setText("Ingrese el correo de su cuenta");
+        }
+    }
 
     private void UpdateProfile(FirebaseUser currentUser) {
 
