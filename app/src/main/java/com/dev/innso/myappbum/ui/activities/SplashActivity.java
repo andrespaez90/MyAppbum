@@ -27,7 +27,6 @@ import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.ui.LoginActivity;
-import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -188,7 +187,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ActivityTags.ACTIVITY_LOGIN.ordinal()) {
+        if (requestCode == MainActivity.REQUEST_ACTIVITY_LOGIN) {
             if (resultCode == RESULT_OK)
                 finishSuccess();
             return;
@@ -222,7 +221,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     protected void accessApp() {
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent, ActivityTags.ACTIVITY_LOGIN.ordinal());
+        startActivityForResult(intent, MainActivity.REQUEST_ACTIVITY_LOGIN);
     }
 
 

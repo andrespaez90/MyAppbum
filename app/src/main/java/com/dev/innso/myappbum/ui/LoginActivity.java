@@ -16,7 +16,6 @@ import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
 import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
-import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -85,14 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonLogin.setEnabled(activate);
         buttonRegister.setEnabled(activate);
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ActivityTags.ACTIVITY_REGISTER.ordinal() && resultCode == RESULT_OK) {
-            setResult(RESULT_OK);
-            finish();
-        }
     }
 
     @Override

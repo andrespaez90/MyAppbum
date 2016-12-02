@@ -1,7 +1,6 @@
 package com.dev.innso.myappbum.ui;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -11,10 +10,10 @@ import android.view.MenuItem;
 
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.models.ui.AppbumActivity;
+import com.dev.innso.myappbum.ui.activities.MainActivity;
 import com.dev.innso.myappbum.ui.activities.PassNumber;
 import com.dev.innso.myappbum.ui.fragments.AddPictureFragment;
 import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
-import com.dev.innso.myappbum.utils.tags.ActivityTags;
 import com.dev.innso.myappbum.utils.tags.FragmentTags;
 
 
@@ -39,24 +38,24 @@ public class BuddiesActivity extends AppbumActivity {
     }
 
 
-    private void isPrivate(){
+    private void isPrivate() {
         boolean pass = getIntent().getBooleanExtra("isPrivate", false);
-        if( pass){
-            Intent intent = new Intent( this, PassNumber.class);
-            intent.putExtra("Pass",getIntent().getIntExtra("Pass",0));
-            startActivityForResult(intent, ActivityTags.ACTIVITY_PASSNUMBER.getCode());
-        }else{
+        if (pass) {
+            Intent intent = new Intent(this, PassNumber.class);
+            intent.putExtra("Pass", getIntent().getIntExtra("Pass", 0));
+            startActivityForResult(intent, MainActivity.REQUEST_ACTIVITY_PASSNUMBER);
+        } else {
             init();
         }
     }
 
-    private void init(){
+    private void init() {
         getData();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void getData(){
+    private void getData() {
         Bundle extras = getIntent().getExtras();
         String appbumName = extras.getString("APPBUM_NAME");
         setTitle(appbumName);
@@ -94,8 +93,8 @@ public class BuddiesActivity extends AppbumActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if( requestCode == ActivityTags.ACTIVITY_PASSNUMBER.getCode() ){
-            if( resultCode == RESULT_CANCELED )
+        if (requestCode == MainActivity.REQUEST_ACTIVITY_PASSNUMBER) {
+            if (resultCode == RESULT_CANCELED)
                 finish();
         }
     }
