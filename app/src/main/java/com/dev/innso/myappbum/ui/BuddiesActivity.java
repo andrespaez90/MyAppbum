@@ -16,7 +16,6 @@ import com.dev.innso.myappbum.ui.fragments.AddPictureFragment;
 import com.dev.innso.myappbum.ui.fragments.ListBuddiesFragment;
 import com.dev.innso.myappbum.utils.tags.FragmentTags;
 
-
 public class BuddiesActivity extends AppbumActivity {
 
     private boolean isOpenActivitiesActivated = true;
