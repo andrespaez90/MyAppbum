@@ -48,8 +48,11 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
-    buildTypes {
+    dataBinding {
+        enabled = true
+    }
 
+    buildTypes {
         debug {
             minifyEnabled false
         }

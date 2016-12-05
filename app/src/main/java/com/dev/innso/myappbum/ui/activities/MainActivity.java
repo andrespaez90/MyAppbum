@@ -79,7 +79,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList dataList;
 
     @Inject
-    FirebaseAuth userManager;
+    FirebaseAuth authManager;
+
+    @Inject
+    FirebaseUser userManager;
 
     @Inject
     AppbumApi appbumApi;
@@ -158,9 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initProfile() {
 
-        FirebaseUser currentUser = userManager.getCurrentUser();
-
-        if (currentUser != null) {
+        if (userManager != null) {
 
             profileName.setText(managerPreferences.getString(AppPreference.USER_NAME));
         }
@@ -240,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void logout() {
         managerPreferences.resetPreferences();
-        userManager.signOut();
+        authManager.signOut();
         startActivityForResult(new Intent(this, SplashActivity.class), REQUEST_ACTIVITY_SPLASH);
     }
 

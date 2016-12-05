@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ManagerPreferences managerPreferences;
 
     @Inject
-    FirebaseAuth userManager;
+    FirebaseAuth authManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         String pass = userPass.getText().toString();
 
-        userManager.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
+        authManager.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
             if (!task.isSuccessful()) {
                 Log.e("Login", "Authentication failed." + task.getException());
             } else {
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = userEmail.getText().toString();
         String pass = userPass.getText().toString();
 
-        userManager.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
+        authManager.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, task -> {
             enableActivity(true);
 
             if (!task.isSuccessful()) {
@@ -154,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void recoverPassword() {
         if (!TextUtils.isEmpty(userEmail.getText().toString())) {
-            userManager.sendPasswordResetEmail(userEmail.getText().toString());
+            authManager.sendPasswordResetEmail(userEmail.getText().toString());
         } else {
             loginError.setText("Ingrese el correo de su cuenta");
         }

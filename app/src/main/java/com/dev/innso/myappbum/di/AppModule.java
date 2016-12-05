@@ -3,6 +3,7 @@ package com.dev.innso.myappbum.di;
 import com.dev.innso.myappbum.app.AppbumApplication;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Singleton;
 
@@ -21,7 +22,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    FirebaseAuth userManager() {
+    FirebaseUser userManager(FirebaseAuth firebaseAuth) {
+        return firebaseAuth.getCurrentUser();
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAuth authManager() {
         return FirebaseAuth.getInstance();
     }
+
 }
