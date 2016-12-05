@@ -4,12 +4,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,9 +23,7 @@ import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
 import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
-import com.dev.innso.myappbum.providers.ServerConnection;
 import com.dev.innso.myappbum.ui.LoginActivity;
-import com.dev.innso.myappbum.utils.tags.JSONTag;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -36,6 +32,12 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +62,9 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     private String usercover;
 
     private GeneralAnimations generalAnimations;
+
+    @Inject
+    FirebaseAuth authManager;
 
     @Inject
     ManagerPreferences managerPreferences;
@@ -147,42 +152,56 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         });
     }
 
-    private void successFacebookLogin(AccessToken Token) {
-        //Save Preference
-        String accessToken = Token.getToken();
-        String userId = Token.getUserId();
-        managerPreferences.set(AppPreference.ACCESS_TOKEN, accessToken);
-        managerPreferences.set(AppPreference.FACEBOOK_USERID, userId);
+    private void successFacebookLogin(AccessToken token) {
 
-        //Save information of facebook account
-        GraphRequest request = GraphRequest.newMeRequest(
-                Token,
-                (object, response) -> saveFacebookInformation(object));
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,email,cover");
-        request.setParameters(parameters);
-        request.executeAsync();
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+
+        authManager.signInWithCredential(credential).addOnCompleteListener(task -> completeFacebookRegister(task, token));
 
     }
 
-    private void saveFacebookInformation(JSONObject information) {
+    private void completeFacebookRegister(Task<AuthResult> task, AccessToken token) {
+
+        if (task.isSuccessful()) {
+
+            UpdateProfile(task.getResult().getUser());
+
+            getAdditionaeFacebookInfo(token);
+
+        } else {
+            Log.w("SPLASH", "signInWithCredential", task.getException());
+        }
+    }
+
+    private void getAdditionaeFacebookInfo(AccessToken token) {
+        GraphRequest request = GraphRequest.newMeRequest(token,
+                (object, response) -> saveFacebookInformation(object));
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "cover");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    private void saveFacebookInformation(JSONObject response) {
         try {
-            userID = information.getString(JSONTag.JSON_USER_ID.toString());
-            userEmail = information.getString(JSONTag.JSON_USER_EMAIL.toString());
-            userName = information.getString(JSONTag.JSON_USER_NAME.toString());
-            usercover = information.getJSONObject(JSONTag.JSON_FACEBOOK_COVER.toString()).getString("source");
 
-            Pair<String, String> pairName = new Pair<>(JSONTag.JSON_USER_NAME.toString(), userName);
-            Pair<String, String> pairEmail = new Pair<>(JSONTag.JSON_USER_EMAIL.toString(), userEmail);
-            Pair<String, String> pairFacebook = new Pair<>(JSONTag.JSON_USER_IDFACE.toString(), userID);
-            Pair<String, String> pairCover = new Pair<>(JSONTag.JSON_URLCOVER.toString(), usercover);
+            managerPreferences.set(AppPreference.COVER_USER, response.getJSONObject("cover").getString("source"));
 
-            new registerFacebookUser().execute(pairName, pairEmail, pairFacebook, pairCover);
-
+            finishSuccess();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    private void UpdateProfile(FirebaseUser newUser) {
+
+        String userName = TextUtils.isEmpty(newUser.getDisplayName()) ? newUser.getEmail() : newUser.getDisplayName();
+
+        managerPreferences.set(AppPreference.USER_ID, newUser.getUid());
+
+        managerPreferences.set(AppPreference.USER_NAME, userName);
+
+        managerPreferences.set(AppPreference.IS_FACEBOOK_USER, true);
     }
 
     @Override
@@ -195,12 +214,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    private void savePreference() {
-        managerPreferences.set(AppPreference.FACEBOOK_USERID, userID);
-        managerPreferences.set(AppPreference.USER_NAME, userName);
-        managerPreferences.set(AppPreference.COVER_USER, usercover);
-    }
 
     private void finishSuccess() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -223,43 +236,4 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, MainActivity.REQUEST_ACTIVITY_LOGIN);
     }
-
-
-    private class registerFacebookUser extends AsyncTask<Pair<String, String>, String, String> {
-
-        protected String doInBackground(Pair<String, String>... data) {
-            try {
-                String response = ServerConnection.requestPOST(getResources().getString(R.string.registerService), data);
-                publishProgress(response);
-                JSONObject jsonObject = new JSONObject(response);
-                if (!jsonObject.getString(JSONTag.JSON_RESPONSE.toString()).equals(JSONTag.JSON_SUCCESS.toString())) {
-                    return null;
-                } else {
-                    managerPreferences.set(AppPreference.USER_ID, jsonObject.getString(JSONTag.JSON_USER_ID.toString()));
-                    savePreference();
-                }
-                publishProgress(response);
-                return JSONTag.JSON_SUCCESS.toString();
-            } catch (Exception e) {
-                Log.d("ReadWeatherJSONFeedTask", e.getMessage());
-                publishProgress(e.getMessage());
-            }
-            return null;
-        }
-
-
-        protected void onProgressUpdate(String... progress) {
-            //Toast.makeText(SplashActivity.this, progress[0], Toast.LENGTH_LONG).show();
-        }
-
-
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                finishSuccess();
-            }
-        }
-
-    }
-
-
 }

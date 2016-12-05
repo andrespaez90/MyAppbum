@@ -1,6 +1,7 @@
 package com.dev.innso.myappbum.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -34,6 +35,7 @@ import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -68,15 +70,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
 
-    private TextView profileName;
+    private TextView textViewUserName;
 
-    private ImageView profileCover;
+    private ImageView imageViewCover;
 
-    private ImageView profilePicture;
+    private ImageView imageViewProfile;
 
     private RecycleAppbumAdapter listAdapter;
 
     private ArrayList dataList;
+
+    private FirebaseAuth.AuthStateListener authenticationListener;
 
     @Inject
     FirebaseAuth authManager;
@@ -131,11 +135,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = navigationView.getHeaderView(0);
 
-        profileName = (TextView) headerView.findViewById(R.id.profile_name);
+        textViewUserName = (TextView) headerView.findViewById(R.id.profile_name);
 
-        profileCover = (ImageView) headerView.findViewById(R.id.profile_cover);
+        imageViewCover = (ImageView) headerView.findViewById(R.id.profile_cover);
 
-        profilePicture = (ImageView) headerView.findViewById(R.id.imageView_profile);
+        imageViewProfile = (ImageView) headerView.findViewById(R.id.imageView_profile);
     }
 
     private void configureViews() {
@@ -163,7 +167,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (userManager != null) {
 
-            profileName.setText(managerPreferences.getString(AppPreference.USER_NAME));
+            textViewUserName.setText(managerPreferences.getString(AppPreference.USER_NAME));
+
+            if (managerPreferences.getBoolean(AppPreference.IS_FACEBOOK_USER)) {
+
+                //String imageURL = "https://graph.facebook.com/" + userManager.getProviderId() + "/picture?type=large";
+
+                Uri imageURL = userManager.getPhotoUrl();
+
+                String urlCover = managerPreferences.getString(AppPreference.COVER_USER);
+
+                Picasso.with(this).load(imageURL).into(imageViewProfile);
+
+                Picasso.with(this).load(urlCover).into(imageViewCover);
+            }
         }
     }
 
@@ -175,6 +192,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         floatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
+
+        authenticationListener = firebaseAuth -> {
+            if (firebaseAuth.getCurrentUser() != null) {
+                logout();
+            }
+        };
     }
 
 
@@ -271,6 +294,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRefresh() {
         getUserAppbums();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (authenticationListener != null) {
+            authManager.removeAuthStateListener(authenticationListener);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (authenticationListener != null) {
+            authManager.addAuthStateListener(authenticationListener);
+        }
     }
 
     public SearchView.OnQueryTextListener getTextListener() {
