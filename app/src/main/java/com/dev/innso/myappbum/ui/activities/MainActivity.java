@@ -3,10 +3,11 @@ package com.dev.innso.myappbum.ui.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void shouldRestartdView(FirebaseAuth firebaseAuth){
+    private void shouldRestartdView(FirebaseAuth firebaseAuth) {
         if (firebaseAuth.getCurrentUser() == null) {
             deleteUserInformation();
         }
@@ -254,15 +255,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
 
         switch (itemId) {
+
+            case R.id.nav_menu_profile:
+                startProfileActivity();
+                break;
             case R.id.nav_menu_close_session:
                 logout();
                 break;
         }
 
-        item.setCheckable(false);
+        //drawerLayout.closeDrawer(GravityCompat.START);
 
-        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void startProfileActivity() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+
+        Pair<View, String> transImage = Pair.create(imageViewProfile, "profileImage");
+
+        Pair<View, String> transCover = Pair.create(imageViewCover, "profileCover");
+
+        Pair<View, String> transName = Pair.create(textViewUserName, "profileName");
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, transImage, transName, transCover);
+
+        startActivity(intent, options.toBundle());
     }
 
     private void logout() {

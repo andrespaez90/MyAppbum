@@ -20,25 +20,20 @@
         <activity
             android:name=".ui.activities.SplashActivity"
             android:label="@string/title_activity_start">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
         <activity
             android:name=".ui.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".ui.BuddiesActivity"
             android:label="@string/app_name"
@@ -47,7 +42,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".models.ui.DetailPhotoActivity"
             android:label="@string/app_name"
@@ -56,13 +50,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dev.innso.myappbum.ui.BuddiesActivity" />
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name=".ui.activities.PassNumber"
             android:label="@string/title_activity_create_appbum" />
@@ -74,6 +66,10 @@
             android:name="io.fabric.ApiKey"
             android:value="60c296b1834a7c2e31bf277e06414291e84ded47" />
 
+        <activity
+            android:name=".ui.activities.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

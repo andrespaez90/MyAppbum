@@ -6,6 +6,7 @@ import com.dev.innso.myappbum.di.AppModule;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.ui.LoginActivity;
 import com.dev.innso.myappbum.ui.activities.MainActivity;
+import com.dev.innso.myappbum.ui.activities.ProfileActivity;
 import com.dev.innso.myappbum.ui.activities.SplashActivity;
 
 import javax.inject.Singleton;
@@ -28,4 +29,6 @@ public interface AppComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(LoginActivity loginActivity);
+
+    void inject(ProfileActivity profileActivity);
 }
