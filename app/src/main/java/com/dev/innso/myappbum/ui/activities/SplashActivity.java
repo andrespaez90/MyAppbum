@@ -56,11 +56,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     private Button buttonAccess;
 
-    private String userID;
-    private String userEmail;
-    private String userName;
-    private String usercover;
-
     private GeneralAnimations generalAnimations;
 
     @Inject
@@ -142,12 +137,12 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onCancel() {
-
+                Log.e("Facebook","CAncel Login");
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                Log.e("Facebook",exception.getMessage());
             }
         });
     }
@@ -188,6 +183,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             managerPreferences.set(AppPreference.COVER_USER, response.getJSONObject("cover").getString("source"));
 
             finishSuccess();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,7 +214,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     private void finishSuccess() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        setResult(RESULT_OK);
         finish();
     }
 

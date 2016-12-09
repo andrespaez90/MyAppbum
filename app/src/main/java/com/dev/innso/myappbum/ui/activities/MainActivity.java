@@ -3,6 +3,7 @@ package com.dev.innso.myappbum.ui.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ import com.dev.innso.myappbum.di.component.DaggerAppComponent;
 import com.dev.innso.myappbum.managers.AppPreference;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -49,8 +51,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final int REQUEST_ACTIVITY_SPLASH = 100;
-
-    public static final int REQUEST_ACTIVITY_START = 200;
 
     public static final int REQUEST_ACTIVITY_LOGIN = 300;
 
@@ -171,8 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (managerPreferences.getBoolean(AppPreference.IS_FACEBOOK_USER)) {
 
-                //String imageURL = "https://graph.facebook.com/" + userManager.getProviderId() + "/picture?type=large";
-
                 Uri imageURL = userManager.getPhotoUrl();
 
                 String urlCover = managerPreferences.getString(AppPreference.COVER_USER);
@@ -193,13 +191,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
-        authenticationListener = firebaseAuth -> {
-            if (firebaseAuth.getCurrentUser() != null) {
-                logout();
-            }
-        };
+        authenticationListener = this::shouldRestartdView;
     }
 
+
+    private void shouldRestartdView(FirebaseAuth firebaseAuth){
+        if (firebaseAuth.getCurrentUser() == null) {
+            deleteUserInformation();
+        }
+    }
 
     private void getUserAppbums() {
 
@@ -258,14 +258,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 logout();
                 break;
         }
+
+        item.setCheckable(false);
+
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void logout() {
-        managerPreferences.resetPreferences();
+
         authManager.signOut();
+
+        deleteUserInformation();
+    }
+
+    private void deleteUserInformation() {
+        if (managerPreferences.getBoolean(AppPreference.IS_FACEBOOK_USER)) {
+
+            LoginManager.getInstance().logOut();
+        }
+
+        managerPreferences.resetPreferences();
+
         startActivityForResult(new Intent(this, SplashActivity.class), REQUEST_ACTIVITY_SPLASH);
+
+        finish();
     }
 
     @Override
@@ -297,16 +314,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         if (authenticationListener != null) {
             authManager.removeAuthStateListener(authenticationListener);
         }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         if (authenticationListener != null) {
             authManager.addAuthStateListener(authenticationListener);
         }
