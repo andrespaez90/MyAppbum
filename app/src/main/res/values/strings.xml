@@ -63,5 +63,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="url.facebook_image_profile">https://graph.facebook.com/%1$s/picture?type=large</string>
 
 </resources>

@@ -25,11 +25,11 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.dev.innso.myappbum.R;
 import com.dev.innso.myappbum.adapters.RecycleAppbumAdapter;
+import com.dev.innso.myappbum.api.controllers.AppbumController;
 import com.dev.innso.myappbum.di.ApiModule;
 import com.dev.innso.myappbum.di.component.AppComponent;
 import com.dev.innso.myappbum.di.component.DaggerAppComponent;
 import com.dev.innso.myappbum.managers.AppPreference;
-import com.dev.innso.myappbum.api.controllers.AppbumController;
 import com.dev.innso.myappbum.managers.preferences.ManagerPreferences;
 import com.dev.innso.myappbum.models.Appbum;
 import com.dev.innso.myappbum.utils.tags.ActivityTags;
@@ -41,7 +41,7 @@ import javax.inject.Inject;
 
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     private Toolbar toolbar;
 
@@ -177,13 +177,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String userCover = managerPreferences.getString(AppPreference.COVER_USER);
 
         if (!TextUtils.isEmpty(userId)) {
-            String imageURL = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            String imageURL = getString(R.string.url_facebook_image_profile, userId);
             Picasso.with(this).load(imageURL).placeholder(R.drawable.ic_profile).into(profilePicture);
             Picasso.with(this).load(userCover).placeholder(R.mipmap.default_bg).into(profileCover);
 
-        } else {
-
         }
+
         profileName.setText(userName.toUpperCase());
     }
 
@@ -219,15 +218,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_menu_close_session) {
             managerPreferences.resetPreferences();
-            startActivit(SplashActivity.class);
+            startActivity(SplashActivity.class);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void startActivit(Class activity){
-        startActivity(new Intent(this,activity));
+    private void startActivity(Class activity) {
+        startActivity(new Intent(this, activity));
         finish();
     }
 
@@ -243,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -253,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         searchview.setQueryHint(getResources().getString(R.string.find_Appbum));
 
-        searchview.setOnQueryTextListener(new MainController());
+        searchview.setOnQueryTextListener(this);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -263,18 +261,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getUserAppbums();
     }
 
-    public class MainController implements SearchView.OnQueryTextListener {
 
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter(query);
-            return false;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter(newText);
-            return false;
-        }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter(query);
+        return false;
     }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        ((RecycleAppbumAdapter) albumsList.getAdapter()).setFilter(newText);
+        return false;
+    }
+
 }
